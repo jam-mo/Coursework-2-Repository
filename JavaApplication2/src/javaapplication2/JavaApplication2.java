@@ -19,6 +19,7 @@ public class JavaApplication2 {
         System.out.println("Hello, goodbye");
         System.out.println("HII< LOVE RICE >");
         System.out.println("HEEEEELLO Everyone. How are you? Fine thank you.");
+        System.out.println("edftghjklre");
     }
     
 }
