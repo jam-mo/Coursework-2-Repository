@@ -51,7 +51,7 @@ public class createTable {
                 + " CONSTRAINT lang_uID_fk FOREIGN KEY(user_ID) REFERENCES USERS(user_ID) " + ") ;";
 
         createLevels = "CREATE TABLE if not exists LEVELS (\n"
-                + "            difficulty_ID     INTEGER      PRIMARY KEY,\n"
+                + "            difficulty_ID     VARCHAR (30)      PRIMARY KEY,\n"
                 + "            level_A1 VARCHAR(50) NOT NULL,\n"
                 + "            level_A2 VARCHAR(50) NOT NULL,\n"
                 + "            level_B1 VARCHAR(50) NOT NULL,\n"
