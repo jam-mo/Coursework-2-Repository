@@ -20,7 +20,7 @@ public class connectDB {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:company22.db";
+            String url = "jdbc:sqlite:languageApp.db";
             Connection con = DriverManager.getConnection(url);
             //JOptionPane.showMessageDialog(null, "Connection Established");
             return con;

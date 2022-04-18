@@ -15,7 +15,7 @@ import java.sql.Statement;
 
 public class jdbcCrud {
     public static void insertEmp() {
-        Connection con = connectDB.getConnection();
+        Connection con = languageApp.getConnection();
         Statement stmt = null;
         String sqlString = ("INSERT INTO Employee  \n"
               +  "VALUES (1066789101, 'Simpson', 'Worker', 20010),\n"

@@ -19,7 +19,7 @@ public class jdbcMenu{
 
     public static void insertEmp(int Eid, String Ename, String Ejob, int Esal) {
 
-        Connection con = connectDB.getConnection();
+        Connection con = languageApp.getConnection();
         Statement stmt = null;
         int empID = Eid;
         String empName = Ename;

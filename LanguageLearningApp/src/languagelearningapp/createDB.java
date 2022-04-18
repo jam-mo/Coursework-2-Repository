@@ -33,7 +33,7 @@ class Connect {
     private Connection con;
 
     public Connect() {
-        urlSQLite = "jdbc:sqlite:company22.db";
+        urlSQLite = "jdbc:sqlite:languageApp.db";
 
         try {
             driverSQLite = new org.sqlite.JDBC();
