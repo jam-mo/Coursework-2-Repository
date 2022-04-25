@@ -13,11 +13,12 @@ import javax.swing.*;
  *
  * @author kokmeng
  */
-public class level_language extends readLevel implements ActionListener {
-    
-    readLevel levelReadData = new readLevel();
+public class levelSubContext extends readLevel implements ActionListener{
+    readLevel levelReadData;
     
     levelContext lc;
+    
+    level_language ll2;
     
     JFrame frame;
     
@@ -26,7 +27,7 @@ public class level_language extends readLevel implements ActionListener {
     JPanel sub_panel;
     JPanel sub_panel1;
 
-    
+    String levels;
     
     JPanel[] each_sub_panel1;
     
@@ -50,7 +51,7 @@ public class level_language extends readLevel implements ActionListener {
         
     };
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/logout.png");
+    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/go-back.png");
     ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
     ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
     
@@ -60,27 +61,29 @@ public class level_language extends readLevel implements ActionListener {
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    level_language(String language){
+    levelSubContext (String language, String level, String context){
         
-        
+        levels = level;
         
         label = new JLabel();
-        label.setText("Choose Level of Spainese");
+        label.setText(context);
         label.setForeground(new java.awt.Color(255,51,51));
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
         
-        levelReadData.levels(language);
+        levelReadData = new readLevel();
+        
+        levelReadData.subcontext(language, level, context); // change 
 
-        each_sub_panel1 = new JPanel[levelReadData.getLevelText().size()];
-        each_sub_panel1_1 = new JPanel[levelReadData.getLevelText().size()];
-        each_sub_button1_1 = new JButton[levelReadData.getLevelText().size()];
+        each_sub_panel1 = new JPanel[levelReadData.getSubcontext().size()];
+        each_sub_panel1_1 = new JPanel[levelReadData.getSubcontext().size()];
+        each_sub_button1_1 = new JButton[levelReadData.getSubcontext().size()];
         
         for(int i = 0; i < each_sub_panel1.length; i++){
             
             
             each_sub_panel1[i] = new JPanel();
-            each_sub_panel1[i].setBackground(new java.awt.Color(160+i+22+i,14*i,35*i));
+            each_sub_panel1[i].setBackground(new java.awt.Color(220-i-i-i-i-i,220-i-i-i-i-i,255-i-i-i));
             each_sub_panel1[i].setLayout(new BorderLayout());
             
             each_sub_panel1_1[i] = new JPanel();
@@ -95,7 +98,7 @@ public class level_language extends readLevel implements ActionListener {
             each_sub_button1_1[i] = new JButton();
             
             
-            each_sub_button1_1[i].setText(" "+levelReadData.getLevelText().get(i));
+            each_sub_button1_1[i].setText(" "+levelReadData.getSubcontext().get(i));
             
             
             each_sub_button1_1[i].setForeground(new java.awt.Color(153,102,255));
@@ -110,17 +113,22 @@ public class level_language extends readLevel implements ActionListener {
         
         sub_panel = new JPanel();
         sub_panel.setBackground(Color.getHSBColor(255, 204, 204));
-        sub_panel.setLayout(new GridLayout(4,1,2,5));
-        sub_panel.setBounds(10, 80, 380, 590);
-            
         for (JPanel each_sub_panel11 : each_sub_panel1) {
             sub_panel.add(each_sub_panel11);
         }
+        sub_panel.setLayout(new GridLayout(levelReadData.getContext().size(),1,5,5));
+        sub_panel.setPreferredSize(new Dimension(380,136*levelReadData.getSubcontext().size()));
+        
+        JScrollPane scroll = new JScrollPane(sub_panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBounds(10, 80, 380, 590);
+        scroll.setBorder(null);
+            
         
         each_sub_Button1_1 = new JButton();
         each_sub_Button1_1.setIcon(icon);
         each_sub_Button1_1.setBorder(null);
         each_sub_Button1_1.addActionListener(this);
+        
         
         each_sub_Button1_2 = new JButton();
         each_sub_Button1_2.setIcon(icon1);
@@ -149,10 +157,10 @@ public class level_language extends readLevel implements ActionListener {
         
         Mainpanel.add(label);
         
-        Mainpanel.add(sub_panel,BorderLayout.CENTER);
+        Mainpanel.add(scroll,BorderLayout.CENTER);
         Mainpanel.add(sub_panel1);
         
-        frame = new JFrame("ChooseLevelSpainese");
+        frame = new JFrame("Context");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
@@ -163,23 +171,29 @@ public class level_language extends readLevel implements ActionListener {
         frame.setVisible(true);
         
     }
+    
     public static void main(String[] arg){
-        level_language lg = new level_language("SPANISH");
+        levelSubContext lg = new levelSubContext("SPANISH","LEVEL_A1","Ordering food and drink");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        for(int i = 0; i< levelReadData.getLevelText().size(); i++){
-            if (e.getSource() == each_sub_button1_1[i]) {
-                lc = new levelContext("SPANISH", (String) levelReadData.getLevelText().get(i));
-                frame.dispose();
-            }
+        
+        for(int i = 0; i< levelReadData.getSubcontext().size(); i++)
+        {
+            
         }
         
-        if(e.getSource() == each_sub_Button1_1 || e.getSource() == each_sub_Button1_2)
+        if(e.getSource() == each_sub_Button1_1 )
         {
-            SignIn si = new SignIn();
+            lc = new levelContext("SPANISH", levels);
+            frame.dispose();
+        }
+        
+        if(e.getSource() == each_sub_Button1_2 )
+        {
+            ll2 = new level_language("SPANISH");
             frame.dispose();
         }
         
@@ -188,9 +202,7 @@ public class level_language extends readLevel implements ActionListener {
             System.out.println("poo3");
         }
         
-        
     }
-    
     
     
 }

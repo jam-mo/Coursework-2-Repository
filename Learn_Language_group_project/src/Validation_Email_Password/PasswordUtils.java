@@ -57,43 +57,30 @@ public class PasswordUtils {
         return returnValue;
     }
 //    
-//    public static void main(String[] args)
-//    {
-//
-//        // User provided password to validate
-//        String providedPassword = "myPassword1231234567890";
-//                
-//        // Encrypted and Base64 encoded password read from database
-//        String salt = "UOHz4QBoNMWB4JxivajeeeWz0HUGQb";
-//        
-//        // Salt value stored in database 
-////        String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
-//        String securePassword = "LZqhPnxjrubLVApfmfDBoZzYeIuC6g+XIUakzJZOaiw=";
-//        
-//        boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
-//        
-//        if(passwordMatch) 
-//        {
-//            System.out.println("Provided user password " + providedPassword + " is correct.");
-//        } else {
-//            System.out.println("Provided password is incorrect");
-//        }
-//        
-//        
-//        
-//        String myPassword = "J.Anya987654321";
-//        
-//        // Generate Salt. The generated value can be stored in DB. 
-//        String salt1 = PasswordUtils.getSalt(30);
-//        
-//        // Protect user's password. The generated value can be stored in DB.
-//        String mySecurePassword = PasswordUtils.generateSecurePassword(myPassword, salt1);
-//        
-//        // Print out protected password 
-//        System.out.println("My secure password = " + mySecurePassword);
-//        System.out.println("Salt value = " + salt1);
-//        
-//        
-//    }
+    public static void main(String[] args)
+    {
+
+        // User provided password to validate
+        String providedPassword = "123456789";
+                
+        // Encrypted and Base64 encoded password read from database
+        String salt = "3oMDBTwGEpSGtrzFbPqAMySq8nayhZ";
+        
+        // Salt value stored in database 
+//        String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
+        String securePassword = "/3CDGV2drpnbatCSHMCiHncwpaG+XodO6qJ+JFRqj4c=";
+        
+        boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
+        
+        if(passwordMatch) 
+        {
+            System.out.println("Provided user password " + providedPassword + " is correct.");
+        } else {
+            System.out.println("Provided password is incorrect");
+        }
+        
+        
+        
+    }
 
 }

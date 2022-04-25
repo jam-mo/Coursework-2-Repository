@@ -8,8 +8,6 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.*;
-import jdbacApi.connectDB;
 
 /**
  *
@@ -237,21 +235,18 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
             if(email.equalsIgnoreCase("") || email.equalsIgnoreCase(null))
             {
-                JOptionPane.showMessageDialog(null, "Add a Email");
+                JOptionPane.showMessageDialog(null, "Add a Email","EMAIL", JOptionPane.ERROR_MESSAGE);
             }
-            else if(password01.equals("") || password01.equals(null))
+            else if(password01.equals("") || password01 == null)
             {
-                JOptionPane.showMessageDialog(null, "Add a password");
+                JOptionPane.showMessageDialog(null, "Add a password" ,"PASSWORD", JOptionPane.ERROR_MESSAGE);
             }
             else if(Validation_Email.validationEmail(email)==false)
             {
-                JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com");
+                JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com" ,"EMAIL", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                
-                Connection con = connectDB.getConnection();
-                Statement stmt = null;
-                
+
                 if(userType.equalsIgnoreCase("Staff"))
                 {
                     ReadDatabase ReadSignIn = new ReadDatabase();
@@ -259,7 +254,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             frame.dispose();
-                            level_language lvlanguage = new level_language();
+                            level_language lvlanguage = new level_language("SPANISH");
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -269,11 +264,24 @@ public class SignIn extends ReadDatabase implements ActionListener{
                 else if(userType.equalsIgnoreCase("student"))
                 {
                     ReadDatabase ReadSignIn = new ReadDatabase();
+                                                String[] responses = {"SPANISH","CHINESE"};
+                            
+                            int answer = JOptionPane.showOptionDialog(null, "Which language do you prefer ?","asdas", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE ,null,responses,0);
+                            
+                            System.out.println(answer);
                     
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
-                            frame.dispose();
-                            level_language lvlanguage = new level_language();
+                            
+                            if(answer == 0){
+                                String language = "SPANISH";
+                                level_language lvlanguage = new level_language(language);
+                                frame.dispose();
+                            }else if(answer == 1){
+                                String language = "CHINESE";
+                                level_language lvlanguage = new level_language(language);
+                                frame.dispose();
+                            }
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);

@@ -6,7 +6,6 @@ package StartedPage;
 
 import Validation_Email_Password.PasswordUtils;
 import java.sql.*;
-import java.util.HashMap;
 import java.util.Random;
 import javax.swing.*;
 import jdbacApi.*;
@@ -106,7 +105,7 @@ public class ReadDatabase extends PasswordUtils {
                 System.out.println("");
                 
             }
-            if(returnValue == null || returnValue == ""){
+            if(returnValue == null || "".equals(returnValue)){
                 
                         String get_Student_ID = "INSERT INTO `STUDENT_USER`(`user_ID`,`username`,`firstName`, `lastName`, `emailAddress`,`encryted`,`encryptedpassword`) VALUES (?,?,?,?,?,?,?);" ;
                         String get_Question = "INSERT INTO `Security_Question`(`Question_1`,`Question_2`,`Question_3`,`user_email`) VALUES (?,?,?,?);";
@@ -439,14 +438,4 @@ public class ReadDatabase extends PasswordUtils {
         }       
         return takeValue;
     }
-
-    
-    
-    public static void main(String[] arg){
-        ReadDatabase rd = new ReadDatabase();
-        
-        
-        
-    }
-
 }
