@@ -15,25 +15,32 @@ import java.util.Random;
  * @author Jamie
  */
 public class Javadb {
-
+    // https://hacksmile.com/category/java-database/ - big help
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         //ConnectingDB.connect();
-        //insertStaff(602, "BeBoop", "Jeff", "Faffle", "emaddil@email.com", "boo", "boo", "tangerine", "math", "610AB");
+       // insertStaff("BeBoop", "Jeff", "Faffle", "emaddil@email.com", "boo", "boo", "tangerine", "math", "610AB");
+        //insertStaff("JBeBoop", "JeffEY", "wafle", "eremaddil@email.com", "bozo", "bozo", "tanqgerine", "msath", "6aa10AB");
     }
 
-    public static void insertStaff(int staff_ID, String UserName, String firstName, String lastName, String email, String password, String encryptedPassword, String securityQuestion, String Department, String teacherCode) {
+    public static void insertStaff(String UserName, String firstName, String lastName, String email, String password, String encryptedPassword, String securityQuestion, String Department, String teacherCode) {
         Connection con = ConnectingDB.connect();
-        PreparedStatement ps = null;
+        PreparedStatement ps = null; 
+        int staff_ID = generateId();
+        
+        // also, call other method
+        
+        // first, check table row, and if num doesnt exist, add in staff ID 
+        
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
             String staffSql = "INSERT INTO STAFF(staff_ID, staffUsername, staffFirstName, staffLastName, staffEmailAddress, staffPassword, staffEncryptedPassword, staffSecurityQuestion,"
                     + "staffDepartment, teacherCode) VALUES(?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(staffSql);
-            // do a random check - ex have a method that checks if number is in db
+            // do a random check - ex have a method thaint staff_ID = generateId();t checks if number is in db
             ps.setInt(1, staff_ID);
             ps.setString(2, UserName);
             ps.setString(3, firstName);
@@ -46,15 +53,18 @@ public class Javadb {
             ps.setString(10, teacherCode);
             ps.execute();
             System.out.println("Data has been added");
+            insertStaffUser(UserName, firstName, lastName, email, password, encryptedPassword, securityQuestion, staff_ID);
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
+        // call 
         // check nums in 
     }
 
-    public static void insertUser(int user_ID, String userName, String firstName, String lastName, String emailAddress, String Password, String encryptedPassword, String securityQuestion, int userProgress) {
+    public static void insertUser(String userName, String firstName, String lastName, String emailAddress, String Password, String encryptedPassword, String securityQuestion, int userProgress) {
         Connection con = ConnectingDB.connect();
         PreparedStatement psUser = null;
+        int user_ID = generateId();
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
             String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password, encryptedPassword, securityQuestion,"
@@ -78,37 +88,38 @@ public class Javadb {
 
     }
 
-    public static void insertStaffUser(int staff_ID, String UserName, String firstName, String lastName, String email, String password, String encryptedPassword, String securityQuestion, String Department, String teacherCode, int difficulty_ID) {
+    public static void insertStaffUser(String userName, String firstName, String lastName, String emailAddress, String Password, String encryptedPassword, String securityQuestion, int staff_ID) {
         Connection con = ConnectingDB.connect();
-        PreparedStatement ps = null;
+        PreparedStatement psStaff = null;
+        ; // should I have a seperate userID for staff, or the userID and staffID be the same
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
-            String staffSql = "INSERT INTO STAFF(staff_ID, staffUsername, staffFirstName, staffLastName, staffEmailAddress, staffPassword, staffEncryptedPassword, staffSecurityQuestion,"
-                    + "staffDepartment, teacherCode) VALUES(?,?,?,?,?,?,?,?,?,?)";
-            ps = con.prepareStatement(staffSql);
+            String staffSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password, encryptedPassword, securityQuestion,"
+                    + "staff_ID) VALUES(?,?,?,?,?,?,?,?,?)";
+            psStaff = con.prepareStatement(staffSql);
             // do a random check - ex have a method that checks if number is in db
-            ps.setInt(1, staff_ID);
-            ps.setString(2, UserName);
-            ps.setString(3, firstName);
-            ps.setString(4, lastName);
-            ps.setString(5, email);
-            ps.setString(6, password);
-            ps.setString(7, encryptedPassword);
-            ps.setString(8, securityQuestion);
-            ps.setString(9, Department);
-            ps.setString(10, teacherCode);
-            ps.execute();
-            System.out.println("Data has been added");
+            psStaff.setInt(1, staff_ID);
+            psStaff.setString(2, userName);
+            psStaff.setString(3, firstName);
+            psStaff.setString(4, lastName);
+            psStaff.setString(5, emailAddress);
+            psStaff.setString(6, Password);
+            psStaff.setString(7, encryptedPassword);
+            psStaff.setString(8, securityQuestion);
+            psStaff.setInt(9, staff_ID);
+            psStaff.execute();
+            System.out.println("Data has been added to users");
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         // check nums in 
     }
 
-    public static void insertLevels(int difficulty_ID, String levelA1, String levelA2, String levelB1, String levelB2) {
+    public static void insertLevels(String levelA1, String levelA2, String levelB1, String levelB2) {
         // what am i going to do for this one? // get lanugages_ID 
         Connection con = ConnectingDB.connect();
         PreparedStatement psLevel = null;
+        int difficulty_ID = generateId();
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
             String levelSql = "INSERT INTO LEVELS(difficulty_ID, level_A1, level_A2, level_B1, level_B2) VALUES(?,?,?,?,?)";
@@ -119,7 +130,7 @@ public class Javadb {
             psLevel.setString(3, levelA2);
             psLevel.setString(4, levelB1);
             psLevel.setString(5, levelB2);
-
+            //psLevel.setString(6, languages_ID);    
             psLevel.execute();
             System.out.println("Data has been added to Level table");
         } catch (SQLException e) {
@@ -127,11 +138,13 @@ public class Javadb {
         }
     }
 
-        public static void insertLanguages(int languages_ID, String spanish) {
+        public static void insertLanguages() {
 
 	// fetch userID, or when creating user, call this function
          Connection con = ConnectingDB.connect();
          PreparedStatement psLanguage = null;
+         int languages_ID = generateId();
+         String spanish = "Yes";
          // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
          try{
              String languageSql = "INSERT INTO LANGUAGES(languages_ID, spanish) VALUES(?,?)";
