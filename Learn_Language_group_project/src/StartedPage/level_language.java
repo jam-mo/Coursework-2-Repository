@@ -54,7 +54,7 @@ public class level_language extends readLevel implements ActionListener {
     ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
     ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
     
-    Font myFont1 = new Font("Bradley hand",Font.BOLD,25);
+    Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
     Font myFont3 = new Font("Rockwell",Font.PLAIN,13);
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
@@ -163,9 +163,9 @@ public class level_language extends readLevel implements ActionListener {
         frame.setVisible(true);
         
     }
-    public static void main(String[] arg){
-        level_language lg = new level_language("SPANISH");
-    }
+//    public static void main(String[] arg){
+//        level_language lg = new level_language("SPANISH");
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

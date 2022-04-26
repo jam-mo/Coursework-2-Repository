@@ -56,7 +56,7 @@ public class levelContext extends readLevel implements ActionListener {
     ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
     ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
     
-    Font myFont1 = new Font("Bradley hand",Font.BOLD,25);
+    Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
     Font myFont3 = new Font("Rockwell",Font.PLAIN,13);
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
@@ -172,9 +172,9 @@ public class levelContext extends readLevel implements ActionListener {
         
     }
     
-//    public static void main(String[] arg){
-//        levelContext lg = new levelContext("SPANISH","LEVEL_A1");
-//    }
+    public static void main(String[] arg){
+        levelContext lg = new levelContext("SPANISH","LEVEL_A1");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

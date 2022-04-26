@@ -187,9 +187,9 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
     }
     
-    public static void main(String[] arg){
-        SignIn signin = new SignIn();
-    }
+//    public static void main(String[] arg){
+//        SignIn signin = new SignIn();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

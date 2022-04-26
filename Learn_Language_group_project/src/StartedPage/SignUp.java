@@ -341,10 +341,10 @@ public class SignUp extends ReadDatabase implements ActionListener{
     
     }
     
-    public static void main(String[] arg){
-       SignUp opening= new SignUp();
-       
-    }
+//    public static void main(String[] arg){
+//       SignUp opening= new SignUp();
+//       
+//    }
     
 
 }

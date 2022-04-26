@@ -173,9 +173,9 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    public static void main(String[] arg){
-        Reset_password Rpwd = new Reset_password();
-    }
+//    public static void main(String[] arg){
+//        Reset_password Rpwd = new Reset_password();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

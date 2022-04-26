@@ -109,7 +109,6 @@ public class ReadDatabase extends PasswordUtils {
                 
                         String get_Student_ID = "INSERT INTO `STUDENT_USER`(`user_ID`,`username`,`firstName`, `lastName`, `emailAddress`,`encryted`,`encryptedpassword`) VALUES (?,?,?,?,?,?,?);" ;
                         String get_Question = "INSERT INTO `Security_Question`(`Question_1`,`Question_2`,`Question_3`,`user_email`) VALUES (?,?,?,?);";
-                        System.out.println("eerp");
                         try
                         {
                             con.setAutoCommit(false);
