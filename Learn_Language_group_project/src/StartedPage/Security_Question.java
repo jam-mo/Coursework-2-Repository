@@ -160,7 +160,7 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         
         Mpanel.add(buttonSubmit);
         
-        frame = new JFrame("SecurityQuestion");
+        frame = new JFrame("Security Question");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
@@ -189,20 +189,20 @@ public class Security_Question extends ReadDatabase implements ActionListener{
                 
                 if(qestionText1.equalsIgnoreCase(qestionText2) || qestionText1.equalsIgnoreCase(qestionText3))
                 {
-                    JOptionPane.showMessageDialog(null, "Sorry! you cant have same anwer");
+                    JOptionPane.showMessageDialog(null, "Sorry! You can not have the same answer");
                 }
                 else if (qestionText2.equalsIgnoreCase(qestionText1) || qestionText2.equalsIgnoreCase(qestionText3))
                 {
-                    JOptionPane.showMessageDialog(null, "Sorry! you cant have same anwer");
+                    JOptionPane.showMessageDialog(null, "Sorry! You can not have the same answer");
                 }
                 else if(qestionText2.equalsIgnoreCase(qestionText1) || qestionText2.equalsIgnoreCase(qestionText3))
                 {
-                    JOptionPane.showMessageDialog(null, "Sorry! you cant have same anwer");
+                    JOptionPane.showMessageDialog(null, "Sorry! You can not have the same answer");
                 }
                 else
                 {
                 
-                    JOptionPane.showMessageDialog(null, "Wow amazing answer You account is create");
+                    JOptionPane.showMessageDialog(null, "Wow amazing answer! Your account is created");
 
                     ReadDatabase Input = new ReadDatabase();
                     Input.InputSignUp(firstname, lastname, emailAddress, password, qestionText1, qestionText2, qestionText3);

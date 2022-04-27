@@ -141,6 +141,25 @@ public class SignUp extends ReadDatabase implements ActionListener{
             }  
         });
         
+        label8 = new JLabel();
+        label8.setText("Welcome page");
+        label8.setFont(myFont5);
+        label8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        label8.setBounds(30, 20, 200, 20);
+        label8.setForeground(new java.awt.Color(0,0,0));
+        label8.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e)  
+            {  
+               // you can open a new frame here as
+               // i have assumed you have declared "frame" as instance variable
+                openning opening= new openning();
+                frame1.dispose();
+
+            }  
+        });
+        
         text1 = new JTextField();
         text1.setForeground(new java.awt.Color(255,51,51));
         text1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -212,6 +231,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
         Mainpanel.add(label5);
         Mainpanel.add(label6);
         Mainpanel.add(label7);
+        Mainpanel.add(label8);
         
         Mainpanel.add(text1);
         Mainpanel.add(text2);
