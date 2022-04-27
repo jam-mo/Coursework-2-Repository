@@ -26,6 +26,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
     JLabel label3;
     JLabel label4;
     JLabel label5;
+    JLabel label6;
     
     JTextField text1;
     JPasswordField password;
@@ -85,7 +86,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label3.setBounds(-50, 650, 388, 30);
-        label3.setText("If you dont have Any Account |");
+        label3.setText("If you do not have an account |");
         
         label4 = new JLabel();
         label4.setText("Sign Up");
@@ -118,6 +119,25 @@ public class SignIn extends ReadDatabase implements ActionListener{
                // you can open a new frame here as
                // i have assumed you have declared "frame" as instance variable
                 Reset_password Rpwd = new Reset_password();
+
+            }  
+        });
+        
+        label6 = new JLabel();
+        label6.setText("Welcome page");
+        label6.setFont(myFont5);
+        label6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        label6.setBounds(30, 20, 200, 20);
+        label6.setForeground(new java.awt.Color(0,0,0));
+        label6.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e)  
+            {  
+               // you can open a new frame here as
+               // i have assumed you have declared "frame" as instance variable
+                openning opening= new openning();
+                frame.dispose();
 
             }  
         });
@@ -164,6 +184,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         Mainpanel.add(label3);
         Mainpanel.add(label4);
         Mainpanel.add(label5);
+        Mainpanel.add(label6);
         
         Mainpanel.add(checkbox);
         
@@ -290,7 +311,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please select your student or teacher");
+                    JOptionPane.showMessageDialog(null, "Please select if you are a student or teacher");
                 }
             }
             
