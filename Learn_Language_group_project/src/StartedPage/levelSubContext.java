@@ -204,8 +204,27 @@ public class levelSubContext extends readLevel implements ActionListener{
         for(int i = 0; i< levelReadData.getSubcontext().size(); i++)
         {
             if (e.getSource() == each_sub_button1_1[i]) {
-                Comm = new Communication("SPANISH", levels , contexts,(String) levelReadData.getSubcontext().get(i),getemail );
-                frame.dispose();
+                
+                ReadDatabase ReadSignIn = new ReadDatabase();
+                String[] responses = {"Person A","Person B"};
+                int answer = JOptionPane.showOptionDialog(null, "Which language do you prefer ?","asdas", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE ,null,responses,0);
+                
+                if(answer == 0){
+                    
+                    String personA = "PERSON_A";
+                    
+                    Comm = new Communication("SPANISH", levels , contexts,(String) levelReadData.getSubcontext().get(i),getemail );
+                    frame.dispose();
+                    
+                }else if(answer == 1){
+                    
+                    String personB = "PERSON_B";
+                    
+                    Comm = new Communication("SPANISH", levels , contexts,(String) levelReadData.getSubcontext().get(i),getemail );
+                    frame.dispose();
+                    
+                }
+                
             }
         }
         
