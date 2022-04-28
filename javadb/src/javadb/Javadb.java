@@ -64,6 +64,8 @@ public class Javadb {
     public static void insertUser(String userName, String firstName, String lastName, String emailAddress, String Password, String encryptedPassword, String securityQuestion, int userProgress) {
         Connection con = ConnectingDB.connect();
         PreparedStatement psUser = null;
+        int languages = generateId();
+        insertLanguages(languages);
         int user_ID = generateId();
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
@@ -115,14 +117,18 @@ public class Javadb {
         // check nums in 
     }
 
-    public static void insertLevels(String levelA1, String levelA2, String levelB1, String levelB2) {
+    public static void insertLevels(int languages_ID) {
         // what am i going to do for this one? // get lanugages_ID 
         Connection con = ConnectingDB.connect();
         PreparedStatement psLevel = null;
         int difficulty_ID = generateId();
+        String levelA1 = "/22";  // these will update in each individuals id - ex the language_id matching the user_id will update these when the user finished one of these.
+        String levelA2 = "/25";
+        String levelB1 = "/11";
+        String levelB2 = "/4";
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
-            String levelSql = "INSERT INTO LEVELS(difficulty_ID, level_A1, level_A2, level_B1, level_B2) VALUES(?,?,?,?,?)";
+            String levelSql = "INSERT INTO LEVELS(difficulty_ID, level_A1, level_A2, level_B1, level_B2, languages_ID) VALUES(?,?,?,?,?,?)";
             psLevel = con.prepareStatement(levelSql);
             // do a random check - ex have a method that checks if number is in db
             psLevel.setInt(1, difficulty_ID);
@@ -130,7 +136,9 @@ public class Javadb {
             psLevel.setString(3, levelA2);
             psLevel.setString(4, levelB1);
             psLevel.setString(5, levelB2);
+            psLevel.setInt(6, languages_ID);
             //psLevel.setString(6, languages_ID);    
+            //insertContext(difficulty_ID);
             psLevel.execute();
             System.out.println("Data has been added to Level table");
         } catch (SQLException e) {
@@ -138,13 +146,14 @@ public class Javadb {
         }
     }
 
-        public static void insertLanguages() {
+        public static void insertLanguages(int languages_ID) {
 
-	// fetch userID, or when creating user, call this function
+	// fetch userID, or when creating user, call this function, and pass a parameted for languages_id
          Connection con = ConnectingDB.connect();
          PreparedStatement psLanguage = null;
-         int languages_ID = generateId();
+         //int languages_ID = generateId();
          String spanish = "Yes";
+         insertLevels(languages_ID);
          // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
          try{
              String languageSql = "INSERT INTO LANGUAGES(languages_ID, spanish) VALUES(?,?)";
@@ -154,6 +163,7 @@ public class Javadb {
              psLanguage.setString(2, spanish);
              
              psLanguage.execute();
+             insertLevels(languages_ID);
              System.out.println("Data has been added");
          } catch(SQLException e) {
              System.out.println(e.toString());
@@ -164,6 +174,16 @@ public class Javadb {
          Connection con = ConnectingDB.connect();
          PreparedStatement psContext = null;
          // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER - fetch id too - difficulty
+         /*
+         int context_ID, 
+         String contextTitle, 
+         String contextLevel,
+         String subContext, 
+         String conversationPrompt,
+         String spanishWords
+         
+         */
+         // read csv file into here, 
          try{
              String contextSql = "INSERT INTO CONTEXT(CONTEXT_ID, CONTEXT_TITLE, CONTEXT_LEVEL, SUB_CONTEXT, CONVERSATION_PROMPT, SPANISH_WORDS) VALUES(?,?,?,?,?,?)";
              psContext = con.prepareStatement(contextSql);
@@ -184,6 +204,7 @@ public class Javadb {
       public static void insertUserActivity(int userActivity_ID, String loginDate, String loginTime, String logoutTime, String activity_completed){
           Connection con = ConnectingDB.connect();
          PreparedStatement psUserActivity = null;
+         // add user_ID in here, call from user_ID
          // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
          try{
              String userActivitySql = "INSERT INTO USERACTIVITY(userActivity_ID, loginDate, loginTime, logoutTime, activity_completed) VALUES(?,?,?,?,?)";
@@ -210,6 +231,10 @@ public class Javadb {
       }
       
       private static void readSpecificData() {
+          
+      }
+      
+      public static void readCSVFile() {
           
       }
       public static Integer generateId() { // https://tutorial.eyehunts.com/java/random-number-generator-java-range-5-digit/ source
