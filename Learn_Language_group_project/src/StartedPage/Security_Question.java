@@ -160,7 +160,9 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         
         Mpanel.add(buttonSubmit);
         
-        frame = new JFrame("SecurityQuestion");
+
+        frame = new JFrame("Security Question");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
         frame.setResizable(false);

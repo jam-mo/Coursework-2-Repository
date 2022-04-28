@@ -128,7 +128,7 @@ public class levelContext extends readLevel implements ActionListener {
         scroll.setBorder(null);
             
         
-        each_sub_Button1_1 = new JButton();
+        each_sub_Button1_1 = new JButton("Choose Level");
         each_sub_Button1_1.setIcon(icon);
         each_sub_Button1_1.setText("Go back");
         each_sub_Button1_1.setBorder(null);
@@ -138,7 +138,7 @@ public class levelContext extends readLevel implements ActionListener {
         each_sub_Button1_1.setIconTextGap(-10);
         each_sub_Button1_1.addActionListener(this);
         
-        each_sub_Button1_2 = new JButton();
+        each_sub_Button1_2 = new JButton("Log out");
         each_sub_Button1_2.setIcon(icon1);
         each_sub_Button1_2.setText("Home");
         each_sub_Button1_2.setBorder(null);
@@ -147,7 +147,7 @@ public class levelContext extends readLevel implements ActionListener {
         each_sub_Button1_2.setForeground(Color.WHITE);
         each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
-        
+
         each_sub_Button1_3 = new JButton();
         each_sub_Button1_3.setText("Profile");
         each_sub_Button1_3.setIcon(icon2);
@@ -214,9 +214,16 @@ public class levelContext extends readLevel implements ActionListener {
             frame.dispose();
         }
         
+        if(e.getSource() == each_sub_Button1_2)
+        {
+            SignIn si = new SignIn();
+            frame.dispose();
+        }
+        
         if(e.getSource() == each_sub_Button1_3 )
         {
-            System.out.println("poo3");
+            openning opening= new openning();
+            frame.dispose();
         }
         
     }

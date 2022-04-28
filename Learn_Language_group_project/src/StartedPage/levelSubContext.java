@@ -130,7 +130,7 @@ public class levelSubContext extends readLevel implements ActionListener{
         scroll.setBorder(null);
             
         
-        each_sub_Button1_1 = new JButton();
+        each_sub_Button1_1 = new JButton("Return to Content page");
         each_sub_Button1_1.setIcon(icon);
         each_sub_Button1_1.setText("Go back");
         each_sub_Button1_1.setBorder(null);
@@ -150,6 +150,7 @@ public class levelSubContext extends readLevel implements ActionListener{
         each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
         
+
         each_sub_Button1_3 = new JButton();
         each_sub_Button1_3.setText("Profile");
         each_sub_Button1_3.setIcon(icon2);
@@ -222,7 +223,8 @@ public class levelSubContext extends readLevel implements ActionListener{
         
         if(e.getSource() == each_sub_Button1_3 )
         {
-            System.out.println("poo3");
+            openning opening= new openning();
+            frame.dispose();
         }
         
     }
