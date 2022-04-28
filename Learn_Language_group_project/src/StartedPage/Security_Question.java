@@ -58,7 +58,7 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("Security Question");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -161,16 +161,17 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         Mpanel.add(buttonSubmit);
         
         frame = new JFrame("SecurityQuestion");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
         frame.setResizable(false);
-        
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(Mpanel);
         
         frame.setVisible(true);
         
     }
+    
+    
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==buttonSubmit){
             
@@ -189,20 +190,20 @@ public class Security_Question extends ReadDatabase implements ActionListener{
                 
                 if(qestionText1.equalsIgnoreCase(qestionText2) || qestionText1.equalsIgnoreCase(qestionText3))
                 {
-                    JOptionPane.showMessageDialog(null, "Sorry! you cant have same anwer");
+                    JOptionPane.showMessageDialog(null, "Sorry! You can not have the same answer");
                 }
                 else if (qestionText2.equalsIgnoreCase(qestionText1) || qestionText2.equalsIgnoreCase(qestionText3))
                 {
-                    JOptionPane.showMessageDialog(null, "Sorry! you cant have same anwer");
+                    JOptionPane.showMessageDialog(null, "Sorry! You can not have the same answer");
                 }
                 else if(qestionText2.equalsIgnoreCase(qestionText1) || qestionText2.equalsIgnoreCase(qestionText3))
                 {
-                    JOptionPane.showMessageDialog(null, "Sorry! you cant have same anwer");
+                    JOptionPane.showMessageDialog(null, "Sorry! You can not have the same answer");
                 }
                 else
                 {
                 
-                    JOptionPane.showMessageDialog(null, "Wow amazing answer You account is create");
+                    JOptionPane.showMessageDialog(null, "Wow amazing answer! Your account is created");
 
                     ReadDatabase Input = new ReadDatabase();
                     Input.InputSignUp(firstname, lastname, emailAddress, password, qestionText1, qestionText2, qestionText3);

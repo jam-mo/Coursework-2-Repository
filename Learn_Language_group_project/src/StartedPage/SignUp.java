@@ -7,14 +7,7 @@ package StartedPage;
 import Validation_Email_Password.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
 import javax.swing.*;
-import jdbacApi.connectDB;
-import java.util.regex.*;
 
 /**
  *
@@ -28,9 +21,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
     String password;
     String email;
 
-    
-    
-    
+
     JFrame frame1;
     
     JPanel Mainpanel;
@@ -45,12 +36,17 @@ public class SignUp extends ReadDatabase implements ActionListener{
     JLabel label7;
     JLabel label8;
     
+    JButton goback_button;
+    
     JCheckBox checkbox;
     JCheckBox checkbox1;
     
     JTextField text1;
     JTextField text2;
     JTextField text3;
+    
+    JComboBox combobox;
+    String userType;
     
     JPasswordField passwordfield;
     JPasswordField re_passwordfield;
@@ -59,6 +55,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
 
     ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/eye.png");
     ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/hidden.png");
+//    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -67,10 +64,16 @@ public class SignUp extends ReadDatabase implements ActionListener{
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
     SignUp(){
+        
+//        goback_button = new JButton();
+//        goback_button.setIcon(icon2);
+//        goback_button.setBounds(5, 15, 35, 35);
+//        goback_button.setBorder(null);
+//        goback_button.addActionListener(this);
 
         label = new JLabel();
         label.setText("SignUp");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -198,6 +201,13 @@ public class SignUp extends ReadDatabase implements ActionListener{
         
         buttonSubmit.addActionListener(this);
         
+        String[] valueType = {"Select","Student","Staff"};
+        combobox = new JComboBox(valueType);
+        combobox.setBounds(300, 0, 100, 50);
+        combobox.addActionListener(this);
+        
+        userType = (String) combobox.getSelectedItem();
+        
         Mainpanel = new JPanel();
         Mainpanel.setBackground(Color.getHSBColor(255, 204, 204));
         Mainpanel.setLayout(null);
@@ -224,6 +234,8 @@ public class SignUp extends ReadDatabase implements ActionListener{
         
         Mainpanel.add(checkbox);
         Mainpanel.add(checkbox1);
+        
+        Mainpanel.add(combobox);
         
         frame1 = new JFrame("SignUP");
         frame1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -30,6 +30,8 @@ public class SignIn extends ReadDatabase implements ActionListener{
     JTextField text1;
     JPasswordField password;
     
+    JButton goback_button;
+    
     JButton buttonSubmit;
     
     JCheckBox checkbox;
@@ -38,8 +40,9 @@ public class SignIn extends ReadDatabase implements ActionListener{
     
     JComboBox combobox;
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/hidden.png");
+    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/eye.png");
+    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/hidden.png");
+    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -48,6 +51,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
     SignIn(){
+        
+        goback_button = new JButton();
+        goback_button.setIcon(icon2);
+        goback_button.setBounds(5, 15, 35, 35);
+        goback_button.setBorder(null);
+        goback_button.addActionListener(this);
+        
         String[] valueType = {"Select","Student","Staff"};
         
         combobox = new JComboBox(valueType);
@@ -59,7 +69,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("SignIn");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -85,7 +95,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label3.setBounds(-50, 650, 388, 30);
-        label3.setText("If you dont have Any Account |");
+        label3.setText("If you do not have an account |");
         
         label4 = new JLabel();
         label4.setText("Sign Up");
@@ -110,7 +120,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label5.setBounds(230, 365, 150, 30);
-        label5.setForeground(new java.awt.Color(255,51,51));
+        label5.setForeground(new java.awt.Color(198,102,104));
         label5.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e)  
@@ -118,7 +128,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                // you can open a new frame here as
                // i have assumed you have declared "frame" as instance variable
                 Reset_password Rpwd = new Reset_password();
-
+                frame.dispose();
             }  
         });
         
@@ -165,6 +175,8 @@ public class SignIn extends ReadDatabase implements ActionListener{
         Mainpanel.add(label4);
         Mainpanel.add(label5);
         
+        Mainpanel.add(goback_button);
+        
         Mainpanel.add(checkbox);
         
         Mainpanel.add(text1);
@@ -193,6 +205,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == goback_button){
+            
+            openning op = new openning();
+            frame.dispose();
+            
+        }
         
         if(e.getSource()==combobox){
             if(combobox.getSelectedItem().equals("Admin")){
@@ -254,7 +273,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             frame.dispose();
-                            level_language lvlanguage = new level_language("SPANISH");
+                            level_language lvlanguage = new level_language("SPANISH",email);
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -273,13 +292,17 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             
+                            userActivity userAct = new userActivity();
+                            
+                            userAct.userLogintime(email);
+                            
                             if(answer == 0){
                                 String language = "SPANISH";
-                                level_language lvlanguage = new level_language(language);
+                                level_language lvlanguage = new level_language(language,email);
                                 frame.dispose();
                             }else if(answer == 1){
                                 String language = "CHINESE";
-                                level_language lvlanguage = new level_language(language);
+                                level_language lvlanguage = new level_language(language,email);
                                 frame.dispose();
                             }
                         }
@@ -290,7 +313,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please select your student or teacher");
+                    JOptionPane.showMessageDialog(null, "Please select if you are a student or teacher");
                 }
             }
             

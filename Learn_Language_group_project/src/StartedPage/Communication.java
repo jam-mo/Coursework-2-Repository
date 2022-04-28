@@ -22,6 +22,13 @@ public class Communication extends readLevel implements ActionListener{
     
     JPanel sub_panel_center;
     
+    levelSubContext lsc;
+    
+    String levels;
+    String contexts;
+    String subContexts;
+    String getemail;
+    
     JPanel[] sub_panel_center_1 = new JPanel[3];
     JPanel[] sub_panel_center_1_1 = new JPanel[3];
     
@@ -29,11 +36,13 @@ public class Communication extends readLevel implements ActionListener{
     JPanel sub_panel_center_center;
     JButton sub_panel_center_buttonSubmit;
     
-    JPanel button_panel1;
+    JPanel sub_panel1;
     
     JPanel[] sub_panel_1 = new JPanel[23];
     
-    JButton[] sub_Button = new JButton[3];
+    JButton each_sub_Button1_1;
+    JButton each_sub_Button1_2;
+    JButton each_sub_Button1_3;
     
     JLabel label;
     
@@ -55,7 +64,12 @@ public class Communication extends readLevel implements ActionListener{
     
     ImageIcon[] icon = new ImageIcon[3];
     
-    Communication(String language, String level, String context, String subcontext){
+    Communication(String language, String level, String context, String subcontext,String email){
+        
+        levels = level;
+        contexts = context;
+        subContexts = subcontext;
+        getemail = email;
         
     icon[0] = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/go-back.png");
     icon[1] = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
@@ -63,7 +77,7 @@ public class Communication extends readLevel implements ActionListener{
         
         label = new JLabel();
         label.setText(subcontext);
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
         
@@ -79,42 +93,115 @@ public class Communication extends readLevel implements ActionListener{
         levelReadData.ReadtextA(language, level, context, subcontext);
         levelReadData.ReadtextB(language, level, context, subcontext);
         
-        label5 = new JLabel[levelReadData.getPersonA().size()];
-        label7 = new JLabel[levelReadData.getPersonA().size()];
-        
-        for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
-            
-            label5[i] = new JLabel();
-            label5[i].setText("<html>• Person A : "+(String) levelReadData.getPersonA().get(i)+"</html>");
-            label5[i].setIconTextGap(-10);
-//            label5[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
-            label5[i].setPreferredSize(new Dimension(50,50));
-            label5[i].setForeground(new java.awt.Color(0,0,0));
-            label5[i].setFont(myFont3);
-            
-        }
-        
-        for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
-            
-            label7[i] = new JLabel();
-            label7[i].setText("• Person B : "+(String) levelReadData.getPersonB().get(i));
-            label7[i].setPreferredSize(new Dimension(10,50));
-            label7[i].setForeground(new java.awt.Color(255,51,51));
-            label7[i].setFont(myFont3);
-            
-        }
 
-        sub_panel_center_center = new JPanel();
-        sub_panel_center_center.setBackground(new java.awt.Color(233,255,255));
-        sub_panel_center_center.setPreferredSize(new Dimension(360, 700));
-        sub_panel_center_center.setLayout(new GridLayout(10,1,0,0));
         
-        for (int i = 0 ; i < label5.length ; i++) {
+        if(levelReadData.getPersonA().size()> levelReadData.getPersonB().size()){
+            label5 = new JLabel[levelReadData.getPersonA().size()];
+            label7 = new JLabel[levelReadData.getPersonA().size()];
             
-            sub_panel_center_center.add(label5[i]);
-            
-            sub_panel_center_center.add(label7[i]);
+            levelReadData.getPersonB().add("<p style='color:red;' >_______________________END _____________________(Thank you for using ours app 🥰)</p>");
+          
+            for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
 
+                label5[i] = new JLabel();
+                label5[i].setText("<html> <b>+</b> Person A : <p> →  "+(String) levelReadData.getPersonA().get(i)+"</p></html>");
+                label5[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                label5[i].setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+                label5[i].setForeground(new java.awt.Color(174,3,49));
+                label5[i].setFont(myFont3);
+                
+                label7[i] = new JLabel();
+                label7[i].setText("<html> <b>+</b>  Person B : <p> → "+(String) levelReadData.getPersonB().get(i)+"</p></html>");
+                label7[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                label7[i].setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+                label7[i].setForeground(new java.awt.Color(120,150,240));
+                label7[i].setFont(myFont3);
+
+            }
+            
+            sub_panel_center_center = new JPanel();
+            sub_panel_center_center.setBackground(new java.awt.Color(233,231,214));
+            sub_panel_center_center.setPreferredSize(new Dimension(360, 900));
+            sub_panel_center_center.setLayout(new GridLayout(levelReadData.getPersonA().size()+5,1,0,10));
+            
+            for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {     
+                
+                sub_panel_center_center.add(label5[i]);
+                sub_panel_center_center.add(label7[i]);
+                
+            }
+            
+        }else if (levelReadData.getPersonA().size()< levelReadData.getPersonB().size()){
+            label5 = new JLabel[levelReadData.getPersonB().size()];
+            label7 = new JLabel[levelReadData.getPersonB().size()];
+            
+            levelReadData.getPersonA().add("<p>_______________________END _____________________(Thank you for using ours app 🥰)");
+            
+            for (int i = 0 ; i < levelReadData.getPersonB().size() ; i++) {
+
+                label5[i] = new JLabel();
+                label5[i].setText("<html> <b>+</b> Person A : <br> → "+(String) levelReadData.getPersonA().get(i)+"</html>");
+//                label5[i].setIconTextGap(-5);
+                label5[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                label5[i].setPreferredSize(new Dimension(50,50));
+                label5[i].setForeground(new java.awt.Color(174,3,49));
+                label5[i].setFont(myFont3);
+
+                label7[i] = new JLabel();
+                label7[i].setText("<html> <b>+</b>  Person B : <br> → "+(String) levelReadData.getPersonB().get(i)+"</html>");
+//                label7[i].setIconTextGap(-5);
+                label7[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                label7[i].setPreferredSize(new Dimension(10,50));
+                label7[i].setForeground(new java.awt.Color(120,150,240));
+                label7[i].setFont(myFont3);
+            }
+            sub_panel_center_center = new JPanel();
+            sub_panel_center_center.setBackground(new java.awt.Color(233,231,214));
+            sub_panel_center_center.setPreferredSize(new Dimension(360, 900));
+            sub_panel_center_center.setLayout(new GridLayout(levelReadData.getPersonB().size()+5,1,0,10));
+            
+            for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
+
+                sub_panel_center_center.add(label5[i]);
+                sub_panel_center_center.add(label7[i]);
+                
+            }
+            
+        }else if (levelReadData.getPersonA().size() == levelReadData.getPersonB().size()){
+            
+            label5 = new JLabel[levelReadData.getPersonA().size()];
+            label7 = new JLabel[levelReadData.getPersonB().size()];
+            
+            for (int i = 0 ; i < levelReadData.getPersonB().size() ; i++) {
+
+                label5[i] = new JLabel();
+                label5[i].setText("<html> <b>+</b> Person A : <br> → "+(String) levelReadData.getPersonA().get(i)+"</html>");
+//                label5[i].setIconTextGap(-5);
+                label5[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                label5[i].setPreferredSize(new Dimension(50,50));
+                label5[i].setForeground(new java.awt.Color(174,3,49));
+                label5[i].setFont(myFont3);
+
+                label7[i] = new JLabel();
+                label7[i].setText("<html> <b>+</b>  Person B : <br> → "+(String) levelReadData.getPersonB().get(i)+"</html>");
+//                label7[i].setIconTextGap(-5);
+                label7[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                label7[i].setPreferredSize(new Dimension(10,50));
+                label7[i].setForeground(new java.awt.Color(120,150,240));
+                label7[i].setFont(myFont3);
+            }
+            sub_panel_center_center = new JPanel();
+            sub_panel_center_center.setBackground(new java.awt.Color(233,232,214));
+            sub_panel_center_center.setPreferredSize(new Dimension(360, 900));
+            sub_panel_center_center.setLayout(new GridLayout(levelReadData.getPersonB().size()+5,1,0,10));
+            
+            for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
+
+                sub_panel_center_center.add(label5[i]);
+                sub_panel_center_center.add(label7[i]);
+                
+            }
+            
         }
         
         
@@ -130,40 +217,68 @@ public class Communication extends readLevel implements ActionListener{
         sub_panel_center_buttonSubmit.addActionListener(this);
         
         sub_panel_center= new JPanel();
-        sub_panel_center.setBackground(new java.awt.Color(233,255,255));
+        sub_panel_center.setBackground(new java.awt.Color(233,231,214));
         sub_panel_center.setLayout(new BorderLayout(0,10));
 
         
         JScrollPane scroll = new JScrollPane(sub_panel_center,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setBounds(10, 80, 380, 590);
+        scroll.setBounds(10, 80, 380, 570);
         scroll.setBorder(null);
 
         sub_panel_center.add(sub_panel_center_Top,BorderLayout.NORTH);
         sub_panel_center.add(sub_panel_center_center,BorderLayout.CENTER);
         sub_panel_center.add(sub_panel_center_buttonSubmit,BorderLayout.SOUTH);
         
-        button_panel1 = new JPanel();
-        button_panel1.setBackground(new java.awt.Color(23, 213, 164));
-        button_panel1.setBounds(0, 674, 400, 55);
-        button_panel1.setLayout(new GridLayout(1,3,10,10));
+        each_sub_Button1_1 = new JButton();
+        each_sub_Button1_1.setIcon(icon[0]);
+        each_sub_Button1_1.setText("Go back");
+        each_sub_Button1_1.setBorder(null);
+        each_sub_Button1_1.setHorizontalTextPosition(JButton.CENTER);
+        each_sub_Button1_1.setVerticalTextPosition(JButton.BOTTOM);
+        each_sub_Button1_1.setForeground(Color.WHITE);
+        each_sub_Button1_1.setIconTextGap(-10);
+        each_sub_Button1_1.addActionListener(this);
         
-        for(int i = 0; i < sub_Button.length ; i++){
-            sub_Button[i] = new JButton();
-            sub_Button[i].setIcon(icon[i]);
-            sub_Button[i].setBorder(null);
-            sub_Button[i].addActionListener(this);
+        each_sub_Button1_2 = new JButton();
+        each_sub_Button1_2.setIcon(icon[1]);
+        each_sub_Button1_2.setText("Home");
+        each_sub_Button1_2.setBorder(null);
+        each_sub_Button1_2.setHorizontalTextPosition(JButton.CENTER);
+        each_sub_Button1_2.setVerticalTextPosition(JButton.BOTTOM);
+        each_sub_Button1_2.setForeground(Color.WHITE);
+        each_sub_Button1_2.setIconTextGap(-10);
+        each_sub_Button1_2.addActionListener(this);
+        
+        each_sub_Button1_3 = new JButton();
+        each_sub_Button1_3.setText("Profile");
+        each_sub_Button1_3.setIcon(icon[2]);
+        each_sub_Button1_3.setBorder(null);
+        each_sub_Button1_3.setHorizontalTextPosition(JButton.CENTER);
+        each_sub_Button1_3.setVerticalTextPosition(JButton.BOTTOM);
+        each_sub_Button1_3.setForeground(Color.WHITE);
+        each_sub_Button1_3.setIconTextGap(-5);
+        each_sub_Button1_3.addActionListener(this);
+        
+        sub_panel1 = new JPanel();
+        sub_panel1.setBackground(new java.awt.Color(120,139,204));
+        sub_panel1.setBounds(0, 673, 400, 55);
+        
+        sub_panel1.setLayout(new GridLayout(1,3,10,10));
+        
+        sub_panel1.add(each_sub_Button1_1);
+        sub_panel1.add(each_sub_Button1_2);
+        sub_panel1.add(each_sub_Button1_3);
+        
             
-            button_panel1.add(sub_Button[i]);
-        }
         Mainpanel = new JPanel();
-        Mainpanel.setBackground(new java.awt.Color(233,255,255));
+        Mainpanel.setBackground(new java.awt.Color(233,231,214));
         Mainpanel.setLayout(null);
         Mainpanel.setSize(400,750);
         
         Mainpanel.add(label);
         
         Mainpanel.add(scroll,BorderLayout.CENTER);
-        Mainpanel.add(button_panel1);
+        Mainpanel.add(sub_panel1);
         
         frame = new JFrame("Learn language");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -177,12 +292,21 @@ public class Communication extends readLevel implements ActionListener{
         
     }
     
-    public static void main(String[] arg){
-        Communication c = new Communication("SPANISH","LEVEL_A1" ,"Ordering food and drink" ,"Take Away");
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        
+        if(e.getSource() == each_sub_Button1_1 || e.getSource() == each_sub_Button1_2)
+        {
+            lsc = new levelSubContext("SPANISH", levels, contexts,getemail);
+            frame.dispose();
+        }
+        
+        if(e.getSource() == each_sub_Button1_1 )
+        {
+            System.out.println("poo3");
+        }
         
     }
     
