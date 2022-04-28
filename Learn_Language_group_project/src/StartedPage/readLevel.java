@@ -151,14 +151,15 @@ public class readLevel extends getdata_learning {
     @Override
     protected boolean subcontext(String languageSelect, String level,String context) {
         
-        String readSubContext = "SELECT  sc.SUB_CONTEXT\n" +
-                                    "FROM LANGUAGES sp JOIN LEVELS l\n" +
-                                    "ON sp.languages_ID = l.languages_ID \n" +
-                                    "JOIN CONTEXT c  \n" +
-                                    "ON l.difficulty_ID = c.difficulty_ID \n" +
-                                    "JOIN SUB_CONTEXT sc \n" +
-                                    "on c.Context_ID = sc.Context_ID\n" +
-                                    "WHERE languages =? AND Language_level =? AND CONTEXT=?;";
+        String readSubContext = """
+                                SELECT  sc.SUB_CONTEXT
+                                FROM LANGUAGES sp JOIN LEVELS l
+                                ON sp.languages_ID = l.languages_ID 
+                                JOIN CONTEXT c  
+                                ON l.difficulty_ID = c.difficulty_ID 
+                                JOIN SUB_CONTEXT sc 
+                                on c.Context_ID = sc.Context_ID
+                                WHERE languages =? AND Language_level =? AND CONTEXT=?;""";
         
         con = connectDB.getConnection();
             try {
@@ -226,7 +227,6 @@ public class readLevel extends getdata_learning {
                              JOIN PERSON_A pA
                              ON sc.SUB_CONTEXT_ID = pA.SUB_CONTEXT_ID
                              WHERE languages =? AND Language_level =? AND CONTEXT=? AND SUB_CONTEXT=?;""";
-        
         con = connectDB.getConnection();
             try {
                 
@@ -282,7 +282,7 @@ public class readLevel extends getdata_learning {
     @Override
     protected boolean ReadtextB(String languageSelect, String level,  String context, String subContext) {
         
-        String readPersonA = """
+        String readPersonB = """
                              SELECT  pB.TEXT
                              FROM LANGUAGES sp JOIN LEVELS l
                              ON sp.languages_ID = l.languages_ID 
@@ -297,7 +297,7 @@ public class readLevel extends getdata_learning {
         con = connectDB.getConnection();
             try {
                 
-                pstmt = con.prepareStatement(readPersonA);
+                pstmt = con.prepareStatement(readPersonB);
 
                 pstmt.setString(1, languageSelect);
                 pstmt.setString(2, level);
@@ -347,29 +347,29 @@ public class readLevel extends getdata_learning {
     }
     
     
-    public static void main(String[] arg){
-        readLevel  lea = new readLevel();
-        lea.ReadtextA("SPANISH","LEVEL_A1" ,"Ordering food and drink" ,"Take Away" );
-        lea.ReadtextB("SPANISH","LEVEL_A1" ,"Ordering food and drink" ,"Take Away" );
-        
-        System.out.println("_________________A_B_____________________");
-        
-        for (Object personA : lea.getPersonA()) {
-            
-            System.out.println("• Person A : "+personA);
-            System.out.println("• Person B : ••••••••••••••••••••••••••••••••••");
-            
-        }
-        
-        System.out.println("_________END__________");
-        
-        for (Object personB : lea.getPersonB()) {
-            
-            System.out.println("• Person B : "+personB);
-            System.out.println("• Person A : ••••••••••••••••••••••••••••••••••");
-            
-        }
-        
-    }
+//    public static void main(String[] arg){
+//        readLevel  lea = new readLevel();
+//        lea.ReadtextA("SPANISH","LEVEL_A1" ,"Ordering food and drink" ,"Takeaway" );
+//        lea.ReadtextB("SPANISH","LEVEL_A1" ,"Ordering food and drink" ,"Takeaway" );
+//        
+//        System.out.println("_________________A_B_____________________");
+//        
+//        for (Object personA : lea.getPersonA()) {
+//            
+//            System.out.println("• Person A : "+personA);
+//            System.out.println("• Person B : ••••••••••••••••••••••••••••••••••");
+//            
+//        }
+//        
+//        System.out.println("_________END__________");
+//        
+//        for (Object personB : lea.getPersonB()) {
+//            
+//            System.out.println("• Person B : "+personB);
+//            System.out.println("• Person A : ••••••••••••••••••••••••••••••••••");
+//            
+//        }
+//        
+//    }
     
 }

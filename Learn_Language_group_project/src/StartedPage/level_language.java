@@ -26,7 +26,7 @@ public class level_language extends readLevel implements ActionListener {
     JPanel sub_panel;
     JPanel sub_panel1;
 
-    
+    String getemail;
     
     JPanel[] each_sub_panel1;
     
@@ -60,13 +60,18 @@ public class level_language extends readLevel implements ActionListener {
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    level_language(String language){
+    level_language(String language, String email){
         
-        
+        getemail = email;
         
         label = new JLabel();
+
+        label.setText("Choose Level of Spainese");
+        label.setForeground(new java.awt.Color(198,102,104));
+
         label.setText("Choose Level of Spainish");
         label.setForeground(new java.awt.Color(255,51,51));
+
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
         
@@ -80,7 +85,7 @@ public class level_language extends readLevel implements ActionListener {
             
             
             each_sub_panel1[i] = new JPanel();
-            each_sub_panel1[i].setBackground(new java.awt.Color(160+i+22+i,14*i,35*i));
+            each_sub_panel1[i].setBackground(new java.awt.Color(198+i+22+i,15*(5*i),50*i+(i*10)));
             each_sub_panel1[i].setLayout(new BorderLayout());
             
             each_sub_panel1_1[i] = new JPanel();
@@ -111,7 +116,7 @@ public class level_language extends readLevel implements ActionListener {
         sub_panel = new JPanel();
         sub_panel.setBackground(Color.getHSBColor(255, 204, 204));
         sub_panel.setLayout(new GridLayout(4,1,2,5));
-        sub_panel.setBounds(10, 80, 380, 590);
+        sub_panel.setBounds(10, 80, 380, 570);
             
         for (JPanel each_sub_panel11 : each_sub_panel1) {
             sub_panel.add(each_sub_panel11);
@@ -119,22 +124,39 @@ public class level_language extends readLevel implements ActionListener {
         
         each_sub_Button1_1 = new JButton("Log out");
         each_sub_Button1_1.setIcon(icon);
+        each_sub_Button1_1.setText("LogOut");
         each_sub_Button1_1.setBorder(null);
+        each_sub_Button1_1.setHorizontalTextPosition(JButton.CENTER);
+        each_sub_Button1_1.setVerticalTextPosition(JButton.BOTTOM);
+        each_sub_Button1_1.setForeground(Color.WHITE);
+        each_sub_Button1_1.setIconTextGap(-10);
         each_sub_Button1_1.addActionListener(this);
         
         each_sub_Button1_2 = new JButton();
         each_sub_Button1_2.setIcon(icon1);
+        each_sub_Button1_2.setText("Home");
         each_sub_Button1_2.setBorder(null);
+        each_sub_Button1_2.setHorizontalTextPosition(JButton.CENTER);
+        each_sub_Button1_2.setVerticalTextPosition(JButton.BOTTOM);
+        each_sub_Button1_2.setForeground(Color.WHITE);
+        each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
         
-        each_sub_Button1_3 = new JButton("Welcome page");
+
+        each_sub_Button1_3 = new JButton();
+        each_sub_Button1_3.setText("Profile");
+
         each_sub_Button1_3.setIcon(icon2);
         each_sub_Button1_3.setBorder(null);
+        each_sub_Button1_3.setHorizontalTextPosition(JButton.CENTER);
+        each_sub_Button1_3.setVerticalTextPosition(JButton.BOTTOM);
+        each_sub_Button1_3.setForeground(Color.WHITE);
+        each_sub_Button1_3.setIconTextGap(-5);
         each_sub_Button1_3.addActionListener(this);
         
         sub_panel1 = new JPanel();
-        sub_panel1.setBackground(new java.awt.Color(23, 213, 164));
-        sub_panel1.setBounds(0, 674, 400, 55);
+        sub_panel1.setBackground(new java.awt.Color(120,139,204));
+        sub_panel1.setBounds(0, 673, 400, 55);
         
         sub_panel1.setLayout(new GridLayout(1,3,10,10));
         
@@ -163,22 +185,21 @@ public class level_language extends readLevel implements ActionListener {
         frame.setVisible(true);
         
     }
-//    public static void main(String[] arg){
-//        level_language lg = new level_language("SPANISH");
-//    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         
         for(int i = 0; i< levelReadData.getLevelText().size(); i++){
             if (e.getSource() == each_sub_button1_1[i]) {
-                lc = new levelContext("SPANISH", (String) levelReadData.getLevelText().get(i));
+                lc = new levelContext("SPANISH", (String) levelReadData.getLevelText().get(i),getemail);
                 frame.dispose();
             }
         }
         
         if(e.getSource() == each_sub_Button1_1 || e.getSource() == each_sub_Button1_2)
         {
+            userActivity userAct = new userActivity();
+
+            userAct.userLogouttime(getemail);
             SignIn si = new SignIn();
             frame.dispose();
         }

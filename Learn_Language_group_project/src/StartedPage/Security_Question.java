@@ -58,7 +58,7 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("Security Question");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -160,17 +160,20 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         
         Mpanel.add(buttonSubmit);
         
+
         frame = new JFrame("Security Question");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
         frame.setResizable(false);
-        
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(Mpanel);
         
         frame.setVisible(true);
         
     }
+    
+    
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==buttonSubmit){
             

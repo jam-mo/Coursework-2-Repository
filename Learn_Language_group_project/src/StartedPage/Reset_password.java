@@ -59,7 +59,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("Confirm email");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -173,9 +173,9 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-//    public static void main(String[] arg){
-//        Reset_password Rpwd = new Reset_password();
-//    }
+    public static void main(String[] arg){
+        Reset_password Rpwd = new Reset_password();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
