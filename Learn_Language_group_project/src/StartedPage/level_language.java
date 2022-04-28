@@ -174,7 +174,7 @@ public class level_language extends readLevel implements ActionListener {
         Mainpanel.add(sub_panel,BorderLayout.CENTER);
         Mainpanel.add(sub_panel1);
         
-        frame = new JFrame("ChooseLevelSpainese");
+        frame = new JFrame("ChooseLevelSpainish");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
