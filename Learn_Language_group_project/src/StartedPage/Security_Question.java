@@ -10,7 +10,7 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 
 public class Security_Question extends ReadDatabase implements ActionListener{
@@ -65,7 +65,7 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         label.setFont(myFont1);
         
         label1 = new JLabel();
-        label1.setText("Quetion 1: Are you single?");
+        label1.setText("Quetion 1: What your favorite food?");
         label1.setForeground(new java.awt.Color(102,102,255));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -73,7 +73,7 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         label1.setFont(myFont2);
         
         label2 = new JLabel();
-        label2.setText("Quetion 2: Are you single?");
+        label2.setText("Quetion 2: What your favorite Candy?");
         label2.setForeground(new java.awt.Color(102,102,255));
         label2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label2.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -81,7 +81,7 @@ public class Security_Question extends ReadDatabase implements ActionListener{
         label2.setFont(myFont2);
         
         label3 = new JLabel();
-        label3.setText("Quetion 3: Are you single?");
+        label3.setText("Quetion 3: What your favorite animal ? ");
         label3.setForeground(new java.awt.Color(102,102,255));
         label3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label3.setVerticalAlignment(javax.swing.SwingConstants.CENTER);

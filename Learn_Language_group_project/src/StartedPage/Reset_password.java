@@ -7,6 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+/**
+ *
+ * @author kokmeng / christopher
+ */
+
 public class Reset_password extends ReadDatabase implements ActionListener{
     
     JFrame frame;
@@ -48,8 +54,8 @@ public class Reset_password extends ReadDatabase implements ActionListener{
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/hidden.png");
+    ImageIcon icon = new ImageIcon("eye.png");
+    ImageIcon icon1 = new ImageIcon("hidden.png");
     
     Reset_password(){
         

@@ -4,6 +4,11 @@
  */
 package StartedPage;
 
+/**
+ *
+ * @author kokmeng / christopher
+ */
+
 public class student_user {
     
     private String firstName;

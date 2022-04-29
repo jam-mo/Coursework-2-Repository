@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 
 public class SignIn extends ReadDatabase implements ActionListener{
@@ -41,9 +41,9 @@ public class SignIn extends ReadDatabase implements ActionListener{
     
     JComboBox combobox;
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/hidden.png");
-    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/back.png");
+    ImageIcon icon = new ImageIcon("eye.png");
+    ImageIcon icon1 = new ImageIcon("hidden.png");
+    ImageIcon icon2 = new ImageIcon("back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);

@@ -11,8 +11,9 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
+
 public class level_language extends readLevel implements ActionListener {
     
     readLevel levelReadData = new readLevel();
@@ -50,9 +51,9 @@ public class level_language extends readLevel implements ActionListener {
         
     };
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/logout.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
-    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
+    ImageIcon icon = new ImageIcon("logout.png");
+    ImageIcon icon1 = new ImageIcon("home-page.png");
+    ImageIcon icon2 = new ImageIcon("account.png");
     
     Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -66,11 +67,9 @@ public class level_language extends readLevel implements ActionListener {
         
         label = new JLabel();
 
-        label.setText("Choose Level of Spainese");
         label.setForeground(new java.awt.Color(198,102,104));
 
         label.setText("Choose Level of Spainish");
-        label.setForeground(new java.awt.Color(255,51,51));
 
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);

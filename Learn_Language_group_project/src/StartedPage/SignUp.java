@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 
 public class SignUp extends ReadDatabase implements ActionListener{
@@ -53,8 +53,8 @@ public class SignUp extends ReadDatabase implements ActionListener{
     
     JButton buttonSubmit;
 
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/hidden.png");
+    ImageIcon icon = new ImageIcon("eye.png");
+    ImageIcon icon1 = new ImageIcon("hidden.png");
 //    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);

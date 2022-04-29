@@ -17,8 +17,9 @@ import jdbacApi.connectDB;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
+
 public class readLevel extends getdata_learning {
     
     Connection con;
@@ -32,6 +33,8 @@ public class readLevel extends getdata_learning {
     
     ArrayList level = new ArrayList();
     ArrayList context = new ArrayList();
+    ArrayList Imgcontext = new ArrayList();
+    ArrayList ImgSubcontext = new ArrayList();
     ArrayList Subcontext = new ArrayList();
     ArrayList personA = new ArrayList();
     ArrayList personB = new ArrayList();
@@ -345,6 +348,123 @@ public class readLevel extends getdata_learning {
     ArrayList getPersonB(){
         return personB;
     }
+    
+    protected boolean readImgContext(String languageSelect, String level){
+        String readContext = "SELECT  c.Context_image FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  JOIN CONTEXT c   ON l.difficulty_ID = c.difficulty_ID  WHERE languages =? AND Language_level =?;";
+        
+        
+        con = connectDB.getConnection();
+        
+            try {
+                pstmt = con.prepareStatement(readContext);
+
+                pstmt.setString(1, languageSelect);
+                pstmt.setString(2, level);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                int n = 0;
+
+                while(rs.next()){
+                    int numColumns = rs.getMetaData().getColumnCount();
+                    n++;
+
+                    for (int i = 1; i <= numColumns; i++) {
+                        System.out.print(" something : "+rs.getObject(i));
+                        this.Imgcontext.add(rs.getObject(i));
+                    }
+                    System.out.println("");
+                }
+                System.out.println("");
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
+            }finally {
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+            }
+        return false;
+    }
+    
+    ArrayList getImg(){
+        return Imgcontext;
+    }
+    
+    protected boolean readImgSubContext(String languageSelect, String level, String context){
+        String readContext = """
+                                SELECT  sc.Sub_context_img
+                                 FROM LANGUAGES sp JOIN LEVELS l
+                                 ON sp.languages_ID = l.languages_ID 
+                                 JOIN CONTEXT c  
+                                 ON l.difficulty_ID = c.difficulty_ID 
+                                 JOIN SUB_CONTEXT sc 
+                                 on c.Context_ID = sc.Context_ID
+                                 WHERE languages =? AND Language_level =? AND CONTEXT=?;
+                             """;
+        
+        
+        con = connectDB.getConnection();
+        
+            try {
+                pstmt = con.prepareStatement(readContext);
+
+                pstmt.setString(1, languageSelect);
+                pstmt.setString(2, level);
+                pstmt.setString(3, context);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                int n = 0;
+
+                while(rs.next()){
+                    int numColumns = rs.getMetaData().getColumnCount();
+                    n++;
+
+                    for (int i = 1; i <= numColumns; i++) {
+                        System.out.print(" something : "+rs.getObject(i));
+                        this.ImgSubcontext.add(rs.getObject(i));
+                    }
+                    System.out.println("");
+                }
+                System.out.println("");
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
+            }finally {
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+            }
+        return false;
+    }
+    
+    ArrayList getSubImg(){
+        return ImgSubcontext;
+    }
+    
     
     
 //    public static void main(String[] arg){

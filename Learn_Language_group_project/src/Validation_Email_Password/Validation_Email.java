@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 public class Validation_Email {
    

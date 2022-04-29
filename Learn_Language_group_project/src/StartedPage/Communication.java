@@ -10,7 +10,7 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 public class Communication extends readLevel implements ActionListener{
     
@@ -71,9 +71,9 @@ public class Communication extends readLevel implements ActionListener{
         subContexts = subcontext;
         getemail = email;
         
-    icon[0] = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/go-back.png");
-    icon[1] = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
-    icon[2] = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
+        icon[0] = new ImageIcon("go-back.png");
+        icon[1] = new ImageIcon("home-page.png");
+        icon[2] = new ImageIcon("account.png");
         
         label = new JLabel();
         label.setText(subcontext);
