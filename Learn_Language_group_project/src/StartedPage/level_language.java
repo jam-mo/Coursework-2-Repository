@@ -44,12 +44,14 @@ public class level_language extends readLevel implements ActionListener {
     JLabel label2;
     
     JLabel label3;
+    JLabel[] label4;
+    JLabel[] label5;
     
     ArrayList getText = new ArrayList();
     
-    MouseAdapter Map = new MouseAdapter() {
-        
-    };
+    ImageIcon[] icon3;
+    Image img;
+    Image newImg;
     
     ImageIcon icon = new ImageIcon("logout.png");
     ImageIcon icon1 = new ImageIcon("home-page.png");
@@ -75,13 +77,31 @@ public class level_language extends readLevel implements ActionListener {
         label.setFont(myFont1);
         
         levelReadData.levels(language);
+        levelReadData.readImgLevel(language); 
 
         each_sub_panel1 = new JPanel[levelReadData.getLevelText().size()];
         each_sub_panel1_1 = new JPanel[levelReadData.getLevelText().size()];
         each_sub_button1_1 = new JButton[levelReadData.getLevelText().size()];
         
+        label5 = new JLabel[levelReadData.getImgLevel().size()];
+        label4 = new JLabel[levelReadData.getImgLevel().size()];
+        icon3 = new ImageIcon[levelReadData.getImgLevel().size()];
+        
+        
         for(int i = 0; i < each_sub_panel1.length; i++){
             
+            icon3[i] = new ImageIcon(String.valueOf(levelReadData.getImgLevel().get(i)));
+//            icon3  = new ImageIcon();
+            img = icon3[i].getImage();
+            newImg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+            icon3[i] = new ImageIcon(newImg);
+            
+            label4[i] = new JLabel();
+            label4[i].setPreferredSize(new Dimension(100,100));
+            label4[i].setIcon(icon3[i]);
+            
+            label5[i] = new JLabel();
+            label5[i].setPreferredSize(new Dimension(135,100));
             
             each_sub_panel1[i] = new JPanel();
             each_sub_panel1[i].setBackground(new java.awt.Color(198+i+22+i,15*(5*i),50*i+(i*10)));
@@ -93,7 +113,8 @@ public class level_language extends readLevel implements ActionListener {
             
             each_sub_panel1_1[i].setBackground(new java.awt.Color(255, 255, 255));
             
-            
+            each_sub_panel1[i].add(label5[i],BorderLayout.WEST);
+            each_sub_panel1[i].add(label4[i],BorderLayout.CENTER);
             each_sub_panel1[i].add(each_sub_panel1_1[i],BorderLayout.SOUTH);
             
             each_sub_button1_1[i] = new JButton();
@@ -114,12 +135,17 @@ public class level_language extends readLevel implements ActionListener {
         
         sub_panel = new JPanel();
         sub_panel.setBackground(Color.getHSBColor(255, 204, 204));
-        sub_panel.setLayout(new GridLayout(4,1,2,5));
-        sub_panel.setBounds(10, 80, 380, 570);
             
         for (JPanel each_sub_panel11 : each_sub_panel1) {
             sub_panel.add(each_sub_panel11);
         }
+        
+        sub_panel.setLayout(new GridLayout(levelReadData.getLevelText().size(),1,5,5));
+        sub_panel.setPreferredSize(new Dimension(380,136*levelReadData.getLevelText().size()));
+        
+        JScrollPane scroll = new JScrollPane(sub_panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBounds(10, 80, 380, 580);
+        scroll.setBorder(null);
         
         each_sub_Button1_1 = new JButton("Log out");
         each_sub_Button1_1.setIcon(icon);
@@ -170,7 +196,7 @@ public class level_language extends readLevel implements ActionListener {
         
         Mainpanel.add(label);
         
-        Mainpanel.add(sub_panel,BorderLayout.CENTER);
+        Mainpanel.add(scroll,BorderLayout.CENTER);
         Mainpanel.add(sub_panel1);
         
         frame = new JFrame("ChooseLevelSpainish");

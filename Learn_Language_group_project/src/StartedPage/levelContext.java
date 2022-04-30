@@ -99,7 +99,7 @@ public class levelContext extends readLevel implements ActionListener {
             icon3[i] = new ImageIcon(String.valueOf(levelReadData.getImg().get(i)));
 //            icon3  = new ImageIcon();
             img = icon3[i].getImage();
-            newImg = img.getScaledInstance(380, 450, java.awt.Image.SCALE_SMOOTH);
+            newImg = img.getScaledInstance(380, 250, java.awt.Image.SCALE_SMOOTH);
             icon3[i] = new ImageIcon(newImg);
             
             each_sub_button1_1[i] = new JButton();

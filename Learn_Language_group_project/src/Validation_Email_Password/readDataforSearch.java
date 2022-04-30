@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package StartedPage;
+package Validation_Email_Password;
 
 import java.sql.*;
 import java.util.*;
@@ -24,7 +24,19 @@ public class readDataforSearch {
     
     ArrayList<String> CopyValue = new ArrayList<String>();
     
-    public boolean ReadContect(){
+    ArrayList<String> ConpyContextA = new ArrayList<String>();
+        ArrayList<String> ConpyContextB = new ArrayList<String>();
+            ArrayList<String> ConpyContextC = new ArrayList<String>();
+                ArrayList<String> ConpyContextD = new ArrayList<String>();
+    
+    ArrayList<String> CopySubValue = new ArrayList<String>();
+    
+    ArrayList<String> CopySubValueA = new ArrayList<String>();
+        ArrayList<String> CopySubValueB = new ArrayList<String>();
+            ArrayList<String> CopySubValueC = new ArrayList<String>();
+                ArrayList<String> CopySubValueD = new ArrayList<String>();
+    
+    protected boolean ReadContect(){
         con = connectDB.getConnection();
         String getContext = """
                             SELECT CONTEXT
@@ -69,7 +81,7 @@ public class readDataforSearch {
         return false;
     }
     
-    public boolean ReadSubContect(){
+    protected boolean ReadSubContect(){
         con = connectDB.getConnection();
         String getSubContext = """
                                 SELECT SUB_CONTEXT
@@ -87,7 +99,7 @@ public class readDataforSearch {
 
                 for (int i = 1; i <= numColumns; i++) {
                     System.out.print("Sub_Context value:" + rs.getObject(i));
-                    CopyValue.add((String) rs.getObject(i));
+                    CopySubValue.add((String) rs.getObject(i));
                 }
                 System.out.println("");
             }
@@ -118,6 +130,16 @@ public class readDataforSearch {
     
     ArrayList copyValue(){
         return CopyValue;
+    }
+    
+    ArrayList copySubValue(){
+        return CopySubValue;
+    }
+    
+    protected boolean ReadLevel(){
+        
+        return false;
+        
     }
     
     public static void main(String[] arg){

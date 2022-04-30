@@ -33,6 +33,7 @@ public class readLevel extends getdata_learning {
     
     ArrayList level = new ArrayList();
     ArrayList context = new ArrayList();
+    ArrayList Imglevel = new ArrayList();
     ArrayList Imgcontext = new ArrayList();
     ArrayList ImgSubcontext = new ArrayList();
     ArrayList Subcontext = new ArrayList();
@@ -464,6 +465,62 @@ public class readLevel extends getdata_learning {
     ArrayList getSubImg(){
         return ImgSubcontext;
     }
+    
+    
+    protected boolean readImgLevel(String languageSelect){
+        
+        String getLevel = "SELECT  l.level_img FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  WHERE languages =?;";
+        
+        con = connectDB.getConnection();
+        
+        try {
+            
+            pstmt = con.prepareStatement(getLevel);
+            
+            pstmt.setString(1, languageSelect);
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            int n = 0;
+            
+            while(rs.next()){
+                int numColumns = rs.getMetaData().getColumnCount();
+                n++;
+
+                for (int i = 1; i <= numColumns; i++) {
+                    System.out.print(" something :"+rs.getObject(i));
+                    this.Imglevel.add(rs.getObject(i));
+                }
+                System.out.println("");
+            }
+            System.out.println("");
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    ArrayList getImgLevel(){
+        return Imglevel;
+    }
+    
     
     
     

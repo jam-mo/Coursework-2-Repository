@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author kokmeng / christopher
  */
 
-public class SearchPage extends readDataforSearch implements ActionListener{
+public class SearchPage extends SearchBarData implements ActionListener{
     
     JFrame frame;
     
@@ -22,6 +22,10 @@ public class SearchPage extends readDataforSearch implements ActionListener{
     
     JPanel PaneSearch;
     
+    JPanel SubpaneCenter;
+    
+    JLabel[] labelContainer;
+    
     JTextField SearchText;
     
     JButton SearchButton;
@@ -29,9 +33,18 @@ public class SearchPage extends readDataforSearch implements ActionListener{
     Image img;
     Image newImg;
     
-    readDataforSearch rdfs;
+    SearchBarData sbd;
     
-    ArrayList <String> list = new ArrayList<String>();
+    ArrayList <String> list1 = new ArrayList<>();
+    ArrayList <String> list2 = new ArrayList<>();
+    ArrayList <String> list3 = new ArrayList<>();
+    ArrayList <String> list4 = new ArrayList<>();
+    ArrayList <String> list5 = new ArrayList<>();
+    ArrayList <String> list6 = new ArrayList<>();
+    ArrayList <String> list7 = new ArrayList<>();
+    ArrayList <String> list8 = new ArrayList<>();
+    
+    ArrayList <String> StealValue = new ArrayList<>();
     
     JButton each_sub_Button1_1;
     JButton each_sub_Button1_2;
@@ -42,19 +55,53 @@ public class SearchPage extends readDataforSearch implements ActionListener{
     ImageIcon icon2 = new ImageIcon("account.png");
     
     ImageIcon icon3 = new ImageIcon("Search.png");
+    ImageIcon icon4 = new ImageIcon("Search1.png");
     
     Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     
-    SearchPage(){
+    SearchPage(String email){
         
-        rdfs = new readDataforSearch();
-        rdfs.ReadContect();
-        rdfs.ReadSubContect();
+        sbd = new SearchBarData();
         
-        for(int i = 0; i < rdfs.copyValue().size(); i++ ){
-            list.add((String) rdfs.copyValue().get(i));
+        sbd.ReadContextA1();
+        sbd.ReadContextA2();
+        sbd.ReadContextB1();
+        sbd.ReadContextB2();
+        
+        sbd.ReadSubContextA1();
+        sbd.ReadSubContextA2();
+        sbd.ReadSubContextB1();
+        sbd.ReadSubContextB2();
+        
+        for(int i = 0; i < sbd.CopyContextA1().size() ; i++){
+            list1.add((String)sbd.CopyContextA1().get(i));
         }
         
+        for(int i = 0; i < sbd.CopyContextA2().size() ; i++){
+            list2.add((String)sbd.CopyContextA2().get(i));
+        }
+        
+        for(int i = 0; i < sbd.CopyContextB1().size() ; i++){
+            list3.add((String)sbd.CopyContextB1().get(i));
+        }
+        for(int i = 0; i < sbd.CopyContextB2().size() ; i++){
+            list4.add((String)sbd.CopyContextB2().get(i));
+        }
+        
+        for(int i = 0; i < sbd.CopySubValueA1().size() ; i++){
+            list5.add((String)sbd.CopySubValueA1().get(i));
+        }
+        
+        for(int i = 0; i < sbd.CopySubValueA2().size() ; i++){
+            list6.add((String)sbd.CopySubValueA2().get(i));
+        }
+        
+        for(int i = 0; i < sbd.CopySubValueB1().size() ; i++){
+            list7.add((String)sbd.CopySubValueB1().get(i));
+        }
+        for(int i = 0; i < sbd.CopySubValueB2().size() ; i++){
+            list8.add((String)sbd.CopySubValueB2().get(i));
+        }
         
         label = new JLabel();
         label.setText("SEARCH");
@@ -69,6 +116,10 @@ public class SearchPage extends readDataforSearch implements ActionListener{
         img = icon3.getImage();
         newImg = img.getScaledInstance(35, 35, java.awt.Image.SCALE_SMOOTH);
         icon3 = new ImageIcon(newImg);
+        
+        img = icon4.getImage();
+        newImg = img.getScaledInstance(35, 35, java.awt.Image.SCALE_SMOOTH);
+        icon4 = new ImageIcon(newImg);
         
         SearchButton = new JButton();
         SearchButton.setIcon(icon3);
@@ -86,10 +137,11 @@ public class SearchPage extends readDataforSearch implements ActionListener{
         PaneSearch.add(SearchButton);
         
 //            icon3  = new ImageIcon();
+
         
-        each_sub_Button1_1 = new JButton("Log out");
+        each_sub_Button1_1 = new JButton();
         each_sub_Button1_1.setIcon(icon);
-        each_sub_Button1_1.setText("LogOut");
+        each_sub_Button1_1.setText("Go bAck");
         each_sub_Button1_1.setBorder(null);
         each_sub_Button1_1.setHorizontalTextPosition(JButton.CENTER);
         each_sub_Button1_1.setVerticalTextPosition(JButton.BOTTOM);
@@ -109,7 +161,6 @@ public class SearchPage extends readDataforSearch implements ActionListener{
 
         each_sub_Button1_3 = new JButton();
         each_sub_Button1_3.setText("Profile");
-
         each_sub_Button1_3.setIcon(icon2);
         each_sub_Button1_3.setBorder(null);
         each_sub_Button1_3.setHorizontalTextPosition(JButton.CENTER);
@@ -127,6 +178,15 @@ public class SearchPage extends readDataforSearch implements ActionListener{
         sub_panel1.add(each_sub_Button1_1);
         sub_panel1.add(each_sub_Button1_2);
         sub_panel1.add(each_sub_Button1_3);
+        
+        SubpaneCenter= new JPanel();
+        SubpaneCenter.setBackground(new java.awt.Color(255,255,255));
+        SubpaneCenter.setLayout(new GridLayout());
+
+        
+        JScrollPane scroll = new JScrollPane(SubpaneCenter,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBounds(5, 130, 390, 535);
+        scroll.setBorder(null);
             
         Mainpanel = new JPanel();
         Mainpanel.setBackground(new java.awt.Color(233,231,214));
@@ -136,7 +196,7 @@ public class SearchPage extends readDataforSearch implements ActionListener{
         Mainpanel.add(label);
         
         Mainpanel.add(PaneSearch);
-//        Mainpanel.add(scroll,BorderLayout.CENTER);
+        Mainpanel.add(scroll,BorderLayout.CENTER);
         Mainpanel.add(sub_panel1);
         
         frame = new JFrame("Search");
@@ -151,25 +211,163 @@ public class SearchPage extends readDataforSearch implements ActionListener{
     }
     
     public static void main(String[] arg){
-        SearchPage sp = new SearchPage();
+        SearchPage sp = new SearchPage("email");
         
-        System.out.println(sp.list);
+        System.out.println(sp.list1);
+        System.out.println(sp.list2);
+        System.out.println(sp.list3);
+        System.out.println(sp.list4);
+        System.out.println(sp.list5);
+        System.out.println(sp.list6);
+        System.out.println(sp.list7);
+        System.out.println(sp.list8);
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == SearchButton ){
            
-            for (String element : list){
-               if (element.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
-                   System.out.println(element);
+           
+           StealValue.clear();
+           
+            for(String element1 : list1){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL A1 : "+ element1);
+                   labelContainer = new JLabel[element1.length()];
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A1 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   
+                   StealValue.add(element1);
+                   
+                   
                }
             }
             
-            for(String element : list ){
-                
+            for(String element1 : list2){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL A2 : "+ element1);
+                   labelContainer = new JLabel[element1.length()];
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A2 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+               }
             }
+            
+            for(String element1 : list3){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL B1 : "+element1);
+                   labelContainer = new JLabel[element1.length()];
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level B2 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+               }
+            }
+            
+            for(String element1 : list4){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL B2 : "+element1);
+                   labelContainer = new JLabel[element1.length()];
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A1 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+                   
+               }
+            }
+            
+            for(String element1 : list5){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL A1 - Context: "+element1);
+                   labelContainer = new JLabel[element1.length()];                   
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A1 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+               }
+            }
+            
+            for(String element1 : list6){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL A2 - Context: "+element1);
+                   labelContainer = new JLabel[element1.length()];
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A1 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+               }
+            }
+            
+            for(String element1 : list7){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL B1 - Context: "+element1);
+                   labelContainer = new JLabel[element1.length()];
+                    for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A1 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+               }
+            }
+            
+            for(String element1 : list8){
+               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                   System.out.println("LEVEL B2 - Context: "+element1);
+                   labelContainer = new JLabel[element1.length()];
+                   for(int i = 0 ; i < labelContainer.length; i++)
+                   {
+                       labelContainer[i] = new JLabel();
+                       labelContainer[i].setText("Level A1 : " + element1);
+                       
+                       SubpaneCenter.add(labelContainer[i]);
+                   }
+                   
+                   StealValue.add(element1);
+               }
+            }
+            
+            
+            System.out.println(StealValue);
+            
         
        }
+       
     }
 }
