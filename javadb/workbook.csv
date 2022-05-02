@@ -11,99 +11,99 @@ A1,Ordering food and drink,Takeaway,A,Hi there. Do you have a table for 2?,
 A1,Exchanging personal information,Social Media,A,Hi Peter. How was your weekend?,
 ,,,B,Hi. It was good thank you. I met a nice girl.,
 ,,,A,Oh really? What is she like? Did you get her Snapchat?,
-,,,B,She doesn't use Snapchat. She's very pretty. She has long brown hair and big green eyes. I like her. ,usa 
+,,,B,She doesn't 'use' Snapchat. She's very pretty. She has long brown hair and big green eyes. I like her. ,usa 
 ,,,A,I want to see her. What's her name? I'll look her up on Instagram. ,
 ,,,B,You can try. Her name is Natalia Black.,
 ,,,A,"I found her! Wow, she is beautiful. I'm happy for you!",
 ,,,B,I am happy too. And thank you. ,
 A1,Going shopping and asking for prices,Payment,A,Hi there. May I pay for these items please?,
-,,,B,"Hello, yes of course. Your total is £35. Will you be paying by cash or card?",en efectivo / con tarjeta
+,,,B,"Hello, yes of course. Your total is £35. Will you be paying by 'cash' or 'card'?",en efectivo / con tarjeta
 ,,,A,"Card, please. ",
-,,,B,No problem. You can insert or touch your card to the machine. ,insertar/ tocar
+,,,B,No problem. You can 'insert' or 'touch' your card to the machine. ,insertar/ tocar
 ,,,A,Thank you. ,
-,,,B,I'm sorry your card hasn't worked. Can you try again?,no ha funcionado
-,,,A,I'm sorry about that. I will use my PIN.,PIN
+,,,B,I'm sorry your card 'hasn't worked'. Can you try again?,no ha funcionado
+,,,A,I'm sorry about that. I will use my 'PIN'.,PIN
 ,,,B,That is all done. Thank you for shopping with us. Have a good day!,
 ,,,A,Have a good day! Goodbye. ,
-A1,Making Appointments,Booking,A,"Hello, can I make an appointment for tomorrow. ",cita
-,,,B,"No problem, what time would you like to book?",reservar
+A1,Making Appointments,Booking,A,"Hello, can I make an 'appointment' for tomorrow. ",cita
+,,,B,"No problem, what time would you like 'to book'?",reservar
 ,,,A,2pm.,
-,,,B,"I'm sorry, that time is not available. We have 10am and 5pm.",disponible
+,,,B,"I'm sorry, that time is not 'available'. We have 10am and 5pm.",disponible
 ,,,A,"Sorry, those times aren't good. Do you have 2pm the day after tomorrow?",
 ,,,B,"Yes, it's available. I will book that for you.",
 ,,,A,"Perfect, thank you.",
 A1,Introductions,Repeat name,A,"Hello, my name is Danielle.",
 ,,,B,"Hello Danielle, my name is Michael.",
-,,,A,"Sorry I didn't hear you, can you repeat that?",repetir
+,,,A,"Sorry I didn't hear you, can you 'repeat' that?",repetir
 ,,,B,My name is Michael.,
 ,,,A,Michael?,
 ,,,B,"Yes, it's Michael.",
 ,,,A,It's nice to meet you Michael.,
 ,,,B,It's nice to meet you too.,
-A1,Basic employment issues,Cover,A,"Hello, is the manager there?","jefe,a"
-,,,B,"They will arrive in an hour, do you want to call back or I can take a message?",llamar de nuevo  / darle el mensaje
+A1,Basic employment issues,Cover,A,"Hello, is the 'manager' there?","jefe,a"
+,,,B,"They will arrive in an hour, do you want 'to call back' or I can 'take a message'?",llamar de nuevo  / darle el mensaje
 ,,,A,Can you tell them that I am sick and can't come to work today.,
 ,,,B,What's the matter?,
-,,,A,I've got a cold.,Tengo un resfriado
-,,,B,Did you find cover?,encontraste una sustituciÃ³n
+,,,A,I've got a cold'.,Tengo un resfriado
+,,,B,Did you 'find cover'?,encontraste una sustituciÃ³n
 ,,,A,Not yet.,
-,,,B,"Send a message in the group chat, hopefully someone can cover your shift.",EnvÃ­a un mensaje al grupo de chat / turno
+,,,B,"Send a message in the group chat', hopefully someone can cover your 'shift'.",EnvÃ­a un mensaje al grupo de chat / turno
 ,,,A,"I will do that now, thank you.",
 ,,,B,"Well, I hope you get well soon.",
 ,,,A,"Thank you, speak to you soon. Goodbye.",
 ,,,B,Goodbye.,
-A1,Going shopping and asking for prices,Refund,A,Hello there. I would like a refund for these items please. ,reembolso / artículos
-,,,B,"Hi there. Unfortunately, these items look like they have been used. I can offer an exchange or a gift voucher instead.",desgraciadamente / usados / intercambio / vale regalo
+A1,Going shopping and asking for prices,Refund,A,Hello there. I would like a 'refund' for these 'items' please. ,reembolso / artículos
+,,,B,"Hi there. 'Unfortunately', these items look like they have been 'used'. I can offer an 'exchange' or a 'gift voucher' instead.",desgraciadamente / usados / intercambio / vale regalo
 ,,,A,That will not work. I want my money back.,
 ,,,B,We cannot offer a refund for used items. You can exchange it for another item or I can issue you a gift voucher. ,
-,,,A,Fine. But I will take this up with your manager. ,"jefe,a"
+,,,A,Fine. But I will take this up with your 'manager'. ,"jefe,a"
 ,,,B,I am the manager. ,
 ,,,A,"Oh. Well, in that case I will just take the gift voucher. Thank you and have a good day. ",
 ,,,B,You too. Bye!  (phone conversation),
 A2,Asking and giving directions,Delivery Driver,A,Hello there. Is this Mary?,
 ,,,B,"Hi, yes it is. Who's speaking?",
-,,,A,"This is John, the delivery driver. I am having trouble finding your apartment. ","conductor,a de reparto  / tengo un problema"
-,,,B,"Yes it can be a little tricky. Go past the big black gates, turn left at the statue and you should see my building. I live on the 4th floor so I would recommend taking the lift.",complicado / verjas / estatua / recomendaría / ascensor
+,,,A,"This is John, the 'delivery driver'. I am 'having trouble' finding your apartment. ","conductor,a de reparto  / tengo un problema"
+,,,B,"Yes it can be a little 'tricky'. Go past the big black 'gates', turn left at the 'statue' and you should see my building. I live on the 4th floor so I would 'recommend' taking the 'lift'.",complicado / verjas / estatua / recomendaría / ascensor
 ,,,A,I can't see a statue. Are you sure it's correct?,
-,,,B,"It is a big stone statue, round and grey in colour. ",piedra / redonda
+,,,B,"It is a big 'stone' statue, 'round' and grey in colour. ",piedra / redonda
 ,,,A,"Oh yes, I see it. I will be there soon. Goodbye!",
 ,,,B,See you soon. Goodbye!,
-A2,Ordering food and drink,Vegan pizza,A,Hi excuse me? I think I have the wrong order. ,pedido incorrecto
+A2,Ordering food and drink,Vegan pizza,A,Hi excuse me? I think I have the 'wrong order'. ,pedido incorrecto
 ,,,B,"Hi there, what seems to be the problem?",
-,,,A,I asked for a vegan pizza and this seems to have cheese and meat all over it.,vegana
-,,,B,I'm so sorry about that there must have been a mix up. I will bring you a new one immediately. ,confusión
-,,,A,That is not good enough. My friends and I have been waiting over an hour already. I want a new pizza and my money back.,Eso no es suficiente / esperando sobre
-,,,B,I will see if I can get that done for you. And please accept our sincere apologies.,acepte nuestras más sinceras disculpas 
-,,,A,"Apology accepted. Now please hurry up, I am starving. ","dese prisa / muerto,a de hambre"
-,,,B,I will let the kitchen know and your pizza should be with you as soon as possible. ,cocina
+,,,A,I asked for a 'vegan' pizza and this seems to have cheese and meat all over it.,vegana
+,,,B,I'm so sorry about that there must have been a 'mix up'. I will bring you a new one immediately. ,confusión
+,,,A,That is not good enough'. My friends and I have been 'waiting over' an hour already. I want a new pizza and my money back.,Eso no es suficiente / esperando sobre
+,,,B,I will see if I can get that done for you. And please 'accept our sincere apologies'.,acepte nuestras más sinceras disculpas 
+,,,A,"Apology accepted. Now please 'hurry up', I am' starving'. ","dese prisa / muerto,a de hambre"
+,,,B,I will let the 'kitchen' know and your pizza should be with you as soon as possible. ,cocina
 ,,,A,Thank you. ,
 A1,Socialising in the country,Interview arrangements,A,Hi Derreck. How was your weekend?,
-,,,B,"Hi Pete. Well, I actually secured a job interview for this admin role. I'm so excited!",conseguido una entrevista de trabajo / papel administrativo
+,,,B,"Hi Pete. Well, I actually  secured a job interview' for this 'admin role'. I'm so excited!",conseguido una entrevista de trabajo / papel administrativo
 ,,,A,That is great news! Give me all the details.,
-,,,B,"Well, the interview is at 10:00 tomorrow. The dress code is smart-casual so I need to wear a shirt and jeans. ",código de vestir / informal
-,,,A,Will it be face-to-face or online?,presencial / en linea
-,,,B,"Face-to-face so I need to be prepared. It's not far from here, only 3 stops on the no.32 bus. ",solo 3 paradas en la línea 32  de autobús
+,,,B,"Well, the interview is at 10:00 tomorrow. The 'dress code' is 'smart-casual' so I need to wear a shirt and jeans. ",código de vestir / informal
+,,,A,Will it be 'face-to-face' or 'online'?,presencial / en linea
+,,,B,"Face-to-face so I need to be prepared. It's not far from here, only '3 stops on the no.32 bus'. ",solo 3 paradas en la línea 32  de autobús
 ,,,A,"Good luck, my friend I will be thinking of you. You will do great!",
-,,,B,Thank you! I will let you know how it goes. ,haré saber
+,,,B,Thank you! I will 'let you know' how it goes. ,haré saber
 A2,Making Appointments,Dentist,A,"Hi there. I would like to book an appointment with my dentist, Clara. ",
-,,,B,"Hi there, I'm sorry but Clara is not available at the moment. Could I put you down with someone else?",darle cita
-,,,A,Clara has done my teeth for the past 10 years. She is very professional and I trust her. Where is she?,cuidado mis dientes / confío
+,,,B,"Hi there, I'm sorry but Clara is not available at the moment. Could I 'put you down' with someone else?",darle cita
+,,,A,Clara has 'done my teeth' for the past 10 years. She is very professional and I 'trust' her. Where is she?,cuidado mis dientes / confío
 ,,,B,She is on holiday until the 22nd. I can book you in with Clara on the 30th.,
-,,,A,That is too long to wait. Do you not have anything sooner?,antes
-,,,B,Let me check for you. There is a cancellation on the 25th at 13:00. Would you like this appointment?,cancelación / cita
+,,,A,That is too long to wait. Do you not have anything 'sooner'?,antes
+,,,B,Let me check for you. There is a 'cancellation' on the 25th at 13:00. Would you like this 'appointment'?,cancelación / cita
 ,,,A,Yes please. Thank you for that. I will see you then. Bye!,
 ,,,B,"No problem, Clara will see you then. Goodbye! ",
-A1,Ordering food and drink,Coffee Order,A,Could I please have a regular decafe latte.,descafeinado con leche
+A1,Ordering food and drink,Coffee Order,A,Could I please have a regular 'decafe latte'.,descafeinado con leche
 ,,,B,"We have no decafe, sorry about that.",
-,,,A,"That's okay, I'll just have a regular latte then, and could I get that iced.",con hielo
+,,,A,"That's okay, I'll just have a regular latte then, and could I get that 'iced'.",con hielo
 ,,,B,Yes.,
-,,,A,"And, do you have sugar-free syrup?",almíbar sin azúcar 
+,,,A,"And, do you have 'sugar-free syrup'?",almíbar sin azúcar 
 ,,,B,"We have sugar-free caramel, vanilla and hazelnut.",
-,,,A,"Could I get the sugar-free vanilla please, and could I get that with oat milk please.",leche de avena
-,,,B,Is that to have in or to go?,Es para tomar aquí o para llevar
+,,,A,"Could I get the sugar-free vanilla please, and could I get that with 'oat milk' please.",leche de avena
+,,,B,Is that to have in or to go?',Es para tomar aquí o para llevar
 ,,,A,To go please.,
 A1,Making Appointments,Spelling your name,A,"Hello, can I make an appointment for tomorrow.",
-,,,B,We're booked for the next week unfortunately.,hemos reservado
+,,,B,We're booked' for the next week unfortunately.,hemos reservado
 ,,,A,Can I book for next week Tuesday then?,
 ,,,B,"Of course, what time?",
 ,,,A,at 10am please.,
@@ -114,24 +114,24 @@ A1,Making Appointments,Spelling your name,A,"Hello, can I make an appointment fo
 ,,,B,"That's all done for you, see you next week.",
 ,,,A,"Thank you, see you then.",
 A1,Basic employment issues,Inteview,A,"Good afternoon, how can I help you?",
-,,,B,"Good afternoon, I have an interview here today.",entrevista
+,,,B,"Good afternoon, I have an 'interview' here today.",entrevista
 ,,,A,What time is the interview?,
 ,,,B,at 13:30.,
 ,,,A,With who?,
 ,,,B,it's with Johnathan.,
 ,,,A,"Johnathan works in the other building, it's not far.",
 ,,,B,How do I get there?,
-,,,A,If you go right when you leave the building and then turn left. Best of luck with the interview.,derecha/Gire a la izquierda
+,,,A,If you go 'right' when you leave the building and then 'turn left'. Best of luck with the interview.,derecha/Gire a la izquierda
 ,,,B,Thank you very much.,
 A1,Ordering food and drink,Water for table,A,"Good evening, how is it going?",
 ,,,B,Excellent thanks.,
 ,,,A,Can I get you some drinks while you look at the menu?,
-,,,B,"Yes, can we get tap water for the table and two lemonades.",agua del grifo
+,,,B,"Yes, can we get 'tap water' for the table and two lemonades.",agua del grifo
 ,,,A,I'll get that for you now. Is this your daughter? She's beautiful.,
 ,,,B,"Actually, she's my wife.",
 ,,,A,"Of course, excuse me, I'll get your drinks.",
 A2,Ordering food and drink,Reservation,A,Hi there. Do you have a table for 4?,
-,,,B,Good evening. Do you have a reservation with us?,reservación
+,,,B,Good evening. Do you have a 'reservation' with us?,reservación
 ,,,A,"Yes, I do, for 8 pm",
 ,,,B,What is your name?,
 ,,,A,It's Jones.,
@@ -140,22 +140,22 @@ A2,Ordering food and drink,Reservation,A,Hi there. Do you have a table for 4?,
 ,,,B,"I do understand, but the people who booked the table at 6pm have not finished their meal. ",
 ,,,A,"Well, I suggest that you ask them to hurry up. We are going to sit down. ",
 ,,,B,May I ask you to wait in the bar while I get your table ready. ,
-,,,A,Ha! That's a typical trick! You delay the table and ask me to wait in the bar so that I have to buy some drinks!,demora
-,,,B,That is not what I intended. I am sorry that your table is not ready. Please can you wait in the bar. May I get you a drink on the house?,destinado/ en la casa
+,,,A,Ha! That's a typical trick! You 'delay' the table and ask me to wait in the bar so that I have to buy some drinks!,demora
+,,,B,That is not what I 'intended'. I am sorry that your table is not ready. Please can you wait in the bar. May I get you a drink 'on the house'?,destinado/ en la casa
 ,,,A,That sounds more like it. ,
 A2,Going shopping and asking for prices,Payment,A,Hi there. May I pay for these items please?,
-,,,B,"Hello, yes of course. Your total is £35. Will you be paying by cash or card?",en efectivo / con tarjeta
+,,,B,"Hello, yes of course. Your total is £35. Will you be paying by 'cash' or 'card'?",en efectivo / con tarjeta
 ,,,A,"Card, please. ",
-,,,B,No problem. You can insert or touch your card to the machine. ,insertar/ tocar
+,,,B,No problem. You can 'insert' or 'touch' your card to the machine. ,insertar/ tocar
 ,,,A,Thank you. ,
-,,,B,I'm sorry your card hasn't worked. Can you try again?,no ha funcionado
+,,,B,I'm sorry your card 'hasn't worked'. Can you try again?,no ha funcionado
 ,,,A,Let me try another card. Here it is!,
 ,,,B,"I'm sorry, but this card hasn't worked either. ",
 ,,,A,How embarassing. I will go and get some cash from the bank. ,
 ,,,B,Ok. No problem. I can hold onto your shopping for 30 minutes. ,
 ,,,A,I will be back as soon as possible. ,
 B1,Going shopping and asking for prices,Payment,A,Hi there. May I pay for these items please?,
-,,,B,"Hello, yes of course. Your total is £255. Will you be paying by cash or card?",en efectivo / con tarjeta
+,,,B,"Hello, yes of course. Your total is £255. Will you be paying by 'cash' or 'card'?",en efectivo / con tarjeta
 ,,,A,Â£255! Are you sure? ,
 ,,,B,"Yes. You have bought 2 pairs of trousers at £65 each, and a jumper - that's £125. That's £255 in total. ",
 ,,,A,Oh. That is too much. I will only buy one of the pairs of trousers. ,
@@ -163,21 +163,21 @@ B1,Going shopping and asking for prices,Payment,A,Hi there. May I pay for these 
 ,,,A,The blue. I'm so sorry about this. ,
 ,,,B,"Not a problem. Right, so, that's one pair of trousers at £65 and a jumper at £125. So, £190 please.",
 ,,,A,Ok. Here's my card. ,
-,,,B,"Right, please can you insert your card. Oh, I'm sorry, the payment has not been authorised. ",autorizado
+,,,B,"Right, please can you insert your card. Oh, I'm sorry, the payment has not been 'authorised'. ",autorizado
 ,,,A,Oh dear. I think I'll leave it. Bye. ,
 A1,Ordering food and drink,Reservation,A,Hi there. Do you have a table for 4?,
-,,,B,Good evening. Do you have a reservation with us?,reservación
+,,,B,Good evening. Do you have a 'reservation' with us?,reservación
 ,,,A,I'm sorry I don't. ,
 ,,,B,I'm afraid we're very busy tonight so there are no free tables. Would you like to wait or come back later?,
-,,,A,How long is the wait for a table? ,espera
-,,,B,It is about one hour. I'm sorry about that. Are you happy to wait at the bar? ,sobre
+,,,A,How long is the 'wait' for a table? ,espera
+,,,B,It is 'about' one hour. I'm sorry about that. Are you happy to wait at the bar? ,sobre
 ,,,A,"Yes, no problem at all. We know this restaurant is popular. ",
 ,,,B,I need to book you in. What is your name?,
 ,,,A,Smith.,
 ,,,B,Great. You are booked in for 9 o'clock. The bar is over there. I will call you when your table is ready. ,
 A1,Asking and giving directions,Delivery Driver,A,Hello there. Is this John?,
 ,,,B,"Hi, yes it is. Who's speaking?",
-,,,A,"This is Anna, the delivery driver. I am having trouble finding your house. ",Conductora de entrega/ teniendo problemas
+,,,A,"This is Anna, the 'delivery driver'. I am 'having trouble' finding your house. ",Conductora de entrega/ teniendo problemas
 ,,,B,Where are you right now?,
 ,,,A,I'm parked outside the train station. The train station is on my left. ,
 ,,,B,"Oh, you're close by. Just cross the street, my house is number 12. It has a red door. ",
@@ -186,7 +186,7 @@ A1,Asking and giving directions,Delivery Driver,A,Hello there. Is this John?,
 A2,Health matters,Sick relative,A,"Hey, what are your plans for Saturday night?",
 ,,,B,"I'm in Italy, didn't you know?",
 ,,,A,"Oh no, I didn't know that. When will you return?",
-,,,B,"I meant to stay for 2 weeks but my grandma is unwell, so I am staying another week.",indispuesto
+,,,B,"I meant to stay for 2 weeks but my grandma is 'unwell', so I am staying another week.",indispuesto
 ,,,A,I hope she gets well soon.,
 ,,,B,"Thank you, it seems as if she will.",
 ,,,A,"Let me know if you want to talk about it, okay. ",
@@ -196,18 +196,18 @@ A2,Making invitations,Charity,A,"Good morning sir, can I speak with you for a mo
 ,,,B,"No, I am busy.",
 ,,,A,It will just take a second.,
  ,,,B,I am going to work.,
-,,,A,I just wanted to speak to you about our charitable organisation.,organización caritativa
+,,,A,I just wanted to speak to you about our 'charitable organisation'.,organización caritativa
 ,,,B,I am not interested.,
-,,,A,So you don't give to charity?,no des a la caridad
+,,,A,So you 'don't give to charity'?,no des a la caridad
 ,,,B,Stop following me.,
-,,,A,"But sir, if you give me your email then you can choose to sign up or not in your own time.",elige / registrarte
-,,,B,Leave me alone.,Déjame en paz
-A2,Making invitations,Lunch,A,Do you want to go for lunch at the weekend?,ve por el almuerzo
-,,,B,"I'm afraid not, I work on weekends.",Me temo que no
-,,,A,Which days do you have off next week?,días tienes libre
-,,,B,I am free on Tuesday and Wednesday,gratis
+,,,A,"But sir, if you give me your email then you can 'choose' to 'sign up' or not in your own time.",elige / registrarte
+,,,B,Leave me alone'.,Déjame en paz
+A2,Making invitations,Lunch,A,Do you want 'to go for lunch' at the weekend?,ve por el almuerzo
+,,,B,"I'm afraid not', I work on weekends.",Me temo que no
+,,,A,Which 'days do you have off' next week?,días tienes libre
+,,,B,I am 'free' on Tuesday and Wednesday,gratis
 ,,,A,I go to University on those days unfortunately.,
-,,,B,"That's a shame, what about on Monday morning?",es una pena
+,,,B,"That's a shame', what about on Monday morning?",es una pena
 ,,,A,I am also free on Monday morning. How about we meet at 10 at the cafe near your house.,
 ,,,B,"Perfect, see you on Monday.",
 ,,,A,See you then!,
@@ -216,7 +216,7 @@ B2,Going shopping and asking for prices,Phone purchase,A,"Hi, can I buy this pho
 ,,,A,"No, I didn't.",
 ,,,B,"You need a reservation, I can make one for you but it will be in about 30 minutes. Is that okay?",
 ,,,A,"No, that's way too long to wait to buy a phone.",
-,,,B,"Well, unfortunately, we are extremely busy because of the launch of our newest phone, and two models have sold out already today. So if you can wait a little while we can get you a slot. Is that okay?",lanzar / modelos / ranura
+,,,B,"Well, unfortunately, we are extremely busy because of the 'launch' of our newest phone, and two 'models' have sold out already today. So if you can wait a little while we can get you a 'slot'. Is that okay?",lanzar / modelos / ranura
 ,,,A,"Fine, I will make the reservation. But is there anything you can offer me in return for my having to wait?",
 ,,,B,"I'm afraid not, we have to do reservations today because we are so busy. Next time you should book online to avoid the wait.",
 A2,Ordering food and drink,Delayed drinks order,A,"Excuse me, where is my coffee. I've been waiting over 20 minutes.",
@@ -224,39 +224,39 @@ A2,Ordering food and drink,Delayed drinks order,A,"Excuse me, where is my coffee
 ,,,A,"This is unacceptable, I am very busy this morning. Some people who ordered after me have already got their drinks.",
 ,,,B,"I'm sorry, I will check how long it will be. What did you order?",
 ,,,A,"Thank you, I ordered a mocha.",
-,,,B,"Sorry there was a mix up, I will make it for you right away.",mezclar
+,,,B,"Sorry there was a 'mix up', I will make it for you right away.",mezclar
 ,,,A,Thank you very much.,
-A1,Exchanging personal information,Instagram,A,"It's getting late, I think I'm gonna head off.",distraer
+A1,Exchanging personal information,Instagram,A,"It's getting late, I think I'm gonna 'head off'.",distraer
 ,,,B,"That's a shame, it was nice getting to know you.",
 ,,,A,I know. But I have to work. ,
 ,,,B,I understand. I work too.,
 ,,,A,"Well, bye.",
 ,,,B,"Oh, can I get your number?",
-,,,A,"Sorry, I don't give out my number.",repartir
+,,,A,"Sorry, I don't 'give out' my number.",repartir
 ,,,B,What about your instagram?,
-,,,A,"Sure, I suppose.",Supongo
-,,,B,What's your username?,nombre de usuario
+,,,A,"Sure, I 'suppose'.",Supongo
+,,,B,What's your 'username'?,nombre de usuario
 A2,Socialising in the country,Family size,A,Who were you chatting to in the cafe?,
 ,,,B,"Oh, that's Suzanna.",
 ,,,A,How do you know each other?,
 ,,,B,She's my sister.,
 ,,,A,Really? But you don't look alike.,
-,,,B,"Yes, she's my half sister actually. Do you have any siblings?",media hermana
-,,,A,"No, I'm an only child.",Hija única(feminine) | Hijo único(masculine)
-,,,B,You are lucky!  I have five sisters - it is very noisy at home.,ruidosa(feminine) | ruidoso(masculine)
+,,,B,"Yes, she's my 'half sister' actually. Do you have any siblings?",media hermana
+,,,A,"No, I'm an 'only child'.",Hija única(feminine) | Hijo único(masculine)
+,,,B,You are lucky!  I have five sisters - it is very 'noisy' at home.,ruidosa(feminine) | ruidoso(masculine)
 ,,,A,I think you are lucky. How nice to have a big family.,
 ,,,B,"Yes, we are. And we also have 3 dogs and 2 cats. How about you?",
 ,,,A,"No, my mum hates animals.",
 ,,,B,Must have been very quiet at home then!,
 ,,,A,"Yes, it was very quiet. But I had many good friends. ",
-A2,Ordering food and drink,QR Code,A,"Good morning, can I get a large almond milk latte please?",almendra
-,,,B,"Sorry about this but, we are all out of almond milk. We do have oat milk or soya milk though. ",avena / soja
-,,,A,In that case I'll just have a peppermint tea.,menta
+A2,Ordering food and drink,QR Code,A,"Good morning, can I get a large 'almond' milk latte please?",almendra
+,,,B,"Sorry about this but, we are all out of almond milk. We do have 'oat' milk or 'soya' milk though. ",avena / soja
+,,,A,In that case I'll just have a 'peppermint' tea.,menta
 ,,,B,"Sorry about that, can I get you anything else?",
 ,,,A,"No, thank you.",
 ,,,B,That'll be 2.40 please.,
-,,,A,I have a subscription with you.,suscripción
-,,,B,Can you scan the QR code for me?,escanear
+,,,A,I have a 'subscription' with you.,suscripción
+,,,B,Can you scan the 'QR code' for me?,escanear
 ,,,A,No problem. ,
 ,,,B,Thank you. Have a nice day.,
 ,,,A,You too!,
@@ -266,10 +266,10 @@ A2,Making Appointments,Doctor,A,"Good Morning, I'd like to make an appointment w
 ,,,B,And your name?,
 ,,,A,It's Jane Brown.,
 ,,,B,"Thank you. So, Ms Brown, what's the problem?",
-,,,A,I have had an earache for the last two days and I would like to see the doctor.,dolor de oidos
+,,,A,I have had an 'earache' for the last two days and I would like to see the doctor.,dolor de oidos
 ,,,B,"Okay, we have nothing today. However, we have appointments tomorrow at 10:00 or 14:45.",
 ,,,A,Can I have 14:45 please.,
-,,,B,"Of course, and I can also see from your record that you need a flu jab. Can I book you in for that too?",vacuna de la gripe
+,,,B,"Of course, and I can also see from your record that you need a 'flu jab'. Can I book you in for that too?",vacuna de la gripe
 ,,,A,"Actually, I would prefer to do it another time.",
 ,,,B,"That's fine, but please book for your flu jab soon.",
 ,,,A,"I will, goodbye.",
@@ -277,20 +277,20 @@ A2,Making Appointments,Doctor,A,"Good Morning, I'd like to make an appointment w
 B1,University life,Study plans,A,How are you?,
 ,,,B,"I'm doing okay, you?",
 ,,,A,I'm stressed.,
-,,,B,Why are you stressed?,asignaciones/vencer
-,,,A,I have two assignments and they are both due next Monday. It's just too much!,
+,,,B,Why are you stressed?,
+,,,A,I have two 'assignments' and they are both 'due' next Monday. It's just too much!,asignaciones/vencer
 ,,,B,"Well, I have the same assignments, why don't we meet in the library and study together?",
-,,,A,"It's hard for me to study with other people, because I get distracted.",distraída(feminine) | distraído(masculine)
-,,,B,"Well, I don't get distracted. Look, we can talk about the structure and share some ideas. ",estructura
+,,,A,"It's hard for me to study with other people, because I get 'distracted'.",distraída(feminine) | distraído(masculine)
+,,,B,"Well, I don't get distracted. Look, we can talk about the 'structure' and share some ideas. ",estructura
 ,,,A,That would be really helpful. But I know that I can't sit in the library for hours. ,
-,,,B,You're not meant to. We will take a short break every couple of hours - that's the way to maintain focus!,mantener
+,,,B,You're not meant to. We will take a short break every couple of hours - that's the way to 'maintain' focus!,mantener
 ,,,A,"That would be really helpful, thank you.",
 A2,Making travel arrangements,Expired Ticket,A,"Good morning, tickets please. ",
 ,,,B,"Good morning, here you go. ",
-,,,A,Your ticket isn't valid for this part of the journey. You can pay the rest by card now. ,válida(feminine) | válido(masculine)
+,,,A,Your ticket isn't 'valid' for this part of the journey. You can pay the rest by card now. ,válida(feminine) | válido(masculine)
 ,,,B,But the lady at the ticket office told me it will be okay for the whole journey. ,
-,,,A,I'm sorry you must have misunderstood. Your ticket expired 3 stops ago so you have to pay up or I'm going to have to ask you to get off at the next station.,incomprendida(feminine) | ncomprendido(masculine)
-,,,B,Fine. How much is the outstanding amount?,pendiente
+,,,A,I'm sorry you must have 'misunderstood'. Your ticket expired 3 stops ago so you have to pay up or I'm going to have to ask you to get off at the next station.,incomprendida(feminine) | ncomprendido(masculine)
+,,,B,Fine. How much is the 'outstanding' amount?,pendiente
 ,,,A,£3.20 please. ,
 ,,,B,Here's my card.,
 ,,,A,Thank you. Have a good day. ,
@@ -301,13 +301,13 @@ B1,Making travel arrangements,E.ticket,A,"Good morning, tickets please. ",
 ,,,B,"No, I'm sure I have it somewhere just give me a minute. I printed off a copy yesterday evening. ",
 ,,,A,"if you can't find the paper copy, the ticket is also available on your phone sir. ",
 ,,,B,"You're right, it's right here. What do I do now?  ",
-,,,A,"Just show me the QR code. Thank you. Now, I see you have a rail card. Please may I see it? ",Código QR / tarjeta de tren
+,,,A,"Just show me the 'QR code'. Thank you. Now, I see you have a 'rail card'. Please may I see it? ",Código QR / tarjeta de tren
 ,,,B,Here it is. I know that this is stored on my phone. ,
 ,,,A,Thank you that is all done. Have a nice day!,
 ,,,B,Have a good day!,
 A2,Exchaning personal information,Age restricted,A,"Hi there, I have a package for Ms. Anna Smith?",
 ,,,B,"Hi, that's me, thanks. ",
-,,,A,Ms. Smith can I see some ID please as the item you have ordered is age restricted. ,edad restringida
+,,,A,Ms. Smith can I see some ID please as the item you have ordered is 'age restricted'. ,edad restringida
 ,,,B,Oh? I don't remember ordering anything dangerous. ,
 ,,,A,I believe the package contains a set of kitchen knives. ,
 ,,,B,"Oh yes of course! Sorry, I will get my ID right away. ",
@@ -318,9 +318,9 @@ A2,Exchaning personal information,Age restricted,A,"Hi there, I have a package f
 ,,,A,"Thank you, here's your item. Have a good day!",
 ,,,B,"Thank you, have a good day. ",
 A1,Exchaning personal information,neighbour's parcel,A,"Hello there, how can I help?",
-,,,B,"Hi I have a parcel for your neighbour, but they're not home, can I leave it with you?",terreno / vencia (feminine) | vecino (masculine)
+,,,B,"Hi I have a 'parcel' for your 'neighbour', but they're not home, can I leave it with you?",terreno / vencia (feminine) | vecino (masculine)
 ,,,A,"Sure, no problem. Which neighbour?",
-,,,B,"Number 17, down the corridor, on the left. Would you mind signing here?",corredora(feminine) | corredor(masculine) / firma
+,,,B,"Number 17, down the 'corridor', on the left. Would you mind 'signing' here?",corredora(feminine) | corredor(masculine) / firma
 ,,,A,All done.,
 ,,,B,"And just to confirm, what is your name?",
 ,,,A,Sarah Smith. And that's S-A-R-A-H with a H at the end. ,
@@ -333,26 +333,26 @@ A2,Introductions,Ist day in job,A,"Hi, how's it going?",
 ,,,A,"Don't be nervous we were all new once. I'm Claire by the way, it's nice to meet you. ",
 ,,,B,Nice to meet you too. I'm Lucy. How long have you worked for the company?,
 ,,,A,Oh a long time. Over 5 years. How are you finding the job so far?,
-,,,B,Exhausting but rewarding. ,agotador pero gratificante
+,,,B,Exhausting but rewarding'. ,agotador pero gratificante
 ,,,A,You will get used to it don't worry.  (phone conversation),
 A2,Introductions,Job offer,A,"Good morning, am I speaking to Lucy?",
 ,,,B,"Hi, yes that's me. ",
-,,,A,"Hi Lucy. I'm calling from H&M, following your interview we are delighted to offer you a position. When can you start?",siguiente / posición
+,,,A,"Hi Lucy. I'm calling from H&M, 'following' your interview we are delighted to offer you a 'position'. When can you start?",siguiente / posición
 ,,,B,That's brilliant news! I am busy this weekend but I can start as soon as Monday.,
-,,,A,"That's perfect. When you come in to the shop, just ask for me, my name is Tim Brown. Can you please bring your passport so we can get the necessary paperwork done.",papeleo
+,,,A,"That's perfect. When you come in to the shop, just ask for me, my name is Tim Brown. Can you please bring your passport so we can get the necessary 'paperwork' done.",papeleo
 ,,,B,Yes I will do. Thank you so much again. What time should we meet?,
 ,,,A,How about 10am?,
 ,,,B,That's perfect. See you then!,
 ,,,A,Great I will see you Monday at 10 am. Bye now!,
 ,,,B,Bye-bye!,
 A2,Asking and giving directions,Hospital Visit,A,Hi there I'm here too see Mr. Smith. ,
-,,,B,"Good morning, I need the full name of the patient and the time he was taken in.",paciente
-,,,A,"David Smith, he was admitted yesterday around 9pm.",aceptada(feminine) | aceptado(masculine)
+,,,B,"Good morning, I need the full name of the 'patient' and the time he was taken in.",paciente
+,,,A,"David Smith, he was 'admitted' yesterday around 9pm.",aceptada(feminine) | aceptado(masculine)
 ,,,B,We are only accepting close relatives of Mr. Smith for visits at the moment. What is your relation to the patient? ,
 ,,,A,I'm his wife.,
 ,,,B,Great Mrs. Smith I just need to see some ID.,
 ,,,A,Here you go. ,
-,,,B,Thank you. His ward is the second door on the left at the end of the corridor. ,pabellón
+,,,B,Thank you. His 'ward' is the second door on the left at the end of the corridor. ,pabellón
 ,,,A,Thank you very much for your help. Have a good day!,
 ,,,B,"Thanks, you too. ",
 B1,Going shopping and asking for prices,Cancel hair appointment,A,"Good morning, how can I help?",

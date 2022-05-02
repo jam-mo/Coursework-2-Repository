@@ -567,7 +567,10 @@ public class ReadDatabase extends PasswordUtils {
                 }
                 else {
                     Conversation += "\n" +  splitSt[3] + ": " + splitSt[4];
-                    Spanish += "," + splitSt[5];
+                    if (splitSt[5] == null || splitSt[5].isEmpty()) {
+                        Spanish += "," + splitSt[5];
+                    }
+                    //Spanish += "," + splitSt[5];
 
                 }
                    
