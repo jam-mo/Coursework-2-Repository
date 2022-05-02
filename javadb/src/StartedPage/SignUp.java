@@ -276,7 +276,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource()==combobox){
-            if(combobox.getSelectedItem().equals("Admin")){
+            if(combobox.getSelectedItem().equals("Staff")){
                 userType = (String) combobox.getSelectedItem();
                 System.out.println(userType);
                 
@@ -385,7 +385,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
                 if(ReadUserName(userName)==false){
                     JOptionPane.showMessageDialog(null, "Amazing");
                     frame1.dispose();
-                    Security_Question s_q = new Security_Question(userName, firstName, lastName, email, password);
+                    Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
                     // pass usertype here
 
                 }else{
@@ -394,7 +394,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
                 if(ReadEmail(email)==false){
                     JOptionPane.showMessageDialog(null, "Amazing");
                     frame1.dispose();
-                    Security_Question s_q = new Security_Question(userName, firstName, lastName, email, password);
+                    Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
 
                 }else{
                     JOptionPane.showMessageDialog(null, "Email Already exists");

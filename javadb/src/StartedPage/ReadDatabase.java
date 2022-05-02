@@ -396,7 +396,7 @@ public class ReadDatabase extends PasswordUtils {
             ps.setString(7, securityQuestion);
             ps.execute();
             System.out.println("Data has been added");
-            //insertStaffUser(UserName, firstName, lastName, email, password,securityQuestion, staff_ID);
+            insertStaffUser(UserName, firstName, lastName, email, password,securityQuestion, staff_ID);
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
@@ -407,12 +407,12 @@ public class ReadDatabase extends PasswordUtils {
     public static void insertUser(String userName, String firstName, String lastName, String emailAddress, String Password,String securityQuestion) {
         Connection con = ConnectingDB.connect();
         PreparedStatement psUser = null;
-        //int languages = generateId();
-        //insertLanguages(languages);
+        int languages = generateId();
+        insertLanguages(languages);
         int user_ID = generateId();
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
-            String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion) VALUES(?,?,?,?,?,?,?)";
+            String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion, languages_ID) VALUES(?,?,?,?,?,?,?,?)";
             psUser = con.prepareStatement(userSql);
             // do a random check - ex have a method that checks if number is in db
             psUser.setInt(1, user_ID);
@@ -422,6 +422,7 @@ public class ReadDatabase extends PasswordUtils {
             psUser.setString(5, emailAddress);
             psUser.setString(6, Password);      
             psUser.setString(7, securityQuestion);
+            psUser.setInt(8, languages);
             psUser.execute();
             System.out.println("Data has been added to User Table");
         } catch (SQLException e) {
@@ -459,6 +460,7 @@ public class ReadDatabase extends PasswordUtils {
         // what am i going to do for this one? // get lanugages_ID 
         Connection con = ConnectingDB.connect();
         PreparedStatement psLevel = null;
+        int language = languages_ID;
         int difficulty_ID = generateId();
         String levelA1 = "/22";  // these will update in each individuals id - ex the language_id matching the user_id will update these when the user finished one of these.
         String levelA2 = "/25";
@@ -474,7 +476,7 @@ public class ReadDatabase extends PasswordUtils {
             psLevel.setString(3, levelA2);
             psLevel.setString(4, levelB1);
             psLevel.setString(5, levelB2);
-            psLevel.setInt(6, languages_ID);
+            psLevel.setInt(6, language);
             //psLevel.setString(6, languages_ID);    
             //insertContext(difficulty_ID);
             psLevel.execute();
@@ -598,14 +600,7 @@ public class ReadDatabase extends PasswordUtils {
              System.out.println(e.toString());
          }
      }
-      private static void readAllDatabase() {
-          Connection con = ConnectingDB.connect();
-          PreparedStatement psRead = null;
-          ResultSet rs = null;
-          
-          
-          
-      }
+      
       
       public static Integer generateId() { // https://tutorial.eyehunts.com/java/random-number-generator-java-range-5-digit/ source
           Random rand = new Random();
@@ -621,7 +616,7 @@ public class ReadDatabase extends PasswordUtils {
     public static void main(String[] arg){
         ReadDatabase rd = new ReadDatabase();
         insertContext(); // fills db up
-        
+       // insertLanguages(generateId()); // generates languageID & username
         // need to call insertLevels and insertLanguages here also
         // send languages_id to user
         
