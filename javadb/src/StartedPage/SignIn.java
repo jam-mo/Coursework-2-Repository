@@ -53,7 +53,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         String[] valueType = {"Select","Student","Staff"};
         
         combobox = new JComboBox(valueType);
-        combobox.setBounds(300, 0, 100, 50);
+        combobox.setBounds(100, 0, 100, 50);
         combobox.addActionListener(this);
         
         userType = (String) combobox.getSelectedItem();

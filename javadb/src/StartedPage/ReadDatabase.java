@@ -5,8 +5,14 @@
 package StartedPage;
 
 import Validation_Email_Password.PasswordUtils;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 import javax.swing.*;
 import javadb.*;
@@ -24,6 +30,7 @@ public class ReadDatabase extends PasswordUtils {
     PreparedStatement pstmt = null;
     PreparedStatement pstmt1 = null;
     String userEmail;
+    
     
     protected boolean ReadEmail(String user_email){
         // checks if email doesnt exist,
@@ -501,35 +508,74 @@ public class ReadDatabase extends PasswordUtils {
          }
     }
 
-    public static void insertContext(int context_ID, String contextTitle, String contextLevel, String subContext, String conversationPrompt,String spanishWords) {
-         Connection con = ConnectingDB.connect();
-         PreparedStatement psContext = null;
-         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER - fetch id too - difficulty
-         /*
-         int context_ID, 
-         String contextTitle, 
-         String contextLevel,
-         String subContext, 
-         String conversationPrompt,
-         String spanishWords
-         
-         */
-         // read csv file into here, 
-         try{
-             String contextSql = "INSERT INTO CONTEXT(CONTEXT_ID, CONTEXT_TITLE, CONTEXT_LEVEL, SUB_CONTEXT, CONVERSATION_PROMPT, SPANISH_WORDS) VALUES(?,?,?,?,?,?)";
-             psContext = con.prepareStatement(contextSql);
-             // do a random check - ex have a method that checks if number is in db
-             psContext.setInt(1, context_ID);
-             psContext.setString(2, contextTitle);
-             psContext.setString(3, contextLevel);
-             psContext.setString(4, subContext);
-             psContext.setString(5, conversationPrompt);
-             psContext.setString(6, spanishWords);
-             psContext.execute();
-             System.out.println("Data has been added to Context table");
-         } catch(SQLException e) {
-             System.out.println(e.toString());
-         }
+    public static void insertContext() {
+        Connection con = ConnectingDB.connect();
+        Statement stmt = null;
+        PreparedStatement ps = null;
+        Integer contextID = 0;
+        String level = "";
+        String Context = "";
+        String Subcontext = "";
+        String Conversation = "";
+        String Spanish = "";
+
+        try {
+
+            FileInputStream fstream = new FileInputStream("./workbook.csv");
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+            ArrayList list = new ArrayList();
+
+            int count = 0;
+            while ((strLine = br.readLine()) != null) {
+
+                list.add(strLine);
+                count++;
+            }
+            list.remove(0); // removes title, etc
+            Iterator itr;
+            for (itr = list.iterator(); itr.hasNext();) { // loops through
+                String str = itr.next().toString();
+                String[] splitSt = str.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);//str.split(",");// 
+               // System.out.println(splitSt.length); // https://www.baeldung.com/java-split-string-commas
+                // checks string length
+                if (splitSt[0].equals("A1") || splitSt[0].equals("A2") || splitSt[0].equals("B1") || splitSt[0].equals("B2")) { // splitSt[0].length() != 0 or splitSt[0].isEmpty()
+                    if (!level.isEmpty()) {
+                    String contextSql = "INSERT INTO CONTEXT(CONTEXT_ID,CONTEXT_TITLE, CONTEXT_LEVEL, SUB_CONTEXT, CONVERSATION_PROMPT, SPANISH_WORDS) VALUES(?,?,?,?,?,?)";
+                    ps = con.prepareStatement(contextSql);
+                    
+                    ps.setInt(1, contextID);
+                    ps.setString(2, level);
+                    ps.setString(3, Context);
+                    ps.setString(4, Subcontext);
+                    ps.setString(5, Conversation);
+                    ps.setString(6, Spanish);
+                    ps.execute();
+                    }
+                    
+                    contextID = generateId();
+                    level = splitSt[0];
+                    Context = splitSt[1];
+                    Subcontext = splitSt[2];
+                    Conversation = splitSt[3] + ": " + splitSt[4];
+                    Spanish = splitSt[5];
+//                     
+                }
+                else {
+                    Conversation += "\n" +  splitSt[3] + ": " + splitSt[4];
+                    Spanish += "," + splitSt[5];
+
+                }
+                   
+                //System.out.println(Arrays.toString(splitSt));
+            }
+
+//
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+       
     }
 
       public static void insertUserActivity(int userActivity_ID, String loginDate, String loginTime, String logoutTime, String activity_completed){
@@ -568,14 +614,16 @@ public class ReadDatabase extends PasswordUtils {
           int returnNum = Integer.parseInt(formatNum);
           return returnNum;
       }
-      public static void readFromFile() {
-          
-      }
+      
 
     
     
     public static void main(String[] arg){
         ReadDatabase rd = new ReadDatabase();
+        insertContext(); // fills db up
+        
+        // need to call insertLevels and insertLanguages here also
+        // send languages_id to user
         
         
         

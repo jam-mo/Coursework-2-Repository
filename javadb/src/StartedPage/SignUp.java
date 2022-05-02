@@ -58,6 +58,9 @@ public class SignUp extends ReadDatabase implements ActionListener{
     JPasswordField re_passwordfield;
     
     JButton buttonSubmit;
+    JComboBox combobox;
+    
+    String userType;
 
     ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/eye.png");
     ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/hidden.png");
@@ -69,6 +72,13 @@ public class SignUp extends ReadDatabase implements ActionListener{
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
     SignUp(){
+        String[] valueType = {"Select","Student","Staff"};
+        
+        combobox = new JComboBox(valueType);
+        combobox.setBounds(300, 0, 100, 50);
+        combobox.addActionListener(this);
+        
+        userType = (String) combobox.getSelectedItem();
 
         label = new JLabel();
         label.setText("SignUp");
@@ -247,6 +257,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
         
         Mainpanel.add(checkbox);
         Mainpanel.add(checkbox1);
+        Mainpanel.add(combobox);
         
         frame1 = new JFrame("SignUP");
         frame1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -264,7 +275,6 @@ public class SignUp extends ReadDatabase implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        /*  // move combobox over here aswell
         if(e.getSource()==combobox){
             if(combobox.getSelectedItem().equals("Admin")){
                 userType = (String) combobox.getSelectedItem();
@@ -280,7 +290,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
                 System.out.println(userType);
             }
         }
-        */
+        
         
         if(e.getSource()==checkbox) //Change Icon hen show display
         {
@@ -376,6 +386,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Amazing");
                     frame1.dispose();
                     Security_Question s_q = new Security_Question(userName, firstName, lastName, email, password);
+                    // pass usertype here
 
                 }else{
                     JOptionPane.showMessageDialog(null, "Username already exists");

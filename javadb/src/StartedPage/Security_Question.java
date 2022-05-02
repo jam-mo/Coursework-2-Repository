@@ -174,10 +174,12 @@ public class Security_Question extends ReadDatabase implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Wow amazing answer You account is create");
 
                     ReadDatabase Input = new ReadDatabase();
+                    // userType - checks if == admin or user
                     Input.insertUser(userName,firstname, lastname, emailAddress, password, qestionText1);
 
                     SignIn SignIn = new SignIn();
                     frame.dispose();
+                    // send usertype
                 
             }
             
