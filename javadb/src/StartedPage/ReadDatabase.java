@@ -410,6 +410,7 @@ public class ReadDatabase extends PasswordUtils {
         int languages = generateId();
         insertLanguages(languages);
         int user_ID = generateId();
+        insertUserActivity(user_ID);
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
             String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion, languages_ID) VALUES(?,?,?,?,?,?,?,?)";
@@ -548,8 +549,8 @@ public class ReadDatabase extends PasswordUtils {
                     ps = con.prepareStatement(contextSql);
                     
                     ps.setInt(1, contextID);
-                    ps.setString(2, level);
-                    ps.setString(3, Context);
+                    ps.setString(2, Context);
+                    ps.setString(3, level);
                     ps.setString(4, Subcontext);
                     ps.setString(5, Conversation);
                     ps.setString(6, Spanish);
@@ -580,20 +581,19 @@ public class ReadDatabase extends PasswordUtils {
        
     }
 
-      public static void insertUserActivity(int userActivity_ID, String loginDate, String loginTime, String logoutTime, String activity_completed){
+      public static void insertUserActivity(int user_ID){
           Connection con = ConnectingDB.connect();
          PreparedStatement psUserActivity = null;
          // add user_ID in here, call from user_ID
+         int userActivity_ID = generateId();
          // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
          try{
-             String userActivitySql = "INSERT INTO USERACTIVITY(userActivity_ID, loginDate, loginTime, logoutTime, activity_completed) VALUES(?,?,?,?,?)";
+             String userActivitySql = "INSERT INTO USERACTIVITY(userActivity_ID, user_ID) VALUES(?,?)";
              psUserActivity = con.prepareStatement(userActivitySql);
              // do a random check - ex have a method that checks if number is in db
              psUserActivity.setInt(1, userActivity_ID);
-             psUserActivity.setString(2, loginDate);
-             psUserActivity.setString(3, loginTime);
-             psUserActivity.setString(4, logoutTime);
-             psUserActivity.setString(5, activity_completed);
+             psUserActivity.setInt(2, user_ID);
+            
              psUserActivity.execute();
              System.out.println("Data has been added to user activity table");
          } catch(SQLException e) {

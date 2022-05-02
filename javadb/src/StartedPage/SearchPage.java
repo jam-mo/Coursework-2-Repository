@@ -24,7 +24,17 @@ public class SearchPage extends SearchBarData implements ActionListener{
     
     JPanel SubpaneCenter;
     
-    JLabel[] labelContainer;
+//    JLabel labelContainer;
+    
+    JList listA1;
+    JList listA2;
+    JList listB1;
+    JList listB2;
+    
+    JList listA1sc;
+    JList listA2sc;
+    JList listB1sc;
+    JList listB2sc;
     
     JTextField SearchText;
     
@@ -43,6 +53,16 @@ public class SearchPage extends SearchBarData implements ActionListener{
     ArrayList <String> list6 = new ArrayList<>();
     ArrayList <String> list7 = new ArrayList<>();
     ArrayList <String> list8 = new ArrayList<>();
+    
+    ArrayList <String> getValue1 = new ArrayList<>();
+    ArrayList <String> getValue2 = new ArrayList<>();
+    ArrayList <String> getValue3 = new ArrayList<>();
+    ArrayList <String> getValue4 = new ArrayList<>();
+    ArrayList <String> getValue5 = new ArrayList<>();
+    ArrayList <String> getValue6 = new ArrayList<>();
+    ArrayList <String> getValue7 = new ArrayList<>();
+    ArrayList <String> getValue8 = new ArrayList<>();
+    
     
     ArrayList <String> StealValue = new ArrayList<>();
     
@@ -138,7 +158,6 @@ public class SearchPage extends SearchBarData implements ActionListener{
         
 //            icon3  = new ImageIcon();
 
-        
         each_sub_Button1_1 = new JButton();
         each_sub_Button1_1.setIcon(icon);
         each_sub_Button1_1.setText("Go bAck");
@@ -179,10 +198,109 @@ public class SearchPage extends SearchBarData implements ActionListener{
         sub_panel1.add(each_sub_Button1_2);
         sub_panel1.add(each_sub_Button1_3);
         
-        SubpaneCenter= new JPanel();
-        SubpaneCenter.setBackground(new java.awt.Color(255,255,255));
-        SubpaneCenter.setLayout(new GridLayout());
+//                   labelContainer= new JLabel[100];
+                   
+//                   for(int i = 0; i < labelContainer.length ; i++){
 
+//                       labelContainer[i].setText("");
+//                   }
+        
+        listA1 = new JList<>();
+        listA1.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_A1_Context"));
+        listA1.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list1.size(); }
+            @Override
+            public String getElementAt(int i) { return list1.get(i); }
+        });
+        
+        listA2 = new JList<>();
+        listA2.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_A2_Context"));
+        listA2.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list2.size(); }
+            @Override
+            public String getElementAt(int i) { return list2.get(i); }
+        });
+        
+        listB1 = new JList<>();
+        listB1.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B1_Context"));
+        listB1.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list3.size(); }
+            @Override
+            public String getElementAt(int i) { return list3.get(i); }
+        });
+        
+        
+        listB2 = new JList<>();
+        listB2.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B2_Context"));
+        listB2.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list4.size(); }
+            @Override
+            public String getElementAt(int i) { return list4.get(i); }
+        });
+        
+        listA1sc = new JList<>();
+        listA1sc.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_A1_Sub_Context"));
+        listA1sc.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list5.size(); }
+            @Override
+            public String getElementAt(int i) { return list5.get(i); }
+        });
+        
+        
+        listA2sc = new JList<>();
+        listA2sc.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_A2_Sub_Context"));
+        listA2sc.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list6.size(); }
+            @Override
+            public String getElementAt(int i) { return list6.get(i); }
+        });
+        
+        
+        listB1sc = new JList<>();
+        listB1sc.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B1_Sub_Context"));
+        listB1sc.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list7.size(); }
+            @Override
+            public String getElementAt(int i) { return list7.get(i); }
+        });
+        
+        listB2sc = new JList<>();
+        listB2sc.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B2_Sub_Context"));
+        listB2sc.setModel(new javax.swing.AbstractListModel<String>() {
+
+            @Override
+            public int getSize() { return list8.size(); }
+            @Override
+            public String getElementAt(int i) { return list8.get(i); }
+        });
+        
+        
+        SubpaneCenter= new JPanel();
+        SubpaneCenter.setBackground(new java.awt.Color(233,231,214));
+        SubpaneCenter.setLayout(new GridLayout(8,1,10,10));
+        
+        SubpaneCenter.add(listA1);
+        SubpaneCenter.add(listA2);
+        SubpaneCenter.add(listB1);
+        SubpaneCenter.add(listB2);
+        SubpaneCenter.add(listA1sc);
+        SubpaneCenter.add(listA2sc);
+        SubpaneCenter.add(listB1sc);
+        SubpaneCenter.add(listB2sc);
         
         JScrollPane scroll = new JScrollPane(SubpaneCenter,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(5, 130, 390, 535);
@@ -228,73 +346,88 @@ public class SearchPage extends SearchBarData implements ActionListener{
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == SearchButton ){
            
+           getValue1.clear();
+           getValue2.clear();
+           getValue3.clear();
+           getValue4.clear();
+           getValue5.clear();
+           getValue6.clear();
+           getValue7.clear();
+           getValue8.clear();
            
-           StealValue.clear();
+           SubpaneCenter.removeAll();
+//           
+           for(String element : list1){
+               
+                if (element.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
+                    System.out.println("LEVEL A1 : "+ element);
+                    getValue1.add(element);
+
+                    listA1.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue1.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue1.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listA1);
+                }
+           }
            
-            for(String element1 : list1){
-               if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
-                   System.out.println("LEVEL A1 : "+ element1);
-                   labelContainer = new JLabel[element1.length()];
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A1 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   
-                   StealValue.add(element1);
-                   
-                   
-               }
-            }
+
             
             for(String element1 : list2){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
-                   System.out.println("LEVEL A2 : "+ element1);
-                   labelContainer = new JLabel[element1.length()];
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A2 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue2.add(element1);
+
+                    listA2.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue2.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue2.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listA2);
                }
             }
             
             for(String element1 : list3){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                    System.out.println("LEVEL B1 : "+element1);
-                   labelContainer = new JLabel[element1.length()];
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level B2 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue3.clear();
+                    getValue3.add(element1);
+
+                    listB1.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue3.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue3.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listB1);
                }
             }
             
             for(String element1 : list4){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                    System.out.println("LEVEL B2 : "+element1);
-                   labelContainer = new JLabel[element1.length()];
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A1 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue4.add(element1);
+
+                    listB2.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue4.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue4.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listB2);
                    
                }
             }
@@ -302,64 +435,72 @@ public class SearchPage extends SearchBarData implements ActionListener{
             for(String element1 : list5){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                    System.out.println("LEVEL A1 - Context: "+element1);
-                   labelContainer = new JLabel[element1.length()];                   
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A1 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue5.add(element1);
+
+                    listA1sc.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue5.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue5.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listA1sc);
                }
             }
             
             for(String element1 : list6){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                    System.out.println("LEVEL A2 - Context: "+element1);
-                   labelContainer = new JLabel[element1.length()];
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A1 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue6.add(element1);
+
+                    listA2sc.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue6.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue6.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listA2sc);
                }
             }
             
             for(String element1 : list7){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                    System.out.println("LEVEL B1 - Context: "+element1);
-                   labelContainer = new JLabel[element1.length()];
-                    for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A1 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue7.add(element1);
+
+                    listB1sc.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue7.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue7.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listB1sc);
                }
             }
             
             for(String element1 : list8){
                if (element1.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                    System.out.println("LEVEL B2 - Context: "+element1);
-                   labelContainer = new JLabel[element1.length()];
-                   for(int i = 0 ; i < labelContainer.length; i++)
-                   {
-                       labelContainer[i] = new JLabel();
-                       labelContainer[i].setText("Level A1 : " + element1);
-                       
-                       SubpaneCenter.add(labelContainer[i]);
-                   }
-                   
-                   StealValue.add(element1);
+                    StealValue.add(element1);
+                    getValue8.add(element1);
+
+                    listB2sc.setModel(new javax.swing.AbstractListModel<String>() {
+                        
+                        @Override
+                        public int getSize() { return getValue8.size(); }
+                        @Override
+                        public String getElementAt(int i) { return getValue8.get(i); }
+                    });
+                    
+                    SubpaneCenter.add(listB2sc);
                }
             }
             
