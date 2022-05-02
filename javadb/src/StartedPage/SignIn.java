@@ -259,7 +259,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             frame.dispose();
-                            level_language lvlanguage = new level_language();
+                            //level_language lvlanguage = new level_language();
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -273,7 +273,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             frame.dispose();
-                            level_language lvlanguage = new level_language();
+                            //level_language lvlanguage = new level_language();
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
