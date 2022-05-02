@@ -17,8 +17,8 @@ public abstract class getdata_learning {
     
     abstract protected boolean subcontext(String languageSelect,String context, String level);
     
-    abstract protected boolean ReadtextA(String languageSelect,String subContext, String context, String level);
+    abstract protected boolean ReadtextA(String languageSelect,String subContext, String level);
     
-    abstract protected boolean ReadtextB(String languageSelect,String subContext, String context, String level);
+    abstract protected boolean ReadContext(String languageSelect,String subContext,String level);
     
 }

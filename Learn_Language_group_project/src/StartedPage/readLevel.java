@@ -38,7 +38,7 @@ public class readLevel extends getdata_learning {
     ArrayList ImgSubcontext = new ArrayList();
     ArrayList Subcontext = new ArrayList();
     ArrayList personA = new ArrayList();
-    ArrayList personB = new ArrayList();
+    String readContext;
     
     
     @Override
@@ -98,7 +98,12 @@ public class readLevel extends getdata_learning {
     @Override
     protected boolean context(String languageSelect, String level) {
        boolean getvalue = false; 
-        String readContext = "SELECT  c.CONTEXT FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  JOIN CONTEXT c   ON l.difficulty_ID = c.difficulty_ID  WHERE languages =? AND Language_level =?;";
+        String readContext = """
+                        SELECT CONTEXT_TITLE
+                              FROM CONTEXT
+                              WHERE CONTEXT_LEVEL = ?
+                            ;
+                             """;
         
         
         con = connectDB.getConnection();
@@ -106,9 +111,8 @@ public class readLevel extends getdata_learning {
             try {
                 pstmt = con.prepareStatement(readContext);
 
-                pstmt.setString(1, languageSelect);
-                pstmt.setString(2, level);
-
+                pstmt.setString(1,level);
+                
                 ResultSet rs = pstmt.executeQuery();
 
                 int n = 0;
@@ -156,23 +160,18 @@ public class readLevel extends getdata_learning {
     protected boolean subcontext(String languageSelect, String level,String context) {
         
         String readSubContext = """
-                                SELECT  sc.SUB_CONTEXT
-                                FROM LANGUAGES sp JOIN LEVELS l
-                                ON sp.languages_ID = l.languages_ID 
-                                JOIN CONTEXT c  
-                                ON l.difficulty_ID = c.difficulty_ID 
-                                JOIN SUB_CONTEXT sc 
-                                on c.Context_ID = sc.Context_ID
-                                WHERE languages =? AND Language_level =? AND CONTEXT=?;""";
+                        SELECT SUB_CONTEXT
+                                FROM CONTEXT
+                                WHERE CONTEXT_LEVEL = ? And CONTEXT_TITLE = ?
+                                """;
         
         con = connectDB.getConnection();
             try {
                 
                 pstmt = con.prepareStatement(readSubContext);
 
-                pstmt.setString(1, languageSelect);
-                pstmt.setString(2, level);
-                pstmt.setString(3, context);
+                pstmt.setString(1, level);
+                pstmt.setString(2, context);
 
                 ResultSet rs = pstmt.executeQuery();
 
@@ -218,28 +217,20 @@ public class readLevel extends getdata_learning {
     }
 
     @Override
-    protected boolean ReadtextA(String languageSelect, String level,  String context, String subContext) {
+    protected boolean ReadtextA(String languageSelect, String level, String subContext) {
         
         String readPersonA = """
-                             SELECT  pA.TEXT
-                             FROM LANGUAGES sp JOIN LEVELS l
-                             ON sp.languages_ID = l.languages_ID 
-                             JOIN CONTEXT c  
-                             ON l.difficulty_ID = c.difficulty_ID 
-                             JOIN SUB_CONTEXT sc 
-                             on c.Context_ID = sc.Context_ID
-                             JOIN PERSON_A pA
-                             ON sc.SUB_CONTEXT_ID = pA.SUB_CONTEXT_ID
-                             WHERE languages =? AND Language_level =? AND CONTEXT=? AND SUB_CONTEXT=?;""";
+                        SELECT CONVERSATION_PROMPT
+                            FROM CONTEXT
+                            WHERE CONTEXT_LEVEL = ? And SUB_CONTEXT=?
+                             """;
         con = connectDB.getConnection();
             try {
                 
                 pstmt = con.prepareStatement(readPersonA);
 
-                pstmt.setString(1, languageSelect);
-                pstmt.setString(2, level);
-                pstmt.setString(3, context);
-                pstmt.setString(4, subContext);
+                pstmt.setString(1, level);
+                pstmt.setString(2, subContext);
 
                 ResultSet rs = pstmt.executeQuery();
 
@@ -281,77 +272,14 @@ public class readLevel extends getdata_learning {
     }
     ArrayList getPersonA(){
         return personA;
-    }
-    
-    @Override
-    protected boolean ReadtextB(String languageSelect, String level,  String context, String subContext) {
-        
-        String readPersonB = """
-                             SELECT  pB.TEXT
-                             FROM LANGUAGES sp JOIN LEVELS l
-                             ON sp.languages_ID = l.languages_ID 
-                             JOIN CONTEXT c  
-                             ON l.difficulty_ID = c.difficulty_ID 
-                             JOIN SUB_CONTEXT sc 
-                             on c.Context_ID = sc.Context_ID
-                             JOIN PERSON_B pB
-                             ON sc.SUB_CONTEXT_ID = pB.SUB_CONTEXT_ID
-                             WHERE languages = ? AND Language_level =? AND CONTEXT=? AND SUB_CONTEXT=?;""";
-        
-        con = connectDB.getConnection();
-            try {
-                
-                pstmt = con.prepareStatement(readPersonB);
-
-                pstmt.setString(1, languageSelect);
-                pstmt.setString(2, level);
-                pstmt.setString(3, context);
-                pstmt.setString(4, subContext);
-
-                ResultSet rs = pstmt.executeQuery();
-
-                int n = 0;
-
-                while(rs.next()){
-                    int numColumns = rs.getMetaData().getColumnCount();
-                    n++;
-
-                    for (int i = 1; i <= numColumns; i++) {
-                        System.out.print(" something : "+rs.getObject(i));
-                        this.personB.add(rs.getObject(i));
-                    }
-                    System.out.println("");
-                }
-                System.out.println("");
-                rs.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
-            }finally {
-                if (stmt != null) {
-                    try {
-                        stmt.close();
-                    } catch (SQLException e) {
-                        System.err.println("SQLException: " + e.getMessage());
-                    }
-                }
-                if (con != null) {
-                    try {
-                        con.close();
-                    } catch (SQLException e) {
-                        System.err.println("SQLException: " + e.getMessage());
-                    }
-                }
-            }
-        
-        return false;
-        
-    }
-    ArrayList getPersonB(){
-        return personB;
-    }
+    }  
     
     protected boolean readImgContext(String languageSelect, String level){
-        String readContext = "SELECT  c.Context_image FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  JOIN CONTEXT c   ON l.difficulty_ID = c.difficulty_ID  WHERE languages =? AND Language_level =?;";
+        String readContext = """
+                        SELECT CONTEXT_TITLE_img
+                            FROM CONTEXT
+                            WHERE CONTEXT_LEVEL = ?
+                             """;
         
         
         con = connectDB.getConnection();
@@ -359,8 +287,7 @@ public class readLevel extends getdata_learning {
             try {
                 pstmt = con.prepareStatement(readContext);
 
-                pstmt.setString(1, languageSelect);
-                pstmt.setString(2, level);
+                pstmt.setString(1, level);
 
                 ResultSet rs = pstmt.executeQuery();
 
@@ -405,14 +332,9 @@ public class readLevel extends getdata_learning {
     
     protected boolean readImgSubContext(String languageSelect, String level, String context){
         String readContext = """
-                                SELECT  sc.Sub_context_img
-                                 FROM LANGUAGES sp JOIN LEVELS l
-                                 ON sp.languages_ID = l.languages_ID 
-                                 JOIN CONTEXT c  
-                                 ON l.difficulty_ID = c.difficulty_ID 
-                                 JOIN SUB_CONTEXT sc 
-                                 on c.Context_ID = sc.Context_ID
-                                 WHERE languages =? AND Language_level =? AND CONTEXT=?;
+                        SELECT SUB_CONTEXT_img
+                            FROM CONTEXT
+                            WHERE CONTEXT_LEVEL = ? And CONTEXT_TITLE = ?
                              """;
         
         
@@ -420,10 +342,9 @@ public class readLevel extends getdata_learning {
         
             try {
                 pstmt = con.prepareStatement(readContext);
-
-                pstmt.setString(1, languageSelect);
-                pstmt.setString(2, level);
-                pstmt.setString(3, context);
+                
+                pstmt.setString(1, level);
+                pstmt.setString(2, context);
 
                 ResultSet rs = pstmt.executeQuery();
 
@@ -521,6 +442,64 @@ public class readLevel extends getdata_learning {
         return Imglevel;
     }
     
+    @Override
+    protected boolean ReadContext(String languageSelect, String level, String Context) {
+        
+        String readPersonB = """
+                            SELECT CONTEXT_TITLE
+                               FROM CONTEXT
+                               WHERE CONTEXT_LEVEL=? AND SUB_CONTEXT =? ;
+                             """;
+        
+        con = connectDB.getConnection();
+            try {
+                
+                pstmt = con.prepareStatement(readPersonB);
+
+                pstmt.setString(1, level);
+                pstmt.setString(2, Context);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                int n = 0;
+
+                while(rs.next()){
+                    int numColumns = rs.getMetaData().getColumnCount();
+                    n++;
+
+                    for (int i = 1; i <= numColumns; i++) {
+                        System.out.print(" something : "+rs.getObject(i));
+                        readContext = (String)rs.getObject(i);
+                    }
+                    System.out.println("");
+                }
+                System.out.println("");
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
+            }finally {
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+            }
+        
+        return false;
+        
+    }
+    String readContext(){
+        return readContext;
+    }
     
     
     

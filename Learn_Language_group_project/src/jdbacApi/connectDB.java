@@ -13,7 +13,7 @@ public class connectDB {
     public static Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:LEARNING_LANGUAGES.db";
+            String url = "jdbc:sqlite:appDB.db";
             Connection conn = DriverManager.getConnection(url);
             //JOptionPane.showMessageDialog(null, "Connection Established");
             return conn;

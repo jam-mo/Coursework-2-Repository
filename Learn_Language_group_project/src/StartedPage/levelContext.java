@@ -18,6 +18,8 @@ public class levelContext extends readLevel implements ActionListener {
     
     readLevel levelReadData;
     
+    SearchPage  Searchbar;
+    
     levelSubContext lsc;
     
     level_language ll2;
@@ -53,7 +55,7 @@ public class levelContext extends readLevel implements ActionListener {
     
     
     ImageIcon icon = new ImageIcon("go-back.png");
-    ImageIcon icon1 = new ImageIcon("home-page.png");
+    ImageIcon icon1 = new ImageIcon("Search.png");
     ImageIcon icon2 = new ImageIcon("account.png");
     
     ImageIcon[] icon3;
@@ -76,7 +78,7 @@ public class levelContext extends readLevel implements ActionListener {
         getemail = email;
         
         label = new JLabel();
-        label.setText(level);
+        label.setText("LEVEL_"+level);
         label.setForeground(new java.awt.Color(198,102,104));
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
@@ -143,7 +145,9 @@ public class levelContext extends readLevel implements ActionListener {
         scroll.setBounds(10, 80, 380, 580);
         scroll.setBorder(null);
             
-        
+        img = icon.getImage();
+        newImg = img.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
         each_sub_Button1_1 = new JButton();
         each_sub_Button1_1.setIcon(icon);
         each_sub_Button1_1.setText("Go back");
@@ -154,9 +158,12 @@ public class levelContext extends readLevel implements ActionListener {
         each_sub_Button1_1.setIconTextGap(-10);
         each_sub_Button1_1.addActionListener(this);
         
+        img = icon1.getImage();
+        newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        icon1 = new ImageIcon(newImg);
         each_sub_Button1_2 = new JButton();
         each_sub_Button1_2.setIcon(icon1);
-        each_sub_Button1_2.setText("Home");
+        each_sub_Button1_2.setText("Search");
         each_sub_Button1_2.setBorder(null);
         each_sub_Button1_2.setHorizontalTextPosition(JButton.CENTER);
         each_sub_Button1_2.setVerticalTextPosition(JButton.BOTTOM);
@@ -164,7 +171,9 @@ public class levelContext extends readLevel implements ActionListener {
         each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
         
-
+        img = icon2.getImage();
+        newImg = img.getScaledInstance(43, 43, java.awt.Image.SCALE_SMOOTH);
+        icon2 = new ImageIcon(newImg);
         each_sub_Button1_3 = new JButton();
         each_sub_Button1_3.setText("Profile");
         each_sub_Button1_3.setIcon(icon2);
@@ -208,7 +217,7 @@ public class levelContext extends readLevel implements ActionListener {
     }
     
     public static void  main(String[] arg){
-        levelContext le = new levelContext("SPANISH","LEVEL_A1","asdas");
+        levelContext le = new levelContext("SPANISH","A1","asdas");
     }
 
     @Override
@@ -231,15 +240,10 @@ public class levelContext extends readLevel implements ActionListener {
         
         if(e.getSource() == each_sub_Button1_2)
         {
-            SignIn si = new SignIn();
-            frame.dispose();
+           Searchbar  = new SearchPage(getemail);
+           frame.dispose();
         }
         
-        if(e.getSource() == each_sub_Button1_2)
-        {
-            SignIn si = new SignIn();
-            frame.dispose();
-        }
         
         if(e.getSource() == each_sub_Button1_3 )
         {

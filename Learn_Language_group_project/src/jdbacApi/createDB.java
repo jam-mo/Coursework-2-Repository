@@ -22,7 +22,7 @@ class Connect{
     private Connection conSQLite;
     
     public Connect() {
-        urlSQLite = "jdbc:sqlite:LEARNING_LANGUAGES.db";
+        urlSQLite = "jdbc:sqlite:appDB.db";
         try {
             driverSQLite = new org.sqlite.JDBC();
             DriverManager.registerDriver(driverSQLite);
