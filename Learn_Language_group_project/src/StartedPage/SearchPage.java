@@ -4,7 +4,9 @@ package StartedPage;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.sound.sampled.DataLine;
 import javax.swing.*;
+import javax.swing.event.*;
 
 /**
  *
@@ -206,6 +208,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
 //                   }
         
         listA1 = new JList<>();
+//        listA1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.gray), "Level_A1_Context", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         listA1.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_A1_Context"));
         listA1.setModel(new javax.swing.AbstractListModel<String>() {
 
@@ -213,6 +216,12 @@ public class SearchPage extends SearchBarData implements ActionListener{
             public int getSize() { return list1.size(); }
             @Override
             public String getElementAt(int i) { return list1.get(i); }
+        });
+        
+        listA1.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listA1.getSelectedValue().toString());
+            }
         });
         
         listA2 = new JList<>();
@@ -225,6 +234,12 @@ public class SearchPage extends SearchBarData implements ActionListener{
             public String getElementAt(int i) { return list2.get(i); }
         });
         
+        listA2.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listA2.getSelectedValue().toString());
+            }
+        });
+        
         listB1 = new JList<>();
         listB1.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B1_Context"));
         listB1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -234,7 +249,11 @@ public class SearchPage extends SearchBarData implements ActionListener{
             @Override
             public String getElementAt(int i) { return list3.get(i); }
         });
-        
+        listB1.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listB1.getSelectedValue().toString());
+            }
+        });
         
         listB2 = new JList<>();
         listB2.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B2_Context"));
@@ -244,6 +263,11 @@ public class SearchPage extends SearchBarData implements ActionListener{
             public int getSize() { return list4.size(); }
             @Override
             public String getElementAt(int i) { return list4.get(i); }
+        });
+        listB2.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listB2.getSelectedValue().toString());
+            }
         });
         
         listA1sc = new JList<>();
@@ -255,7 +279,11 @@ public class SearchPage extends SearchBarData implements ActionListener{
             @Override
             public String getElementAt(int i) { return list5.get(i); }
         });
-        
+        listA1sc.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listA1sc.getSelectedValue().toString());
+            }
+        });
         
         listA2sc = new JList<>();
         listA2sc.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_A2_Sub_Context"));
@@ -266,7 +294,11 @@ public class SearchPage extends SearchBarData implements ActionListener{
             @Override
             public String getElementAt(int i) { return list6.get(i); }
         });
-        
+        listA2sc.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listA2sc.getSelectedValue().toString());
+            }
+        });
         
         listB1sc = new JList<>();
         listB1sc.setBorder(javax.swing.BorderFactory.createTitledBorder("Level_B1_Sub_Context"));
@@ -276,6 +308,11 @@ public class SearchPage extends SearchBarData implements ActionListener{
             public int getSize() { return list7.size(); }
             @Override
             public String getElementAt(int i) { return list7.get(i); }
+        });
+        listB1sc.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listB1sc.getSelectedValue().toString());
+            }
         });
         
         listB2sc = new JList<>();
@@ -287,7 +324,11 @@ public class SearchPage extends SearchBarData implements ActionListener{
             @Override
             public String getElementAt(int i) { return list8.get(i); }
         });
-        
+        listB2sc.addListSelectionListener((ListSelectionEvent e) -> {
+            if(!e.getValueIsAdjusting()){
+                System.out.println(listB2sc.getSelectedValue().toString());
+            }
+        });
         
         SubpaneCenter= new JPanel();
         SubpaneCenter.setBackground(new java.awt.Color(233,231,214));
@@ -345,6 +386,8 @@ public class SearchPage extends SearchBarData implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == SearchButton ){
+           
+           StealValue.clear();
            
            getValue1.clear();
            getValue2.clear();
