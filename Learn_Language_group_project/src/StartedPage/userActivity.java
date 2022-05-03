@@ -5,8 +5,8 @@
 package StartedPage;
 
 import java.sql.*;
+import javadb.ConnectingDB;
 import javax.swing.*;
-import jdbacApi.*;
 
 /**
  *
@@ -30,7 +30,7 @@ public class userActivity {
                                                              ?
                                                          );""";
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         
@@ -86,7 +86,7 @@ public class userActivity {
                                                               ?
                                                           );""";
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         

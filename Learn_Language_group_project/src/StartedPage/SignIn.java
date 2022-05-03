@@ -8,6 +8,8 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.*;
+import javadb.*;
 
 /**
  *
@@ -26,14 +28,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
     JLabel label3;
     JLabel label4;
     JLabel label5;
-    JLabel label6;
     
     JTextField text1;
     JPasswordField password;
     
-    JButton goback_button;
-    
     JButton buttonSubmit;
+    
+    JButton goback_button;
     
     JCheckBox checkbox;
     
@@ -41,9 +42,9 @@ public class SignIn extends ReadDatabase implements ActionListener{
     
     JComboBox combobox;
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/hidden.png");
-    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/PushToSteam/Coursework-2-Repository/Learn_Language_group_project/src/image/back.png");
+    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/eye.png");
+    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/hidden.png");
+    ImageIcon icon2 = new ImageIcon("back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -70,7 +71,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("SignIn");
-        label.setForeground(new java.awt.Color(198,102,104));
+        label.setForeground(new java.awt.Color(255,51,51));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -96,7 +97,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label3.setBounds(-50, 650, 388, 30);
-        label3.setText("If you do not have an account |");
+        label3.setText("If you dont have Any Account |");
         
         label4 = new JLabel();
         label4.setText("Sign Up");
@@ -121,7 +122,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label5.setBounds(230, 365, 150, 30);
-        label5.setForeground(new java.awt.Color(198,102,104));
+        label5.setForeground(new java.awt.Color(255,51,51));
         label5.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e)  
@@ -129,25 +130,6 @@ public class SignIn extends ReadDatabase implements ActionListener{
                // you can open a new frame here as
                // i have assumed you have declared "frame" as instance variable
                 Reset_password Rpwd = new Reset_password();
-                frame.dispose();
-            }  
-        });
-        
-        label6 = new JLabel();
-        label6.setText("Welcome page");
-        label6.setFont(myFont5);
-        label6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        label6.setBounds(30, 20, 200, 20);
-        label6.setForeground(new java.awt.Color(0,0,0));
-        label6.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e)  
-            {  
-               // you can open a new frame here as
-               // i have assumed you have declared "frame" as instance variable
-                openning opening= new openning();
-                frame.dispose();
 
             }  
         });
@@ -194,9 +176,6 @@ public class SignIn extends ReadDatabase implements ActionListener{
         Mainpanel.add(label3);
         Mainpanel.add(label4);
         Mainpanel.add(label5);
-        Mainpanel.add(label6);
-        
-        Mainpanel.add(goback_button);
         
         Mainpanel.add(checkbox);
         
@@ -220,19 +199,12 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
     }
     
-//    public static void main(String[] arg){
-//        SignIn signin = new SignIn();
-//    }
+    public static void main(String[] arg){
+        SignIn signin = new SignIn();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if(e.getSource() == goback_button){
-            
-            openning op = new openning();
-            frame.dispose();
-            
-        }
         
         if(e.getSource()==combobox){
             if(combobox.getSelectedItem().equals("Admin")){
@@ -277,24 +249,27 @@ public class SignIn extends ReadDatabase implements ActionListener{
             {
                 JOptionPane.showMessageDialog(null, "Add a Email","EMAIL", JOptionPane.ERROR_MESSAGE);
             }
-            else if(password01.equals("") || password01 == null)
+            else if(password01.equals("") || password01.equals(null))
             {
                 JOptionPane.showMessageDialog(null, "Add a password" ,"PASSWORD", JOptionPane.ERROR_MESSAGE);
             }
             else if(Validation_Email.validationEmail(email)==false)
             {
-                JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com" ,"EMAIL", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com");
             }
             else{
 
                 if(userType.equalsIgnoreCase("Staff"))
-                {
+                { //insertStaff and insertStaffUse
                     ReadDatabase ReadSignIn = new ReadDatabase();
-                    
+                    // 
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
+                            userActivity userAct = new userActivity();
+                            userAct.userLogintime(email);
+                            level_language lvlanguage = new level_language(email);
                             frame.dispose();
-                            level_language lvlanguage = new level_language("SPANISH",email);
+                            //level_language lvlanguage = new level_language();
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,30 +277,16 @@ public class SignIn extends ReadDatabase implements ActionListener{
 
                 }
                 else if(userType.equalsIgnoreCase("student"))
-                {
+                { // call insertUser
                     ReadDatabase ReadSignIn = new ReadDatabase();
-                                                String[] responses = {"SPANISH","CHINESE"};
-                            
-                            int answer = JOptionPane.showOptionDialog(null, "Which language do you prefer ?","asdas", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE ,null,responses,0);
-                            
-                            System.out.println(answer);
                     
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
-                            
                             userActivity userAct = new userActivity();
-                            
                             userAct.userLogintime(email);
-                            
-                            if(answer == 0){
-                                String language = "SPANISH";
-                                level_language lvlanguage = new level_language(language,email);
-                                frame.dispose();
-                            }else if(answer == 1){
-                                String language = "CHINESE";
-                                level_language lvlanguage = new level_language(language,email);
-                                frame.dispose();
-                            }
+                            level_language lvlanguage = new level_language(email);
+                            frame.dispose();
+
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -334,7 +295,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please select if you are a student or teacher");
+                    JOptionPane.showMessageDialog(null, "Please select your student or teacher" ,"SELECT",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
             

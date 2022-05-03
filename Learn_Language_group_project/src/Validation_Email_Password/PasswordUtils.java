@@ -10,6 +10,11 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
  
+/**
+ *
+ * @author kokmeng / christopher
+ */
+
 public class PasswordUtils {
     
     private static final Random RANDOM = new SecureRandom();

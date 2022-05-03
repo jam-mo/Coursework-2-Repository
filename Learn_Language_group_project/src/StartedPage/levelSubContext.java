@@ -11,10 +11,12 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 public class levelSubContext extends readLevel implements ActionListener{
     readLevel levelReadData;
+    
+    SearchPage  Searchbar;
     
     levelContext lc;
     
@@ -51,13 +53,13 @@ public class levelSubContext extends readLevel implements ActionListener{
     
     ArrayList getText = new ArrayList();
     
-    MouseAdapter Map = new MouseAdapter() {
-        
-    };
+    ImageIcon icon = new ImageIcon("go-back.png");
+    ImageIcon icon1 = new ImageIcon("Search.png");
+    ImageIcon icon2 = new ImageIcon("account.png");
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/go-back.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
-    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
+    ImageIcon[] icon3;
+    Image img;
+    Image newImg;
     
     Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -65,7 +67,7 @@ public class levelSubContext extends readLevel implements ActionListener{
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    levelSubContext (String language, String level, String context,String email){
+    levelSubContext (String level, String context,String email){
         
         levels = level;
         contexts = context;
@@ -79,58 +81,81 @@ public class levelSubContext extends readLevel implements ActionListener{
         
         levelReadData = new readLevel();
         
-        levelReadData.subcontext(language, level, context); // change 
+        levelReadData.subcontext(level, context); // change 
+        levelReadData.readImgSubContext( level, context); 
 
         each_sub_panel1 = new JPanel[levelReadData.getSubcontext().size()];
         each_sub_panel1_1 = new JPanel[levelReadData.getSubcontext().size()];
         each_sub_button1_1 = new JButton[levelReadData.getSubcontext().size()];
         
-        for(int i = 0; i < each_sub_panel1.length; i++){
+        icon3 = new ImageIcon[levelReadData.getSubImg().size()];
+        
+        for(int i = 0; i < each_sub_button1_1.length; i++){
             
+            icon3[i] = new ImageIcon(String.valueOf(levelReadData.getSubImg().get(i)));
             
-            each_sub_panel1[i] = new JPanel();
-            each_sub_panel1[i].setBackground(new java.awt.Color(220-i-i-i-i-i,220/2-i-i-i-i,255/2-i-i));
-            each_sub_panel1[i].setLayout(new BorderLayout());
-            
-            each_sub_panel1_1[i] = new JPanel();
-            each_sub_panel1_1[i].setPreferredSize(new Dimension(50,50));
-            each_sub_panel1_1[i].setLayout(new BorderLayout());
-            
-            each_sub_panel1_1[i].setBackground(new java.awt.Color(255, 255, 255));
-            
-            
-            each_sub_panel1[i].add(each_sub_panel1_1[i],BorderLayout.SOUTH);
+            img = icon3[i].getImage();
+            newImg = img.getScaledInstance(380, 250, java.awt.Image.SCALE_SMOOTH);
+            icon3[i] = new ImageIcon(newImg);
             
             each_sub_button1_1[i] = new JButton();
             
-            
-            each_sub_button1_1[i].setText(" "+levelReadData.getSubcontext().get(i));
-            
+            each_sub_button1_1[i].setIcon(icon3[i]);
+            each_sub_button1_1[i].setText("""
+                                          <html>
+                                          <style>
+                                          .bg-text {
+                                            background-color: rgb(0,0,0);
+                                            background-color: rgba(225, 149, 235, 0.2);
+                                            font-weight: bold;
+                                            font-size: 10px;
+                                            border: 3px solid #9E86EB;
+                                            padding: 10px;
+                                            text-align: center;
+                                          }
+                                          </style>
+                                          <div class="bg-text">
+                                          """+levelReadData.getSubcontext().get(i)+"</div></html>");
             
             each_sub_button1_1[i].setForeground(new java.awt.Color(153,102,255));
             each_sub_button1_1[i].setPreferredSize(new Dimension(50,50));
             each_sub_button1_1[i].addActionListener(this);
 //            each_sub_button1_1[i].setBorder(null);
-            each_sub_button1_1[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-            
-            each_sub_panel1_1[i].add(each_sub_button1_1[i],BorderLayout.SOUTH);
+            each_sub_button1_1[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            each_sub_button1_1[i].setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            each_sub_button1_1[i].setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+           
             
         }
         
         sub_panel = new JPanel();
         sub_panel.setBackground(Color.getHSBColor(255, 204, 204));
-        for (JPanel each_sub_panel11 : each_sub_panel1) {
+        for (JButton each_sub_panel11 : each_sub_button1_1) {
             sub_panel.add(each_sub_panel11);
         }
         sub_panel.setLayout(new GridLayout(levelReadData.getContext().size(),1,5,5));
-        sub_panel.setPreferredSize(new Dimension(380,136*levelReadData.getSubcontext().size()));
+        sub_panel.setPreferredSize(new Dimension(380,200*levelReadData.getSubcontext().size()));
         
         JScrollPane scroll = new JScrollPane(sub_panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setBounds(10, 80, 380, 580);
-        scroll.setBorder(null);
-            
+
+        if(levelReadData.getSubcontext().size() == 1 ){
+            scroll.setBounds(10, 80, 380, 210);
+            scroll.setBorder(null);
+        }else if(levelReadData.getSubcontext().size() < 3)
+        {
+            scroll.setBounds(10, 80, 380, 420);
+            scroll.setBorder(null);
+        }
+        else{
+            scroll.setBounds(10, 80, 380, 590);
+            scroll.setBorder(null);
+        }
         
-        each_sub_Button1_1 = new JButton("Return to Content page");
+        
+        img = icon.getImage();
+        newImg = img.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
+        each_sub_Button1_1 = new JButton();
         each_sub_Button1_1.setIcon(icon);
         each_sub_Button1_1.setText("Go back");
         each_sub_Button1_1.setBorder(null);
@@ -140,9 +165,12 @@ public class levelSubContext extends readLevel implements ActionListener{
         each_sub_Button1_1.setIconTextGap(-10);
         each_sub_Button1_1.addActionListener(this);
         
+        img = icon1.getImage();
+        newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        icon1 = new ImageIcon(newImg);
         each_sub_Button1_2 = new JButton();
         each_sub_Button1_2.setIcon(icon1);
-        each_sub_Button1_2.setText("Home");
+        each_sub_Button1_2.setText("Search");
         each_sub_Button1_2.setBorder(null);
         each_sub_Button1_2.setHorizontalTextPosition(JButton.CENTER);
         each_sub_Button1_2.setVerticalTextPosition(JButton.BOTTOM);
@@ -150,7 +178,9 @@ public class levelSubContext extends readLevel implements ActionListener{
         each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
         
-
+        img = icon2.getImage();
+        newImg = img.getScaledInstance(43, 43, java.awt.Image.SCALE_SMOOTH);
+        icon2 = new ImageIcon(newImg);
         each_sub_Button1_3 = new JButton();
         each_sub_Button1_3.setText("Profile");
         each_sub_Button1_3.setIcon(icon2);
@@ -160,6 +190,7 @@ public class levelSubContext extends readLevel implements ActionListener{
         each_sub_Button1_3.setForeground(Color.WHITE);
         each_sub_Button1_3.setIconTextGap(-5);
         each_sub_Button1_3.addActionListener(this);
+        
         
         sub_panel1 = new JPanel();
         sub_panel1.setBackground(new java.awt.Color(120,139,204));
@@ -204,21 +235,39 @@ public class levelSubContext extends readLevel implements ActionListener{
         for(int i = 0; i< levelReadData.getSubcontext().size(); i++)
         {
             if (e.getSource() == each_sub_button1_1[i]) {
-                Comm = new Communication("SPANISH", levels , contexts,(String) levelReadData.getSubcontext().get(i),getemail );
-                frame.dispose();
+                
+//                ReadDatabase ReadSignIn = new ReadDatabase();
+//                String[] responses = {"Person A","Person B"};
+//                int answer = JOptionPane.showOptionDialog(null, "Which language do you prefer ?","asdas", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE ,null,responses,0);
+//                
+//                if(answer == 0){
+//                    
+                    
+                    Comm = new Communication(levels,(String) levelReadData.getSubcontext().get(i),getemail);
+                    frame.dispose();
+//                    
+//                }else if(answer == 1){
+//                    
+//                    String personB = "PERSONB";
+//                    
+//                    Comm = new Communication("SPANISH", levels , contexts,(String) levelReadData.getSubcontext().get(i),getemail ,personB );
+//                    frame.dispose();
+//                    
+//                }
+//                
             }
         }
         
         if(e.getSource() == each_sub_Button1_1 )
         {
-            lc = new levelContext("SPANISH", levels,getemail);
+            lc = new levelContext( levels,getemail);
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_2 )
         {
-            ll2 = new level_language("SPANISH",getemail);
-            frame.dispose();
+           Searchbar  = new SearchPage(getemail);
+           frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_3 )

@@ -11,11 +11,11 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
+
 public class level_language extends readLevel implements ActionListener {
     
-    readLevel levelReadData = new readLevel();
     
     levelContext lc;
     
@@ -43,16 +43,18 @@ public class level_language extends readLevel implements ActionListener {
     JLabel label2;
     
     JLabel label3;
+    JLabel[] label4;
+    JLabel[] label5;
     
     ArrayList getText = new ArrayList();
     
-    MouseAdapter Map = new MouseAdapter() {
-        
-    };
+    ImageIcon[] icon3;
+    Image img;
+    Image newImg;
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/logout.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/home-page.png");
-    ImageIcon icon2 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/account.png");
+    ImageIcon icon = new ImageIcon("home-page.png");
+    ImageIcon icon1 = new ImageIcon("Search.png");
+    ImageIcon icon2 = new ImageIcon("account.png");
     
     Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -60,29 +62,46 @@ public class level_language extends readLevel implements ActionListener {
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    level_language(String language, String email){
+    level_language(String email){
         
         getemail = email;
         
         label = new JLabel();
 
-        label.setText("Choose Level of Spainese");
         label.setForeground(new java.awt.Color(198,102,104));
 
         label.setText("Choose Level of Spainish");
-        label.setForeground(new java.awt.Color(255,51,51));
 
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
         
-        levelReadData.levels(language);
 
-        each_sub_panel1 = new JPanel[levelReadData.getLevelText().size()];
-        each_sub_panel1_1 = new JPanel[levelReadData.getLevelText().size()];
-        each_sub_button1_1 = new JButton[levelReadData.getLevelText().size()];
+        each_sub_panel1 = new JPanel[4];
+        each_sub_panel1_1 = new JPanel[4];
+        each_sub_button1_1 = new JButton[4];
+        
+        label5 = new JLabel[4];
+        label4 = new JLabel[4];
+        icon3 = new ImageIcon[4];
+        
         
         for(int i = 0; i < each_sub_panel1.length; i++){
             
+            icon3[0] = new ImageIcon("1.png");
+            icon3[1] = new ImageIcon("2.png");
+            icon3[2] = new ImageIcon("3.png");
+            icon3[3] = new ImageIcon("4.png");
+//            icon3  = new ImageIcon();
+            img = icon3[i].getImage();
+            newImg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+            icon3[i] = new ImageIcon(newImg);
+            
+            label4[i] = new JLabel();
+            label4[i].setPreferredSize(new Dimension(100,100));
+            label4[i].setIcon(icon3[i]);
+            
+            label5[i] = new JLabel();
+            label5[i].setPreferredSize(new Dimension(135,100));
             
             each_sub_panel1[i] = new JPanel();
             each_sub_panel1[i].setBackground(new java.awt.Color(198+i+22+i,15*(5*i),50*i+(i*10)));
@@ -94,13 +113,21 @@ public class level_language extends readLevel implements ActionListener {
             
             each_sub_panel1_1[i].setBackground(new java.awt.Color(255, 255, 255));
             
-            
+            each_sub_panel1[i].add(label5[i],BorderLayout.WEST);
+            each_sub_panel1[i].add(label4[i],BorderLayout.CENTER);
             each_sub_panel1[i].add(each_sub_panel1_1[i],BorderLayout.SOUTH);
             
             each_sub_button1_1[i] = new JButton();
+
             
+        }
+        
+            each_sub_button1_1[0].setText(" LEVEL_A1");
+            each_sub_button1_1[1].setText(" LEVEL_A2");
+            each_sub_button1_1[2].setText(" LEVEL_B1");
+            each_sub_button1_1[3].setText(" LEVEL_B2");
             
-            each_sub_button1_1[i].setText(" "+levelReadData.getLevelText().get(i));
+        for(int i = 0; i < each_sub_panel1.length; i++){
             
             
             each_sub_button1_1[i].setForeground(new java.awt.Color(153,102,255));
@@ -111,20 +138,27 @@ public class level_language extends readLevel implements ActionListener {
             
             each_sub_panel1_1[i].add(each_sub_button1_1[i],BorderLayout.SOUTH);
             
-        }
-        
+        }        
         sub_panel = new JPanel();
         sub_panel.setBackground(Color.getHSBColor(255, 204, 204));
-        sub_panel.setLayout(new GridLayout(4,1,2,5));
-        sub_panel.setBounds(10, 80, 380, 570);
             
         for (JPanel each_sub_panel11 : each_sub_panel1) {
             sub_panel.add(each_sub_panel11);
         }
         
-        each_sub_Button1_1 = new JButton("Log out");
+        sub_panel.setLayout(new GridLayout(4,1,5,5));
+        sub_panel.setPreferredSize(new Dimension(380,136*4));
+        
+        JScrollPane scroll = new JScrollPane(sub_panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBounds(10, 80, 380, 580);
+        scroll.setBorder(null);
+        
+        img = icon.getImage();
+        newImg = img.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
+        each_sub_Button1_1 = new JButton();
         each_sub_Button1_1.setIcon(icon);
-        each_sub_Button1_1.setText("LogOut");
+        each_sub_Button1_1.setText("Home");
         each_sub_Button1_1.setBorder(null);
         each_sub_Button1_1.setHorizontalTextPosition(JButton.CENTER);
         each_sub_Button1_1.setVerticalTextPosition(JButton.BOTTOM);
@@ -132,9 +166,12 @@ public class level_language extends readLevel implements ActionListener {
         each_sub_Button1_1.setIconTextGap(-10);
         each_sub_Button1_1.addActionListener(this);
         
+        img = icon1.getImage();
+        newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        icon1 = new ImageIcon(newImg);
         each_sub_Button1_2 = new JButton();
         each_sub_Button1_2.setIcon(icon1);
-        each_sub_Button1_2.setText("Home");
+        each_sub_Button1_2.setText("Search");
         each_sub_Button1_2.setBorder(null);
         each_sub_Button1_2.setHorizontalTextPosition(JButton.CENTER);
         each_sub_Button1_2.setVerticalTextPosition(JButton.BOTTOM);
@@ -142,10 +179,11 @@ public class level_language extends readLevel implements ActionListener {
         each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
         
-
+        img = icon2.getImage();
+        newImg = img.getScaledInstance(43, 43, java.awt.Image.SCALE_SMOOTH);
+        icon2 = new ImageIcon(newImg);
         each_sub_Button1_3 = new JButton();
         each_sub_Button1_3.setText("Profile");
-
         each_sub_Button1_3.setIcon(icon2);
         each_sub_Button1_3.setBorder(null);
         each_sub_Button1_3.setHorizontalTextPosition(JButton.CENTER);
@@ -171,10 +209,10 @@ public class level_language extends readLevel implements ActionListener {
         
         Mainpanel.add(label);
         
-        Mainpanel.add(sub_panel,BorderLayout.CENTER);
+        Mainpanel.add(scroll,BorderLayout.CENTER);
         Mainpanel.add(sub_panel1);
         
-        frame = new JFrame("ChooseLevelSpainese");
+        frame = new JFrame("ChooseLevelSpainish");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
@@ -188,20 +226,39 @@ public class level_language extends readLevel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        for(int i = 0; i< levelReadData.getLevelText().size(); i++){
-            if (e.getSource() == each_sub_button1_1[i]) {
-                lc = new levelContext("SPANISH", (String) levelReadData.getLevelText().get(i),getemail);
-                frame.dispose();
-            }
+        if(e.getSource() == each_sub_button1_1[0]){
+            lc = new levelContext("A1",getemail );
+            frame.dispose();
         }
         
-        if(e.getSource() == each_sub_Button1_1 || e.getSource() == each_sub_Button1_2)
+        if(e.getSource() == each_sub_button1_1[1]){
+            lc = new levelContext("A2",getemail );
+            frame.dispose();
+        }
+        
+        if(e.getSource() == each_sub_button1_1[2]){
+            lc = new levelContext("B1",getemail );
+            frame.dispose();
+        }
+        
+        if(e.getSource() == each_sub_button1_1[3]){
+            lc = new levelContext("B2",getemail );
+            frame.dispose();
+        }
+        
+        
+        if(e.getSource() == each_sub_Button1_1 )
         {
             userActivity userAct = new userActivity();
 
             userAct.userLogouttime(getemail);
             SignIn si = new SignIn();
             frame.dispose();
+        }
+        
+        if(e.getSource() == each_sub_Button1_2){
+           SearchPage Searchbar  = new SearchPage(getemail);
+           frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_3 )

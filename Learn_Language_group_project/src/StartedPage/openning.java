@@ -19,7 +19,7 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 public class openning implements ActionListener {
     
