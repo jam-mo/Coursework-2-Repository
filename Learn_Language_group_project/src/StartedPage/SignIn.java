@@ -42,8 +42,8 @@ public class SignIn extends ReadDatabase implements ActionListener{
     
     JComboBox combobox;
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/hidden.png");
+    ImageIcon icon = new ImageIcon("eye.png");
+    ImageIcon icon1 = new ImageIcon("hidden.png");
     ImageIcon icon2 = new ImageIcon("back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
@@ -71,7 +71,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("SignIn");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -129,7 +129,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
             {  
                // you can open a new frame here as
                // i have assumed you have declared "frame" as instance variable
-                Reset_password Rpwd = new Reset_password();
+                
+                if(!(userType.equalsIgnoreCase("student" )|| userType.equalsIgnoreCase("staff"))){
+                    JOptionPane.showMessageDialog(null, "Please select your student or teacher" ,"SELECT",JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    Reset_password rspw=new Reset_password(userType);
+                    frame.dispose();
+                }
 
             }  
         });
@@ -182,6 +188,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         Mainpanel.add(text1);
         
         Mainpanel.add(password);
+        Mainpanel.add(goback_button);
         
         Mainpanel.add(buttonSubmit);
         
@@ -205,6 +212,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == goback_button){
+            
+            openning op = new openning();
+            frame.dispose();
+            
+        }
         
         if(e.getSource()==combobox){
             if(combobox.getSelectedItem().equals("Admin")){
@@ -301,7 +315,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
             
         }
     }
-    
+   
     
     
 }

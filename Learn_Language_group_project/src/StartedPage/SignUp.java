@@ -73,7 +73,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
 
         label = new JLabel();
         label.setText("SignUp");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);

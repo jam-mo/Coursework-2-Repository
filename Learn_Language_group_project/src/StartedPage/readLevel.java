@@ -38,6 +38,7 @@ public class readLevel extends getdata_learning {
     ArrayList ImgSubcontext = new ArrayList();
     ArrayList Subcontext = new ArrayList();
     ArrayList personA = new ArrayList();
+    ArrayList ReadWord = new ArrayList();
     String readContext;
     
     
@@ -500,6 +501,63 @@ public class readLevel extends getdata_learning {
     String readContext(){
         return readContext;
     }
+    
+    protected boolean ReadWord( String level, String subContext) {
+        
+        String readword = """
+                        SELECT SPANISH_WORDS
+                            FROM CONTEXT
+                            WHERE CONTEXT_LEVEL = ? And SUB_CONTEXT=?
+                             """;
+        con = ConnectingDB.connect();
+            try {
+                
+                pstmt = con.prepareStatement(readword);
+
+                pstmt.setString(1, level);
+                pstmt.setString(2, subContext);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                int n = 0;
+
+                while(rs.next()){
+                    int numColumns = rs.getMetaData().getColumnCount();
+                    n++;
+
+                    for (int i = 1; i <= numColumns; i++) {
+                        System.out.print(" something : "+rs.getObject(i));
+                        this.ReadWord.add(rs.getObject(i));
+                    }
+                    System.out.println("");
+                }
+                System.out.println("");
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
+            }finally {
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        System.err.println("SQLException: " + e.getMessage());
+                    }
+                }
+            }
+        
+        return false;
+        
+    }
+    ArrayList readWord(){
+        return ReadWord;
+    }  
     
     
     

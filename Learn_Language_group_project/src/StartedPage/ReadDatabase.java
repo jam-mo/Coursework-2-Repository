@@ -31,7 +31,6 @@ public class ReadDatabase extends PasswordUtils {
     PreparedStatement pstmt1 = null;
     String userEmail;
     
-    
     protected boolean ReadEmail(String userType,String user_email){
         // checks if email doesnt exist,
         String changeEmail = null;
@@ -279,10 +278,25 @@ public class ReadDatabase extends PasswordUtils {
         return re_Value;
     }
     
-    protected boolean ReadSecureQuestion(String value,String text1,String user_email){
+    protected boolean ReadSecureQuestion(String userType,String text1,String user_email){
         
         boolean getvalue = false;
-        String get_Text1 = "SELECT "+value+" from Security_Question where "+value+" = ?  AND user_email = ?;";
+        
+        String changeEmail = null;
+        String user = null;
+        String changeQuestion = null;
+        
+        if(userType.equalsIgnoreCase("Student")){
+            user = "USERS";
+            changeEmail = "emailAddress";
+            changeQuestion = "securityQuestion";
+        }else if(userType.equalsIgnoreCase("Staff")){
+            user = "STAFF";
+            changeEmail = "staffEmailAddress";
+            changeQuestion = "staffSecurityQuestion";
+        }
+        
+        String get_Text1 = "SELECT "+changeQuestion+" from "+user+" where "+changeQuestion+" = ?  AND "+changeEmail+" = ?;";
         con = ConnectingDB.connect();
         try
         {
@@ -292,12 +306,20 @@ public class ReadDatabase extends PasswordUtils {
             pstmt.setString(2, user_email);
             
             ResultSet results_email = pstmt.executeQuery();
-            
-                if(results_email.next()){
+            int n =0;
+            while(results_email.next()){
+                int numColumns = results_email.getMetaData().getColumnCount();
+                n++;
+                
+                for(int i = 1; i <= numColumns; i++){
+                    System.out.println(results_email.getObject(i));
+                    if(results_email.getObject(i).equals(text1)){
                         getvalue = true;
-                }else{
+                    }else{
                         getvalue = false;
+                    }
                 }
+            }
             
             results_email.close();
             
@@ -325,68 +347,43 @@ public class ReadDatabase extends PasswordUtils {
         
     }
     
-    protected boolean ReadSecureEmail(String user_email){
-        
-        boolean getvalue = false;
-        String get_Text1 = "SELECT user_email FROM Security_Question WHERE user_email = ? ;";
-        con = ConnectingDB.connect();
-        try
-        {
-            pstmt = con.prepareStatement(get_Text1);
-            
-            pstmt.setString(1, user_email);
-            
-            ResultSet results_email = pstmt.executeQuery();
-            
-                if(results_email.next()){
-                        getvalue = true;
-                }else{
-                        getvalue = false;
-                }
-            
-            results_email.close();
-            
-        }
-        catch (SQLException ex) {
-            System.out.println("erorr");
-            
-        }finally{
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException ex) {
-                    System.err.println("SQLException: " + ex.getMessage());
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println("SQLException: " + ex.getMessage());
-                }
-            }
-        }
-        return getvalue;
-        
-        
-    }
-    
-    protected boolean changePwd(String user_email, String user_password){
+    protected boolean changePwd(String usertype, String user_email, String user_password){
         
         boolean takeValue = false;
+        
+        String user = null;
+        String encrypted = null;
+        String encryptedPassword = null;
+        String changeEmail = null;
+        String changePassword = null;
+        
+        if(usertype.equalsIgnoreCase("student")){
+            user = "USERS";
+            encrypted = "encrypted";
+            encryptedPassword = "encryptedPassword";
+            changeEmail = "emailAddress";
+            changePassword = "Password";
+        }else if(usertype.equalsIgnoreCase("staff")){
+            user = "STAFF";
+            encrypted = "staffEncrypted";
+            encryptedPassword = "staffEncryptedPassword";
+            changeEmail = "staffEmailAddress";
+            changePassword = "staffPassword";
+        }
         
         String salt1 = PasswordUtils.getSalt(99);
         String mySecurePassword = PasswordUtils.generateSecurePassword(user_password, salt1);
         
-        String get_Text1 = "UPDATE STUDENT_USER SET encryted= ?, encryptedpassword=?  WHERE emailAddress =?;";
+        String get_Text1 = "UPDATE "+user+" SET "+changePassword+"=?, "+encrypted+"= ?, "+encryptedPassword+"=?  WHERE "+changeEmail+" =?;";
         con = ConnectingDB.connect(); 
         
         try{
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(get_Text1);
-            pstmt.setString(1, salt1);
-            pstmt.setString(2, mySecurePassword);
-            pstmt.setString(3, user_email);
+            pstmt.setString(1, user_password);
+            pstmt.setString(2, salt1);
+            pstmt.setString(3, mySecurePassword);
+            pstmt.setString(4, user_email);
 
             pstmt.executeUpdate();
 

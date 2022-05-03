@@ -1,19 +1,20 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package StartedPage;
 
-import Validation_Email_Password.Validation_Email;
-import Validation_Email_Password.Validation_Password;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import Validation_Email_Password.Validation_Email;
+import Validation_Email_Password.Validation_Password;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author kokmeng
  */
-
-public class Reset_password extends ReadDatabase implements ActionListener{
+public class Reset_password extends ReadDatabase implements ActionListener {
     
     JFrame frame;
     JFrame frame1;
@@ -39,11 +40,12 @@ public class Reset_password extends ReadDatabase implements ActionListener{
     JPasswordField text6;
     
     JButton buttonSubmit;
+    JButton goback_button;
     JButton buttonNext;
-    JButton buttonNext1;
-    JButton buttonNext2;
     
     JButton buttonSubmit1;
+    
+    String userType;
     
     JCheckBox checkbox;
     JCheckBox checkbox1;
@@ -56,12 +58,17 @@ public class Reset_password extends ReadDatabase implements ActionListener{
     
     ImageIcon icon = new ImageIcon("eye.png");
     ImageIcon icon1 = new ImageIcon("hidden.png");
+    ImageIcon icon2 = new ImageIcon("back.png");
     
-    Reset_password(){
+    Reset_password(String usertype){
         
-        text2 = new JTextField();
-        text3 = new JTextField();
+        userType = usertype;
         
+        goback_button = new JButton();
+        goback_button.setIcon(icon2);
+        goback_button.setBounds(5, 15, 35, 35);
+        goback_button.setBorder(null);
+        goback_button.addActionListener(this);
         
         label = new JLabel();
         label.setText("Confirm email");
@@ -76,20 +83,20 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         label1.setForeground(new java.awt.Color(102,102,255));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-        label1.setBounds(10, 160, 388, 50);
+        label1.setBounds(10, 290, 388, 50);
         label1.setFont(myFont2);
         
         label3 = new JLabel();
         label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        label3.setBounds(-50, 330, 388, 30);
+        label3.setBounds(-50, 630, 388, 30);
         label3.setText("IF you forget you Email Account | ");
         
         label4 = new JLabel();
         label4.setText("Sign Up");
         label4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        label4.setBounds(100, 330, 388, 30);
+        label4.setBounds(100, 630, 388, 30);
         label4.setForeground(new java.awt.Color(51, 51, 255));
         label4.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e)  
@@ -105,14 +112,8 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         text1 = new JTextField(); 
         text1.setForeground(new java.awt.Color(255,51,51));
         text1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        text1.setBounds(5, 200, 388, 50);
+        text1.setBounds(5, 330, 388, 50);
         text1.setFont(myFont3);
-        
-        text3 = new JTextField(); 
-        text3.setForeground(new java.awt.Color(255,51,51));
-        text3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        text3.setBounds(5, 200, 388, 50);
-        text3.setFont(myFont3);
         
         buttonSubmit = new JButton();
         buttonSubmit.setText("Submit");
@@ -120,7 +121,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         buttonSubmit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         buttonSubmit.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         buttonSubmit.setAlignmentY((float) 0.5);
-        buttonSubmit.setBounds(5, 280, 388, 50);
+        buttonSubmit.setBounds(5, 530, 388, 50);
         buttonSubmit.setFont(myFont4);
         buttonSubmit.addActionListener(this);
         
@@ -130,35 +131,15 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         buttonNext.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         buttonNext.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         buttonNext.setAlignmentY((float) 0.5);
-        buttonNext.setBounds(5, 280, 388, 50);
+        buttonNext.setBounds(5, 530, 388, 50);
         buttonNext.setFont(myFont4);
         buttonNext.addActionListener(this);
         
-        buttonNext1 = new JButton();
-        buttonNext1.setText("Next");
-        buttonNext1.setForeground(new java.awt.Color(153,102,255));
-        buttonNext1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonNext1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonNext1.setAlignmentY((float) 0.5);
-        buttonNext1.setBounds(5, 280, 388, 50);
-        buttonNext1.setFont(myFont4);
-        buttonNext1.addActionListener(this);
-        
-        buttonNext2 = new JButton();
-        buttonNext2.setText("Next");
-        buttonNext2.setForeground(new java.awt.Color(153,102,255));
-        buttonNext2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonNext2.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonNext2.setAlignmentY((float) 0.5);
-        buttonNext2.setBounds(5, 280, 388, 50);
-        buttonNext2.setFont(myFont4);
-        buttonNext2.addActionListener(this);
-        
         Mainpanel = new JPanel();
         Mainpanel.setOpaque(true);
-        Mainpanel.setBackground(new java.awt.Color(238, 238, 237));
+        Mainpanel.setBackground(Color.getHSBColor(255, 204, 204));
         Mainpanel.setLayout(null);
-        Mainpanel.setBounds(0, 0, 400, 400);
+        Mainpanel.setBounds(0, 0, 400, 750);
         
         Mainpanel.add(label);
         Mainpanel.add(label1);
@@ -166,25 +147,36 @@ public class Reset_password extends ReadDatabase implements ActionListener{
         Mainpanel.add(label3);
         Mainpanel.add(label4);
         
+        Mainpanel.add(goback_button);
+        
         Mainpanel.add(text1);
         Mainpanel.add(buttonSubmit);
         
         frame = new JFrame();
         frame.setVisible(true);
-        frame.setSize(400, 400);
+        frame.setSize(400, 750);
         frame.setResizable(false);
         
         frame.add(Mainpanel);
         
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        
     }
     
     public static void main(String[] arg){
-        Reset_password Rpwd = new Reset_password();
+        Reset_password pw = new Reset_password("Student");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == goback_button){
+            
+            SignIn Si = new SignIn();
+            frame.dispose();
+            
+        }
+        
         if(e.getSource() == buttonSubmit){
             String getEmail = text1.getText();
             
@@ -196,19 +188,19 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Your email need to include "+getEmail+"@Example.com");
                 }else{
                     
-                    if(ReadSecureEmail(getEmail)==true){
+                    if(ReadEmail(userType,getEmail)==true){
                         JOptionPane.showMessageDialog(null, "Amazing");
                         
-                            label1.setText("Why are you Gay");
+                            label1.setText("Why are you Gay ?");
                             Mainpanel.remove(text1);
                             Mainpanel.remove(buttonSubmit);
                             
-                            label.setText("Question_1");
+                            label.setText("Secure Question");
                             
                             text2 = new JTextField(); 
                             text2.setForeground(new java.awt.Color(255,51,51));
                             text2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-                            text2.setBounds(5, 200, 388, 50);
+                            text2.setBounds(5, 330, 388, 50);
                             text2.setFont(myFont3);
 
                             Mainpanel.add(text2);
@@ -217,13 +209,12 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                            
                             
                     }else{
-                        JOptionPane.showMessageDialog(null, "Sorry we cant find email :  "+getEmail+" @Example.com on list");
+                        JOptionPane.showMessageDialog(null, "Sorry we cant find email :  "+getEmail+"  on list");
                     }
                 }
         }
-
+        
         if(e.getSource() == buttonNext ){
-            String changeValue = "Question_1";
             String getText = text2.getText();
             String getEmail = text1.getText();
 
@@ -232,83 +223,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Please Answer some question");
             }else{
                 
-                    if(ReadSecureQuestion(changeValue,getText,getEmail)==true){
-                        JOptionPane.showMessageDialog(null, "Amazing");
-                        
-                            label1.setText("Why are you eat my food?");
-                            Mainpanel.remove(text2);
-                            Mainpanel.remove(buttonNext);
-                            
-                            label.setText("Question_2");
-                            
-                            text3 = new JTextField(); 
-                            text3.setForeground(new java.awt.Color(255,51,51));
-                            text3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-                            text3.setBounds(5, 200, 388, 50);
-                            text3.setFont(myFont3);
-
-                            Mainpanel.add(text3);
-                           
-                            Mainpanel.add(buttonNext1);
-                           
-                            
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Sorry it wrong answer");
-                    }
-                
-            }
-
-        }
-       if(e.getSource() == buttonNext1 ){
-            String changeValue = "Question_2";
-            String getText = text3.getText();
-            String getEmail = text1.getText();
-
-            if(getText.equalsIgnoreCase("") || getText.equalsIgnoreCase(null))
-            {
-                JOptionPane.showMessageDialog(null, "Please Answer some question");
-            }else{
-                
-                    if(ReadSecureQuestion(changeValue,getText,getEmail)==true){
-                        JOptionPane.showMessageDialog(null, "Amazing");
-                        
-                            Mainpanel.remove(text3);
-                            Mainpanel.remove(buttonNext1);
-                            
-                            label1.setText("Why fish live without breath?");
-                            
-                            label.setText("Question_3");
-                            
-                            text4 = new JTextField(); 
-                            text4.setForeground(new java.awt.Color(255,51,51));
-                            text4.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-                            text4.setBounds(5, 200, 388, 50);
-                            text4.setFont(myFont3);
-
-                            Mainpanel.add(text4);
-                           
-                            Mainpanel.add(buttonNext2);
-                           
-                            
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Sorry it wrong answer");
-                    }
-                
-            }
-
-        }
-       
-        if(e.getSource() == buttonNext2 ){
-            String changeValue = "Question_3";
-            String getText = text4.getText();
-            String getEmail = text1.getText();
-
-            if(getText.equalsIgnoreCase("") || getText.equalsIgnoreCase(null))
-            {
-                JOptionPane.showMessageDialog(null, "Please Answer some question");
-            }else{
-                
-                    if(ReadSecureQuestion(changeValue,getText,getEmail)==true){
+                if(ReadSecureQuestion(userType,getText,getEmail)==true){
                         JOptionPane.showMessageDialog(null, "Amazing");
                             
                             frame.dispose();
@@ -322,7 +237,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                             label5.setForeground(new java.awt.Color(102,102,255));
                             label5.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                             label5.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-                            label5.setBounds(10, 100, 388, 50);
+                            label5.setBounds(10, 200, 388, 50);
                             label5.setFont(myFont2);
                             
                             label6 = new JLabel();
@@ -330,34 +245,34 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                             label6.setForeground(new java.awt.Color(102,102,255));
                             label6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                             label6.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-                            label6.setBounds(10, 180, 388, 50);
+                            label6.setBounds(10, 300, 388, 50);
                             label6.setFont(myFont2);
                             
                             text5 = new JPasswordField(); 
                             text5.setForeground(new java.awt.Color(255,51,51));
                             text5.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-                            text5.setBounds(5, 140, 388, 50);
+                            text5.setBounds(5, 240, 388, 50);
                             text5.setFont(myFont3);
                             
                             checkbox = new JCheckBox();
                             checkbox.setIcon(icon1);
                             checkbox.setForeground(new java.awt.Color(255,51,51));
                             checkbox.setFocusable(false);
-                            checkbox.setBounds(350, 100, 50, 50);
+                            checkbox.setBounds(350, 200, 50, 50);
                             checkbox.addActionListener(this);
                             checkbox.setFont(myFont5);
                             
                             text6 = new JPasswordField(); 
                             text6.setForeground(new java.awt.Color(255,51,51));
                             text6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-                            text6.setBounds(5, 220, 388, 50);
+                            text6.setBounds(5, 340, 388, 50);
                             text6.setFont(myFont3);
                             
                             checkbox1 = new JCheckBox();
                             checkbox1.setIcon(icon1);
                             checkbox1.setForeground(new java.awt.Color(255,51,51));
                             checkbox1.setFocusable(false);
-                            checkbox1.setBounds(350, 180, 50, 50);
+                            checkbox1.setBounds(350, 300, 50, 50);
                             checkbox1.addActionListener(this);
                             checkbox1.setFont(myFont5);
                             
@@ -367,7 +282,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                             buttonSubmit1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                             buttonSubmit1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
                             buttonSubmit1.setAlignmentY((float) 0.5);
-                            buttonSubmit1.setBounds(5, 280, 388, 50);
+                            buttonSubmit1.setBounds(5, 530, 388, 50);
                             buttonSubmit1.setFont(myFont4);
                             buttonSubmit1.addActionListener(this);
                             
@@ -375,7 +290,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                             Sub_panel.setBackground(new java.awt.Color(238, 238, 247));
                             Sub_panel.setOpaque(true);
                             Sub_panel.setLayout(null);
-                            Sub_panel.setBounds(0, 0, 400, 400);
+                            Sub_panel.setBounds(0, 0, 400, 750);
                             
                             Sub_panel.add(label);
                             
@@ -392,7 +307,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
                             
                             frame1 = new JFrame();
                             frame1.setVisible(true);
-                            frame1.setSize(400, 400);
+                            frame1.setSize(400, 750);
                             frame1.setResizable(false);
                             
                             frame1.add(Sub_panel);
@@ -405,6 +320,7 @@ public class Reset_password extends ReadDatabase implements ActionListener{
             }
 
         }
+        
         
         if(e.getSource()==checkbox)
         {
@@ -471,17 +387,14 @@ public class Reset_password extends ReadDatabase implements ActionListener{
             }
             else
             {
-                if(changePwd(getEmail,getPassword)==false){
-                    JOptionPane.showMessageDialog(null, "Enjoy your New Password");
-                    frame1.dispose();
-                }else{
-                    
-                }
+                changePwd(userType,getEmail,getPassword);
+                JOptionPane.showMessageDialog(null, "Enjoy your New Password");
+                frame1.dispose();
             }
             
         }
         
         
     }
- 
+    
 }

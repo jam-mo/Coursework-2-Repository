@@ -7,7 +7,6 @@ package StartedPage;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -37,6 +36,10 @@ public class Communication extends readLevel implements ActionListener{
     JPanel sub_panel_center_center;
     JButton sub_panel_center_buttonSubmit;
     
+    JButton helpButton;
+    
+    JLabel helpLabel;
+    
     JPanel sub_panel1;
     
     JPanel[] sub_panel_1 = new JPanel[23];
@@ -62,6 +65,7 @@ public class Communication extends readLevel implements ActionListener{
     Font myFont3 = new Font("Rockwell",Font.PLAIN,15);
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
+    Font myFont6 = new Font("Rockwell",Font.PLAIN,13);
 
     Image img;
     Image newImg;
@@ -78,21 +82,30 @@ public class Communication extends readLevel implements ActionListener{
         icon[2] = new ImageIcon("account.png");
         
         label = new JLabel();
+        label.setText(SubContext);
         label.setForeground(new java.awt.Color(198,102,104));
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
         
         levelReadData = new readLevel();
         
-
+        helpButton = new JButton();
+        helpButton.setText("HELP");
+        helpButton.setBounds(310, 5, 50, 40);
+        helpButton.addActionListener(this);
+        
+        helpLabel = new JLabel();
         
         sub_panel_center_Top = new JPanel();
         sub_panel_center_Top.setBackground(Color.WHITE);
         sub_panel_center_Top.setPreferredSize(new Dimension(360, 230));
-        sub_panel_center_Top.setLayout(new BorderLayout());
+        sub_panel_center_Top.setLayout(null);
+        
+        sub_panel_center_Top.add(helpButton);
         
         levelReadData.ReadContext(levels, SubContext);
         levelReadData.ReadtextA( level,SubContext);
+        levelReadData.ReadWord( level,SubContext);
         
         label5 = new JLabel[levelReadData.getPersonA().size()];
         for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
@@ -119,9 +132,6 @@ public class Communication extends readLevel implements ActionListener{
 
         }
             
-        
-        
-        
         sub_panel_center_buttonSubmit = new JButton();
         sub_panel_center_buttonSubmit.setPreferredSize(new Dimension(360, 50));
         sub_panel_center_buttonSubmit.setLayout(new BorderLayout());
@@ -220,6 +230,10 @@ public class Communication extends readLevel implements ActionListener{
         frame.setVisible(true);
         
     }
+    
+    public static void main(String[] arg){
+        Communication c = new Communication("A1", "Takeaway", "kasd");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -239,6 +253,19 @@ public class Communication extends readLevel implements ActionListener{
         if(e.getSource() == each_sub_Button1_1 )
         {
             System.out.println("poo3");
+        }
+        
+        
+        if(e.getSource() == helpButton){
+            
+            helpLabel.setText("<html><h3>Key Vocabulary</h3> "+levelReadData.readWord().get(0)+"</html>");
+            helpLabel.setBounds(0, 0, 360, 430);
+            helpLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+            helpLabel.setFont(myFont6);
+            sub_panel_center_Top.add(helpLabel);
+            
+            JOptionPane.showMessageDialog(null, "Please wait for 2 second to let it run");
+            
         }
         
     }
