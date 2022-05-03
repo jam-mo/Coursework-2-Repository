@@ -233,7 +233,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA1.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA1.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("SPANISH","A1",listA1.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("A1",listA1.getSelectedValue().toString(),email);
                 frame.dispose();
             }
         });
@@ -251,7 +251,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA2.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA2.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("SPANISH","A2",listA2.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("A2",listA2.getSelectedValue().toString(),email);
                 frame.dispose();
             }
         });
@@ -268,7 +268,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB1.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB1.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("SPANISH","B1",listB1.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("B1",listB1.getSelectedValue().toString(),email);
                 frame.dispose();
             }
         });
@@ -285,7 +285,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB2.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB2.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("SPANISH","B2",listB2.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("B2",listB2.getSelectedValue().toString(),email);
                 frame.dispose();
             }
         });
@@ -302,7 +302,8 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA1sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA1sc.getSelectedValue().toString());
-                Communication com= new Communication("Spain", "A1",listA1sc.getSelectedValue().toString(),email );
+                Communication com= new Communication("A1",listA1sc.getSelectedValue().toString(),email );
+                frame.dispose();
             }
         });
         
@@ -318,7 +319,8 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA2sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA2sc.getSelectedValue().toString());
-                Communication com= new Communication("Spain", "A2",listA2sc.getSelectedValue().toString(),email );
+                Communication com= new Communication( "A2",listA2sc.getSelectedValue().toString(),email );
+                frame.dispose();
             }
         });
         
@@ -334,7 +336,8 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB1sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB1sc.getSelectedValue().toString());
-                Communication com= new Communication("Spain", "B1",listB1sc.getSelectedValue().toString(),email );
+                Communication com= new Communication("B1",listB1sc.getSelectedValue().toString(),email );
+                frame.dispose();
             }
         });
         
@@ -350,7 +353,8 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB2sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB2sc.getSelectedValue().toString());
-                Communication com= new Communication("Spain", "B2",listB2sc.getSelectedValue().toString(),email );
+                Communication com= new Communication("B2",listB2sc.getSelectedValue().toString(),email );
+                frame.dispose();
             }
         });
         
@@ -579,7 +583,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
        
         if(e.getSource() == each_sub_Button1_1 )
         {
-            ll = new level_language("Spainsh",getemail);
+            ll = new level_language(getemail);
             frame.dispose();
         }
         

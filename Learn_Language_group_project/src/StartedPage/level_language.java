@@ -62,7 +62,7 @@ public class level_language extends readLevel implements ActionListener {
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    level_language(String language, String email){
+    level_language(String email){
         
         getemail = email;
         
@@ -227,31 +227,31 @@ public class level_language extends readLevel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == each_sub_button1_1[0]){
-            lc = new levelContext("Spainsh","A1",getemail );
+            lc = new levelContext("A1",getemail );
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_button1_1[1]){
-            lc = new levelContext("Spainsh","A2",getemail );
+            lc = new levelContext("A2",getemail );
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_button1_1[2]){
-            lc = new levelContext("Spainsh","B1",getemail );
+            lc = new levelContext("B1",getemail );
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_button1_1[3]){
-            lc = new levelContext("Spainsh","B2",getemail );
+            lc = new levelContext("B2",getemail );
             frame.dispose();
         }
         
         
         if(e.getSource() == each_sub_Button1_1 )
         {
-//            userActivity userAct = new userActivity();
-//
-//            userAct.userLogouttime(getemail);
+            userActivity userAct = new userActivity();
+
+            userAct.userLogouttime(getemail);
             SignIn si = new SignIn();
             frame.dispose();
         }

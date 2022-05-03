@@ -67,7 +67,7 @@ public class levelSubContext extends readLevel implements ActionListener{
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    levelSubContext (String language, String level, String context,String email){
+    levelSubContext (String level, String context,String email){
         
         levels = level;
         contexts = context;
@@ -81,8 +81,8 @@ public class levelSubContext extends readLevel implements ActionListener{
         
         levelReadData = new readLevel();
         
-        levelReadData.subcontext(language, level, context); // change 
-        levelReadData.readImgSubContext(language, level, context); 
+        levelReadData.subcontext(level, context); // change 
+        levelReadData.readImgSubContext( level, context); 
 
         each_sub_panel1 = new JPanel[levelReadData.getSubcontext().size()];
         each_sub_panel1_1 = new JPanel[levelReadData.getSubcontext().size()];
@@ -243,7 +243,7 @@ public class levelSubContext extends readLevel implements ActionListener{
 //                if(answer == 0){
 //                    
                     
-                    Comm = new Communication("SPANISH", levels,(String) levelReadData.getSubcontext().get(i),getemail);
+                    Comm = new Communication(levels,(String) levelReadData.getSubcontext().get(i),getemail);
                     frame.dispose();
 //                    
 //                }else if(answer == 1){
@@ -260,7 +260,7 @@ public class levelSubContext extends readLevel implements ActionListener{
         
         if(e.getSource() == each_sub_Button1_1 )
         {
-            lc = new levelContext("SPANISH", levels,getemail);
+            lc = new levelContext( levels,getemail);
             frame.dispose();
         }
         

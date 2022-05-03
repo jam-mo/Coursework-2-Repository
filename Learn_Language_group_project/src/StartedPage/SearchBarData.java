@@ -6,7 +6,7 @@ package StartedPage;
 
 import java.sql.*;
 import java.util.*;
-import jdbacApi.*;
+import javadb.*;
 
 /**
  *
@@ -29,7 +29,7 @@ public class SearchBarData {
                 ArrayList<String> CopySubValueB2 = new ArrayList<>();
                 
     protected boolean ReadContextA1(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String contextA1 = """
                         SELECT CONTEXT_TITLE
                                               FROM CONTEXT
@@ -77,7 +77,7 @@ public class SearchBarData {
     } 
     
     protected boolean ReadContextA2(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String contextA2 = """
                         SELECT CONTEXT_TITLE
                                               FROM CONTEXT
@@ -123,7 +123,7 @@ public class SearchBarData {
     } 
     
     protected boolean ReadContextB1(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String contextB1 = """
                         SELECT CONTEXT_TITLE
                                               FROM CONTEXT
@@ -168,7 +168,7 @@ public class SearchBarData {
     } 
     
     protected boolean ReadContextB2(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String contextB2 = """
                         SELECT CONTEXT_TITLE
                                               FROM CONTEXT
@@ -215,7 +215,7 @@ public class SearchBarData {
     
     
     protected boolean ReadSubContextA1(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String SubcontextA1 = """
                         SELECT SUB_CONTEXT
                                               FROM CONTEXT
@@ -261,7 +261,7 @@ public class SearchBarData {
     }   
     
     protected boolean ReadSubContextA2(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String SubcontextA2 = """
                         SELECT SUB_CONTEXT
                                               FROM CONTEXT
@@ -307,7 +307,7 @@ public class SearchBarData {
     }      
     
     protected boolean ReadSubContextB1(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String SubcontextB1 = """
                         SELECT SUB_CONTEXT
                                               FROM CONTEXT
@@ -353,7 +353,7 @@ public class SearchBarData {
     } 
     
     protected boolean ReadSubContextB2(){
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         String SubcontextB2 = """
                         SELECT SUB_CONTEXT
                                               FROM CONTEXT

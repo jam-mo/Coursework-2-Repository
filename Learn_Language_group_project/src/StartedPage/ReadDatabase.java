@@ -5,10 +5,18 @@
 package StartedPage;
 
 import Validation_Email_Password.PasswordUtils;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 import javax.swing.*;
-import jdbacApi.*;
+import javadb.*;
+import static javadb.Javadb.generateId;
 
 /**
  *
@@ -23,11 +31,12 @@ public class ReadDatabase extends PasswordUtils {
     PreparedStatement pstmt1 = null;
     String userEmail;
     
+    
     protected boolean ReadEmail(String user_email){
-        
+        // checks if email doesnt exist,
         boolean getvalue = false;
-        String get_Email = "SELECT emailAddress FROM STUDENT_USER WHERE emailAddress = ? ;";
-        con = connectDB.getConnection();
+        String get_Email = "SELECT emailAddress FROM USERS WHERE emailAddress = ? ;";
+        con = ConnectingDB.connect();
         try
         {
             pstmt = con.prepareStatement(get_Email);
@@ -67,107 +76,27 @@ public class ReadDatabase extends PasswordUtils {
         }
         return getvalue;
     }
-
-    protected void InputSignUp(String firstName, String lastName, String user_email, String password , String Question1,String Question2, String Question3 )
-    {
-        String get_Email = "SELECT emailAddress FROM STUDENT_USER WHERE emailAddress = ? ;";
-        con = connectDB.getConnection();
-        
-        Random random = new Random();
-        
-        String returnValue = null;
-        
-        int num = random.nextInt(1000)+1;
-        
-        String num1 = Integer.toString(num);
-        
-        String salt1 = PasswordUtils.getSalt(99);
-        String mySecurePassword = PasswordUtils.generateSecurePassword(password, salt1);
-
-
+    protected boolean ReadUserName(String user_name){
+        // checks if email doesnt exist,
+        boolean unValue = false;
+        String get_userName = "SELECT username FROM USERS WHERE username = ? ;"; // figure out what this is
+        con = ConnectingDB.connect();
         try
         {
-            pstmt = con.prepareStatement(get_Email);
+            pstmt = con.prepareStatement(get_userName);
             
-            pstmt.setString(1, user_email);
+            pstmt.setString(1, user_name);
             
-            ResultSet results_email = pstmt.executeQuery();
+            ResultSet results_uName = pstmt.executeQuery();
             int n =0;
             
-            while(results_email.next()){
-                int numColumns = results_email.getMetaData().getColumnCount();
-                n++;
-                
-                for(int i = 1; i <= numColumns ; i++){
-                    System.out.println("User_Email : " +  results_email.getObject(i));
-                    returnValue = (String)results_email.getObject(i);
+                if(results_uName.next()){
+                        unValue = true;
+                }else{
+                        unValue = false;
                 }
-                System.out.println("");
-                
-            }
-            if(returnValue == null || "".equals(returnValue)){
-                
-                        String get_Student_ID = "INSERT INTO `STUDENT_USER`(`user_ID`,`username`,`firstName`, `lastName`, `emailAddress`,`encryted`,`encryptedpassword`) VALUES (?,?,?,?,?,?,?);" ;
-                        String get_Question = "INSERT INTO `Security_Question`(`Question_1`,`Question_2`,`Question_3`,`user_email`) VALUES (?,?,?,?);";
-                        try
-                        {
-                            con.setAutoCommit(false);
-                            pstmt = con.prepareStatement(get_Student_ID);
-                            pstmt.setString(1, num1);
-                            pstmt.setString(2, firstName+"."+lastName);
-                            pstmt.setString(3, firstName);
-                            pstmt.setString(4, lastName);
-                            pstmt.setString(5, user_email);
-                            pstmt.setString(6, salt1);
-                            pstmt.setString(7, mySecurePassword);
-                            
-                            pstmt1 = con.prepareStatement(get_Question);
-                            pstmt1.setString(1, Question1);
-                            pstmt1.setString(2, Question2);
-                            pstmt1.setString(3, Question3);
-                            pstmt1.setString(4, user_email);
-                            
-                            pstmt.executeUpdate();
-                            pstmt1.executeUpdate();
-                            
-                            pstmt.close();
-                            pstmt1.close();
-                            
-                            con.commit();
-                        }
-                        catch (SQLException ex)
-                        {
-                            System.err.println("SQLException: " + ex.getMessage());
-                        } 
-                        finally 
-                        {
-                            if (pstmt != null) 
-                            {
-                                try 
-                                {
-                                    pstmt.close();
-                                }
-                                catch(SQLException ex) 
-                                {
-                                    System.err.println("SQLException: " + ex.getMessage());
-                                }
-                            }
-                            if (con != null) {
-                                try {
-                                    con.close();
-                                }
-                                catch(SQLException ex) 
-                                {
-                                    System.err.println("SQLException: " + ex.getMessage());
-                                }
-                            }
-                        }
-                
-            }else{
-                System.out.println("Account Already created");
-            }
             
-            results_email.close();
+            results_uName.close();
             
         }
         catch (SQLException ex) {
@@ -189,14 +118,20 @@ public class ReadDatabase extends PasswordUtils {
                 }
             }
         }
+        return unValue;
     }
+// USERNAME NEEDS ADDING, NEEDS READUSERNAME ALSO
+  
 
     
-    protected boolean ReadSignIn(String userType, String userEmail, String userPassword) throws SQLException{
+    protected boolean ReadSignIn(String userType,  String userEmail, String userPassword) throws SQLException{
+        
+        // should also pass in userType here, 
+        // USERNAME NEEDS ADDING
         String TypeOfUser = userType;
         String changeEmail = null;
         String encryptedpassword = null;
-        String encryted = null;
+        String encrypted = null;
         
         String providedPassword = userPassword;
         
@@ -204,20 +139,22 @@ public class ReadDatabase extends PasswordUtils {
         boolean re_Value = false;
         
         if(TypeOfUser.equalsIgnoreCase("staff")){
-            
+            // checks if student says user or staff
             TypeOfUser = "STAFF";
-            changeEmail = "staffemailAddress";
-            encryptedpassword = "staffPassword";
+            changeEmail = "staffEmailAddress";
+            encryptedpassword = "staffEncryptedPassword";
+            encrypted = "staffEncrypted";
             
         }else if(TypeOfUser.equalsIgnoreCase("student")){
-            TypeOfUser = "STUDENT_USER";
+            TypeOfUser = "USERS";
             changeEmail = "emailAddress";
-            encryptedpassword = "encryptedpassword";
+            encryptedpassword = "encryptedPassword";
+            encrypted = "encrypted";
         }
         System.out.println(TypeOfUser+changeEmail+encryptedpassword);
         
         try {
-            con = connectDB.getConnection();
+            con = ConnectingDB.connect();
             stmt = con.createStatement();
             
 
@@ -236,8 +173,8 @@ public class ReadDatabase extends PasswordUtils {
             }
             else
             {
-                String sql = "SELECT `encryptedpassword` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
-                String sql1 = "SELECT `encryted` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
+                String sql = "SELECT `"+encryptedpassword+"` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
+                String sql1 = "SELECT `"+encrypted+"` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
                 
                 pstmt = con.prepareStatement(sql);
                 pstmt1 = con.prepareStatement(sql1);
@@ -306,7 +243,7 @@ public class ReadDatabase extends PasswordUtils {
         
         boolean getvalue = false;
         String get_Text1 = "SELECT "+value+" from Security_Question where "+value+" = ?  AND user_email = ?;";
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         try
         {
             pstmt = con.prepareStatement(get_Text1);
@@ -352,7 +289,7 @@ public class ReadDatabase extends PasswordUtils {
         
         boolean getvalue = false;
         String get_Text1 = "SELECT user_email FROM Security_Question WHERE user_email = ? ;";
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         try
         {
             pstmt = con.prepareStatement(get_Text1);
@@ -402,7 +339,7 @@ public class ReadDatabase extends PasswordUtils {
         String mySecurePassword = PasswordUtils.generateSecurePassword(user_password, salt1);
         
         String get_Text1 = "UPDATE STUDENT_USER SET encryted= ?, encryptedpassword=?  WHERE emailAddress =?;";
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect(); 
         
         try{
             con.setAutoCommit(false);
@@ -437,4 +374,285 @@ public class ReadDatabase extends PasswordUtils {
         }       
         return takeValue;
     }
+    
+    public static void insertStaff(String UserName, String firstName, String lastName, String email, String password, String securityQuestion) {
+        Connection con = ConnectingDB.connect();
+        PreparedStatement ps = null; 
+        int staff_ID = generateId();
+        
+        String salt1 = PasswordUtils.getSalt(50);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(password, salt1);
+        
+        // also, call other method
+        
+        // first, check table row, and if num doesnt exist, add in staff ID 
+        
+        // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
+        try {
+            String staffSql = """
+                                        INSERT INTO STAFF (
+                                                    staff_ID,
+                                                    staffUsername,
+                                                    staffFirstName,
+                                                    staffLastName,
+                                                    staffEmailAddress,
+                                                    staffPassword,
+                                                    staffEncrypted,
+                                                    staffEncryptedPassword,
+                                                    staffSecurityQuestion
+                                                )
+                                                VALUES (
+                                                            ?,?,?,?,?,?,?,?,?
+                                                );
+                              """;
+            ps = con.prepareStatement(staffSql);
+            // do a random check - ex have a method thaint staff_ID = generateId();t checks if number is in db
+            ps.setInt(1, staff_ID);
+            ps.setString(2, UserName);
+            ps.setString(3, firstName);
+            ps.setString(4, lastName);
+            ps.setString(5, email);
+            ps.setString(6, password);
+            ps.setString(7, salt1);
+            ps.setString(8, mySecurePassword);
+            ps.setString(9, securityQuestion);
+            ps.execute();
+            System.out.println("Data has been added");
+            insertStaffUser(UserName, firstName, lastName, email, password,securityQuestion, staff_ID);
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        // call 
+        // check nums in 
+    }
+
+    public static void insertUser(String userName, String firstName, String lastName, String emailAddress, String Password,String securityQuestion) {
+        Connection con = ConnectingDB.connect();
+        PreparedStatement psUser = null;
+        int languages = generateId();
+        insertLanguages(languages);
+        int user_ID = generateId();
+        insertUserActivity(user_ID);
+        
+        String salt1 = PasswordUtils.getSalt(50);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(Password, salt1);
+        
+        // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
+        try {
+            String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password , encrypted, encryptedPassword,securityQuestion, languages_ID) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            psUser = con.prepareStatement(userSql);
+            // do a random check - ex have a method that checks if number is in db
+            psUser.setInt(1, user_ID);
+            psUser.setString(2, userName);
+            psUser.setString(3, firstName);
+            psUser.setString(4, lastName);
+            psUser.setString(5, emailAddress);
+            psUser.setString(6, Password);
+            psUser.setString(7, salt1);
+            psUser.setString(8, mySecurePassword);
+            psUser.setString(9, securityQuestion);
+            psUser.setInt(10, languages);
+            psUser.execute();
+            System.out.println("Data has been added to User Table");
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+    }
+///////////////////////////////////////////////////////////////////////////////////////////
+    public static void insertStaffUser(String userName, String firstName, String lastName, String emailAddress, String Password,String securityQuestion, int staff_ID) {
+        Connection con = ConnectingDB.connect();
+        PreparedStatement psStaff = null;
+        ; // should I have a seperate userID for staff, or the userID and staffID be the same
+        // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
+        try {
+            String staffSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion, staff_ID) VALUES(?,?,?,?,?,?,?,?)";
+            psStaff = con.prepareStatement(staffSql);
+            // do a random check - ex have a method that checks if number is in db
+            psStaff.setInt(1, staff_ID);
+            psStaff.setString(2, userName);
+            psStaff.setString(3, firstName);
+            psStaff.setString(4, lastName);
+            psStaff.setString(5, emailAddress);
+            psStaff.setString(6, Password);
+            psStaff.setString(7, securityQuestion);
+            psStaff.setInt(8, staff_ID);
+            psStaff.execute();
+            System.out.println("Data has been added to users");
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        // check nums in 
+    }
+
+    public static void insertLevels(int languages_ID) {
+        // what am i going to do for this one? // get lanugages_ID 
+        Connection con = ConnectingDB.connect();
+        PreparedStatement psLevel = null;
+        int language = languages_ID;
+        int difficulty_ID = generateId();
+        String levelA1 = "/22";  // these will update in each individuals id - ex the language_id matching the user_id will update these when the user finished one of these.
+        String levelA2 = "/25";
+        String levelB1 = "/11";
+        String levelB2 = "/4";
+        // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
+        try {
+            String levelSql = "INSERT INTO LEVELS(difficulty_ID, level_A1, level_A2, level_B1, level_B2, languages_ID) VALUES(?,?,?,?,?,?)";
+            psLevel = con.prepareStatement(levelSql);
+            // do a random check - ex have a method that checks if number is in db
+            psLevel.setInt(1, difficulty_ID);
+            psLevel.setString(2, levelA1);
+            psLevel.setString(3, levelA2);
+            psLevel.setString(4, levelB1);
+            psLevel.setString(5, levelB2);
+            psLevel.setInt(6, language);
+            //psLevel.setString(6, languages_ID);    
+            //insertContext(difficulty_ID);
+            psLevel.execute();
+            System.out.println("Data has been added to Level table");
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+        public static void insertLanguages(int languages_ID) {
+
+	// fetch userID, or when creating user, call this function, and pass a parameted for languages_id
+         Connection con = ConnectingDB.connect();
+         PreparedStatement psLanguage = null;
+         //int languages_ID = generateId();
+         String spanish = "Yes";
+         insertLevels(languages_ID);
+         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
+         try{
+             String languageSql = "INSERT INTO LANGUAGES(languages_ID, spanish) VALUES(?,?)";
+             psLanguage = con.prepareStatement(languageSql);
+             // do a random check - ex have a method that checks if number is in db
+             psLanguage.setInt(1,languages_ID);
+             psLanguage.setString(2, spanish);
+             
+             psLanguage.execute();
+             insertLevels(languages_ID);
+             System.out.println("Data has been added");
+         } catch(SQLException e) {
+             System.out.println(e.toString());
+         }
+    }
+
+    public static void insertContext() {
+        Connection con = ConnectingDB.connect();
+        Statement stmt = null;
+        PreparedStatement ps = null;
+        Integer contextID = 0;
+        String level = "";
+        String Context = "";
+        String Subcontext = "";
+        String Conversation = "";
+        String Spanish = "";
+
+        try {
+
+            FileInputStream fstream = new FileInputStream("./workbook.csv");
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+            ArrayList list = new ArrayList();
+
+            int count = 0;
+            while ((strLine = br.readLine()) != null) {
+
+                list.add(strLine);
+                count++;
+            }
+            list.remove(0); // removes title, etc
+            Iterator itr;
+            for (itr = list.iterator(); itr.hasNext();) { // loops through
+                String str = itr.next().toString();
+                String[] splitSt = str.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);//str.split(",");// 
+               // System.out.println(splitSt.length); // https://www.baeldung.com/java-split-string-commas
+                // checks string length
+                if (splitSt[0].equals("A1") || splitSt[0].equals("A2") || splitSt[0].equals("B1") || splitSt[0].equals("B2")) { // splitSt[0].length() != 0 or splitSt[0].isEmpty()
+                    if (!level.isEmpty()) {
+                    String contextSql = "INSERT INTO CONTEXT(CONTEXT_ID,CONTEXT_TITLE, CONTEXT_LEVEL, SUB_CONTEXT, CONVERSATION_PROMPT, SPANISH_WORDS) VALUES(?,?,?,?,?,?)";
+                    ps = con.prepareStatement(contextSql);
+                    
+                    ps.setInt(1, contextID);
+                    ps.setString(2, Context);
+                    ps.setString(3, level);
+                    ps.setString(4, Subcontext);
+                    ps.setString(5, Conversation);
+                    ps.setString(6, Spanish);
+                    ps.execute();
+                    }
+                    
+                    contextID = generateId();
+                    level = splitSt[0];
+                    Context = splitSt[1];
+                    Subcontext = splitSt[2];
+                    Conversation = splitSt[3] + ": " + splitSt[4];
+                    Spanish = splitSt[5];
+//                     
+                }
+                else {
+                    Conversation += "\n" +  splitSt[3] + ": " + splitSt[4];
+                    if (splitSt[5] == null || splitSt[5].isEmpty()) {
+                        Spanish += "," + splitSt[5];
+                    }
+                    //Spanish += "," + splitSt[5];
+
+                }
+                   
+                //System.out.println(Arrays.toString(splitSt));
+            }
+
+//
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+       
+    }
+
+      public static void insertUserActivity(int user_ID){
+          Connection con = ConnectingDB.connect();
+         PreparedStatement psUserActivity = null;
+         // add user_ID in here, call from user_ID
+         int userActivity_ID = generateId();
+         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
+         try{
+             String userActivitySql = "INSERT INTO USERACTIVITY(userActivity_ID, user_ID) VALUES(?,?)";
+             psUserActivity = con.prepareStatement(userActivitySql);
+             // do a random check - ex have a method that checks if number is in db
+             psUserActivity.setInt(1, userActivity_ID);
+             psUserActivity.setInt(2, user_ID);
+            
+             psUserActivity.execute();
+             System.out.println("Data has been added to user activity table");
+         } catch(SQLException e) {
+             System.out.println(e.toString());
+         }
+     }
+      
+      
+      public static Integer generateId() { // https://tutorial.eyehunts.com/java/random-number-generator-java-range-5-digit/ source
+          Random rand = new Random();
+          int number = rand.nextInt(100000);
+          String formatNum =  String.format("%05d",number);
+          int returnNum = Integer.parseInt(formatNum);
+          return returnNum;
+      }
+      
+
+    
+    
+    public static void main(String[] arg){
+        ReadDatabase rd = new ReadDatabase();
+        insertContext(); // fills db up
+       // insertLanguages(generateId()); // generates languageID & username
+        // need to call insertLevels and insertLanguages here also
+        // send languages_id to user
+        
+        
+        
+    }
+
 }

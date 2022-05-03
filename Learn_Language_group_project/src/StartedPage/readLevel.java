@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbacApi.connectDB;
+import javadb.ConnectingDB;
 
 /**
  *
@@ -42,16 +42,16 @@ public class readLevel extends getdata_learning {
     
     
     @Override
-    protected boolean levels(String languageSelect) {
+    protected boolean levels() {
         
         String readlevel = "SELECT  l.Language_level FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  WHERE languages =?;";
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
         try {
             pstmt = con.prepareStatement(readlevel);
             
-            pstmt.setString(1, languageSelect);
+//            pstmt.setString(1, languageSelect);
             
             ResultSet rs = pstmt.executeQuery();
             
@@ -96,7 +96,7 @@ public class readLevel extends getdata_learning {
     }
 
     @Override
-    protected boolean context(String languageSelect, String level) {
+    protected boolean context(String level) {
        boolean getvalue = false; 
         String readContext = """
                         SELECT CONTEXT_TITLE
@@ -106,7 +106,7 @@ public class readLevel extends getdata_learning {
                              """;
         
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
             try {
                 pstmt = con.prepareStatement(readContext);
@@ -157,7 +157,7 @@ public class readLevel extends getdata_learning {
     }
     
     @Override
-    protected boolean subcontext(String languageSelect, String level,String context) {
+    protected boolean subcontext( String level,String context) {
         
         String readSubContext = """
                         SELECT SUB_CONTEXT
@@ -165,7 +165,7 @@ public class readLevel extends getdata_learning {
                                 WHERE CONTEXT_LEVEL = ? And CONTEXT_TITLE = ?
                                 """;
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
             try {
                 
                 pstmt = con.prepareStatement(readSubContext);
@@ -217,14 +217,14 @@ public class readLevel extends getdata_learning {
     }
 
     @Override
-    protected boolean ReadtextA(String languageSelect, String level, String subContext) {
+    protected boolean ReadtextA( String level, String subContext) {
         
         String readPersonA = """
                         SELECT CONVERSATION_PROMPT
                             FROM CONTEXT
                             WHERE CONTEXT_LEVEL = ? And SUB_CONTEXT=?
                              """;
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
             try {
                 
                 pstmt = con.prepareStatement(readPersonA);
@@ -274,7 +274,7 @@ public class readLevel extends getdata_learning {
         return personA;
     }  
     
-    protected boolean readImgContext(String languageSelect, String level){
+    protected boolean readImgContext(String level){
         String readContext = """
                         SELECT CONTEXT_TITLE_img
                             FROM CONTEXT
@@ -282,7 +282,7 @@ public class readLevel extends getdata_learning {
                              """;
         
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
             try {
                 pstmt = con.prepareStatement(readContext);
@@ -330,7 +330,7 @@ public class readLevel extends getdata_learning {
         return Imgcontext;
     }
     
-    protected boolean readImgSubContext(String languageSelect, String level, String context){
+    protected boolean readImgSubContext(String level, String context){
         String readContext = """
                         SELECT SUB_CONTEXT_img
                             FROM CONTEXT
@@ -338,7 +338,7 @@ public class readLevel extends getdata_learning {
                              """;
         
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
             try {
                 pstmt = con.prepareStatement(readContext);
@@ -388,17 +388,17 @@ public class readLevel extends getdata_learning {
     }
     
     
-    protected boolean readImgLevel(String languageSelect){
+    protected boolean readImgLevel(){
         
         String getLevel = "SELECT  l.level_img FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  WHERE languages =?;";
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
         
         try {
             
             pstmt = con.prepareStatement(getLevel);
             
-            pstmt.setString(1, languageSelect);
+//            pstmt.setString(1, languageSelect);
             
             ResultSet rs = pstmt.executeQuery();
             
@@ -443,7 +443,7 @@ public class readLevel extends getdata_learning {
     }
     
     @Override
-    protected boolean ReadContext(String languageSelect, String level, String Context) {
+    protected boolean ReadContext( String level, String Context) {
         
         String readPersonB = """
                             SELECT CONTEXT_TITLE
@@ -451,7 +451,7 @@ public class readLevel extends getdata_learning {
                                WHERE CONTEXT_LEVEL=? AND SUB_CONTEXT =? ;
                              """;
         
-        con = connectDB.getConnection();
+        con = ConnectingDB.connect();
             try {
                 
                 pstmt = con.prepareStatement(readPersonB);

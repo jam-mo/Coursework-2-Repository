@@ -73,7 +73,7 @@ public class levelContext extends readLevel implements ActionListener {
     
     Font myFont6 = new Font("Lucida Grande",Font.BOLD,16);
     
-    levelContext(String language, String level, String email){
+    levelContext(String level, String email){
         
         getemail = email;
         
@@ -85,8 +85,8 @@ public class levelContext extends readLevel implements ActionListener {
         
         levelReadData = new readLevel();
         
-        levelReadData.context(language,level); 
-        levelReadData.readImgContext(language,level); 
+        levelReadData.context(level); 
+        levelReadData.readImgContext(level); 
         
         levels = level;
 
@@ -217,7 +217,7 @@ public class levelContext extends readLevel implements ActionListener {
     }
     
     public static void  main(String[] arg){
-        levelContext le = new levelContext("SPANISH","A1","asdas");
+        levelContext le = new levelContext("A1","asdas");
     }
 
     @Override
@@ -227,14 +227,14 @@ public class levelContext extends readLevel implements ActionListener {
         {
             
             if (e.getSource() == each_sub_button1_1[i]) {
-                lsc = new levelSubContext("SPANISH", levels , (String) levelReadData.getContext().get(i), getemail);
+                lsc = new levelSubContext(levels , (String) levelReadData.getContext().get(i), getemail);
                 frame.dispose();
             }
         }
         
         if(e.getSource() == each_sub_Button1_1)
         {
-            ll2 = new level_language("SPANISH", getemail);
+            ll2 = new level_language(getemail);
             frame.dispose();
         }
         

@@ -67,12 +67,8 @@ public class Communication extends readLevel implements ActionListener{
     Image newImg;
     ImageIcon[] icon = new ImageIcon[3];
     
-    public static void main(String[] arg){
-        Communication c = new Communication("asdas","A1","Social Media","");
-    }
     
-    
-    Communication(String language, String level,String SubContext,String email){
+    Communication(String level,String SubContext,String email){
         
         levels = level;
         getemail = email;
@@ -95,8 +91,8 @@ public class Communication extends readLevel implements ActionListener{
         sub_panel_center_Top.setPreferredSize(new Dimension(360, 230));
         sub_panel_center_Top.setLayout(new BorderLayout());
         
-        levelReadData.ReadContext("SPAINESh", levels, SubContext);
-        levelReadData.ReadtextA(language, level,SubContext);
+        levelReadData.ReadContext(levels, SubContext);
+        levelReadData.ReadtextA( level,SubContext);
         
         label5 = new JLabel[levelReadData.getPersonA().size()];
         for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
@@ -231,7 +227,7 @@ public class Communication extends readLevel implements ActionListener{
         
         if(e.getSource() == each_sub_Button1_1)
         {
-            lsc = new levelSubContext("SPANISH", levels, levelReadData.readContext(),getemail);
+            lsc = new levelSubContext(levels, levelReadData.readContext(),getemail);
             frame.dispose();
         }
         
