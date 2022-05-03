@@ -371,37 +371,38 @@ public class SignUp extends ReadDatabase implements ActionListener{
                                                     At least 1 number
                                                     """);
             }
-            else if(userType.equalsIgnoreCase("Staff"))
+            else if(!(userType.equalsIgnoreCase("staff") || userType.equalsIgnoreCase("Student")))
             {
-                 ReadDatabase ReadSignUp = new ReadDatabase();
-                    
-                    if(ReadSignUp.ReadUserName(userName)==false){
-                        JOptionPane.showMessageDialog(null, "Username already exists");
-                    }else if(ReadSignUp.ReadUserName(userName)==false){
-                        JOptionPane.showMessageDialog(null, "Email Already exists");
-                    }else{
+                
+                JOptionPane.showMessageDialog(null, "Please select if you are a student or teacher");
+                
+
+            }
+            else
+            {
+                
+                ReadDatabase ReadSignIn = new ReadDatabase();
+               
+                
+                System.out.println(ReadUserName(userType,userName));
+                System.out.println(ReadEmail(userType,email));
+                
+//                
+                if(ReadUserName(userType,userName)==true){
+                    JOptionPane.showMessageDialog(null, "Username already exists");
+                }else if(ReadEmail(userType,email)==true){
+                    JOptionPane.showMessageDialog(null, "Email Already exists");
+                }else{
                         JOptionPane.showMessageDialog(null, "Amazing");
                         Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
                         frame1.dispose();
-                    }
+                }
                     
-            }else if(userType.equalsIgnoreCase("Student")){
-                ReadDatabase ReadSignUp = new ReadDatabase();
-                    if(ReadSignUp.ReadUserName(userName)==false || ReadSignUp.ReadEmail(email)==false){
-                        JOptionPane.showMessageDialog(null, "Amazing");
-//                        Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
-//                        frame1.dispose();
-                        // pass usertype here
+               
 
-                    }else if(ReadSignUp.ReadUserName(userName)==true){
-                        JOptionPane.showMessageDialog(null, "Username already exists");
-                    } else if(ReadSignUp.ReadEmail(email)==true){
-                        JOptionPane.showMessageDialog(null, "Email Already exists");
-                    }
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Please select your student or teacher" ,"SELECT",JOptionPane.INFORMATION_MESSAGE);
             }
+                
+            
             
         }
     

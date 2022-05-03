@@ -32,10 +32,21 @@ public class ReadDatabase extends PasswordUtils {
     String userEmail;
     
     
-    protected boolean ReadEmail(String user_email){
+    protected boolean ReadEmail(String userType,String user_email){
         // checks if email doesnt exist,
+        String changeEmail = null;
+        String user = null;
         boolean getvalue = false;
-        String get_Email = "SELECT emailAddress FROM USERS WHERE emailAddress = ? ;";
+        
+        if(userType.equalsIgnoreCase("Student")){
+            user = "USERS";
+            changeEmail = "emailAddress";
+        }else if(userType.equalsIgnoreCase("Staff")){
+            user = "STAFF";
+            changeEmail = "staffEmailAddress";
+        }
+        
+        String get_Email = "SELECT "+changeEmail+" FROM "+user+" WHERE "+changeEmail+" = ? ;";
         con = ConnectingDB.connect();
         try
         {
@@ -46,11 +57,19 @@ public class ReadDatabase extends PasswordUtils {
             ResultSet results_email = pstmt.executeQuery();
             int n =0;
             
-                if(results_email.next()){
+            while(results_email.next()){
+                int numColumns = results_email.getMetaData().getColumnCount();
+                n++;
+                
+                for(int i = 1; i <= numColumns; i++){
+                    System.out.println(results_email.getObject(i));
+                    if(results_email.getObject(i).equals(user_email)){
                         getvalue = true;
-                }else{
+                    }else{
                         getvalue = false;
+                    }
                 }
+            }
             
             results_email.close();
             
@@ -76,10 +95,23 @@ public class ReadDatabase extends PasswordUtils {
         }
         return getvalue;
     }
-    protected boolean ReadUserName(String user_name){
+    protected boolean ReadUserName(String userType,String user_name){
         // checks if email doesnt exist,
         boolean unValue = false;
-        String get_userName = "SELECT username FROM USERS WHERE username = ? ;"; // figure out what this is
+        
+        String changeUserName = null;
+        String user = null;
+        
+        if(userType.equalsIgnoreCase("Student")){
+            user = "USERS";
+            changeUserName = "username";
+        }else if(userType.equalsIgnoreCase("Staff")){
+            user = "STAFF";
+            changeUserName = "staffUsername";
+        }
+        System.out.println("Print Type :" +" user " + user + " userName "+ changeUserName);
+        
+        String get_userName = "SELECT "+changeUserName+" FROM "+user+" WHERE "+changeUserName+" = ? ;"; // figure out what this is
         con = ConnectingDB.connect();
         try
         {
@@ -89,12 +121,20 @@ public class ReadDatabase extends PasswordUtils {
             
             ResultSet results_uName = pstmt.executeQuery();
             int n =0;
-            
-                if(results_uName.next()){
+
+            while(results_uName.next()){
+                int numColumns = results_uName.getMetaData().getColumnCount();
+                n++;
+                
+                for(int i = 1; i <= numColumns; i++){
+                    System.out.println(results_uName.getObject(i));
+                    if(results_uName.getObject(i).equals(user_name)){
                         unValue = true;
-                }else{
+                    }else{
                         unValue = false;
+                    }
                 }
+            }
             
             results_uName.close();
             

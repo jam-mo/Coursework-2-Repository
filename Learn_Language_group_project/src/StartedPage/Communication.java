@@ -99,7 +99,7 @@ public class Communication extends readLevel implements ActionListener{
 
             label5[i] = new JLabel();
             label5[i].setText("<html>"+(String) levelReadData.getPersonA().get(i)+"</html>");
-            label5[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
+//            label5[i].setVerticalAlignment(javax.swing.SwingConstants.TOP);
             label5[i].setIconTextGap(100);
             label5[i].setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
             label5[i].setForeground(new java.awt.Color(174,3,49));
