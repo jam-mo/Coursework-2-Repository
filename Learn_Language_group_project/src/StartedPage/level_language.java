@@ -14,7 +14,7 @@ import javax.swing.*;
  * @author kokmeng / christopher
  */
 
-public class level_language extends readLevel implements ActionListener {
+public class level_language extends readLevel implements ActionListener { 
     
     
     levelContext lc;
@@ -26,7 +26,7 @@ public class level_language extends readLevel implements ActionListener {
     JPanel sub_panel;
     JPanel sub_panel1;
 
-    String getemail;
+    int getid;
     
     JPanel[] each_sub_panel1;
     
@@ -62,9 +62,9 @@ public class level_language extends readLevel implements ActionListener {
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    level_language(String email){
+    level_language(int id){
         
-        getemail = email;
+        getid = id;
         
         label = new JLabel();
 
@@ -86,7 +86,7 @@ public class level_language extends readLevel implements ActionListener {
         
         
         for(int i = 0; i < each_sub_panel1.length; i++){
-            
+            // Image for each ImageIcon level A1 - B2
             icon3[0] = new ImageIcon("1.png");
             icon3[1] = new ImageIcon("2.png");
             icon3[2] = new ImageIcon("3.png");
@@ -132,7 +132,7 @@ public class level_language extends readLevel implements ActionListener {
             
             each_sub_button1_1[i].setForeground(new java.awt.Color(153,102,255));
             each_sub_button1_1[i].setPreferredSize(new Dimension(50,50));
-            each_sub_button1_1[i].addActionListener(this);
+            each_sub_button1_1[i].addActionListener(this); //when clicked it will lead to specific pages selected
 //            each_sub_button1_1[i].setBorder(null);
             each_sub_button1_1[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
             
@@ -149,11 +149,13 @@ public class level_language extends readLevel implements ActionListener {
         sub_panel.setLayout(new GridLayout(4,1,5,5));
         sub_panel.setPreferredSize(new Dimension(380,136*4));
         
+        //when scrollpane is used, it will allow all levels to be scrolled if it doesn't fit into view
+        
         JScrollPane scroll = new JScrollPane(sub_panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(10, 80, 380, 580);
         scroll.setBorder(null);
         
-        img = icon.getImage();
+        img = icon.getImage(); //retrieve image and set style
         newImg = img.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
         icon = new ImageIcon(newImg);
         each_sub_Button1_1 = new JButton();
@@ -166,7 +168,7 @@ public class level_language extends readLevel implements ActionListener {
         each_sub_Button1_1.setIconTextGap(-10);
         each_sub_Button1_1.addActionListener(this);
         
-        img = icon1.getImage();
+        img = icon1.getImage(); //retrieve image and set style
         newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         icon1 = new ImageIcon(newImg);
         each_sub_Button1_2 = new JButton();
@@ -179,7 +181,7 @@ public class level_language extends readLevel implements ActionListener {
         each_sub_Button1_2.setIconTextGap(-10);
         each_sub_Button1_2.addActionListener(this);
         
-        img = icon2.getImage();
+        img = icon2.getImage(); //retrieve image and set style
         newImg = img.getScaledInstance(43, 43, java.awt.Image.SCALE_SMOOTH);
         icon2 = new ImageIcon(newImg);
         each_sub_Button1_3 = new JButton();
@@ -226,44 +228,47 @@ public class level_language extends readLevel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        //button to lead to specific page selected A1-B2
+        
         if(e.getSource() == each_sub_button1_1[0]){
-            lc = new levelContext("A1",getemail );
+            lc = new levelContext("A1",getid );
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_button1_1[1]){
-            lc = new levelContext("A2",getemail );
+            lc = new levelContext("A2",getid );
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_button1_1[2]){
-            lc = new levelContext("B1",getemail );
+            lc = new levelContext("B1",getid );
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_button1_1[3]){
-            lc = new levelContext("B2",getemail );
+            lc = new levelContext("B2",getid );
             frame.dispose();
         }
         
-        
+        //button to ( Go back to sign in with userActivity logout ) 
         if(e.getSource() == each_sub_Button1_1 )
         {
             userActivity userAct = new userActivity();
 
-            userAct.userLogouttime(getemail);
+            userAct.userLogouttime(getid);
             SignIn si = new SignIn();
             frame.dispose();
         }
-        
+        //button to ( going to Search page )
         if(e.getSource() == each_sub_Button1_2){
-           SearchPage Searchbar  = new SearchPage(getemail);
+           SearchPage Searchbar  = new SearchPage(getid);
            frame.dispose();
         }
-        
+        //button to ( going to profile page )
         if(e.getSource() == each_sub_Button1_3 )
         {
-            profilePage Pg= new profilePage(getemail);
+            ProfilePage Pp= new ProfilePage(getid);
+            Pp.setVisible(true);
             frame.dispose();
         }
         

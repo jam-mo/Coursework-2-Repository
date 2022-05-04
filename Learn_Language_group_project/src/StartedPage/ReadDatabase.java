@@ -11,16 +11,14 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import javax.swing.*;
 import javadb.*;
-import static javadb.Javadb.generateId;
 
 /**
  *
- * @author kokmeng
+ * @author  Jamie 
  */
 
 public class ReadDatabase extends PasswordUtils {
@@ -30,6 +28,8 @@ public class ReadDatabase extends PasswordUtils {
     PreparedStatement pstmt = null;
     PreparedStatement pstmt1 = null;
     String userEmail;
+    
+   int getId;
     
     protected boolean ReadEmail(String userType,String user_email){
         // checks if email doesnt exist,
@@ -691,5 +691,67 @@ public class ReadDatabase extends PasswordUtils {
         
         
     }
+    
+    protected boolean get_id(String email){
+        
+        
+        String reademail = """
+                            SELECT user_ID
+                             FROM USERS
+                             WHERE emailAddress = ?
+                           ;
+                           """;
+        
+            con = ConnectingDB.connect();
+            try
+            {
+                pstmt = con.prepareStatement(reademail);
+
+                pstmt.setString(1, email);
+
+                ResultSet results_email = pstmt.executeQuery();
+                int n =0;
+                while(results_email.next()){
+                    int numColumns = results_email.getMetaData().getColumnCount();
+                    n++;
+
+                    for (int i = 1; i <= numColumns; i++) {
+                        System.out.print(" something : "+results_email.getObject(i));
+                        getId = (int)results_email.getObject(i);
+                    }
+                }
+
+                results_email.close();
+
+            }
+            catch (SQLException ex) {
+                System.out.println("erorr");
+
+            }finally{
+                if (pstmt != null) {
+                    try {
+                        pstmt.close();
+                    } catch (SQLException ex) {
+                        System.err.println("SQLException: " + ex.getMessage());
+                    }
+                }
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        System.err.println("SQLException: " + ex.getMessage());
+                    }
+                }
+            }
+        
+        
+        
+        return false;
+    }
+    
+    int getId(){
+        return getId;
+    }
+    
 
 }

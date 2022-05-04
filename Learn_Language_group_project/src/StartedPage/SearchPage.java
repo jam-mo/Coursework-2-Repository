@@ -4,13 +4,12 @@ package StartedPage;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-import javax.sound.sampled.DataLine;
 import javax.swing.*;
 import javax.swing.event.*;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author kokmeng / christopher / jamie
  */
 
 public class SearchPage extends SearchBarData implements ActionListener{
@@ -29,7 +28,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
     
     JPanel SubpaneCenter;
     
-    private String getemail;
+    private int getid;
     
 //    JLabel labelContainer;
     
@@ -85,9 +84,9 @@ public class SearchPage extends SearchBarData implements ActionListener{
     
     Font myFont1 = new Font("Rockwell",Font.BOLD,25);
     
-    SearchPage(String email){
+    SearchPage(int  id){
         
-        this.getemail = email;
+        this.getid = id;
         
         sbd = new SearchBarData();
         
@@ -132,12 +131,12 @@ public class SearchPage extends SearchBarData implements ActionListener{
         }
         
         label = new JLabel();
-        label.setText("SEARCH");
+        label.setText("SEARCH"); // search label 
         label.setForeground(new java.awt.Color(198,102,104));
         label.setBounds(10, 35, 388, 50);
         label.setFont(myFont1);
         
-        SearchText = new JTextField();
+        SearchText = new JTextField(); // text input 
         SearchText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
         SearchText.setBounds(4, 4, 315, 42);
         
@@ -145,7 +144,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         newImg = img.getScaledInstance(35, 35, java.awt.Image.SCALE_SMOOTH);
         icon3 = new ImageIcon(newImg);
         
-        SearchButton = new JButton();
+        SearchButton = new JButton(); // button when text input  have value 
         SearchButton.setIcon(icon3);
         SearchButton.setBorder(null);
         SearchButton.setBounds(317, 0, 75, 50);
@@ -218,6 +217,8 @@ public class SearchPage extends SearchBarData implements ActionListener{
 
 //                       labelContainer[i].setText("");
 //                   }
+
+        // looking for matches from database
         
         listA1 = new JList<>();
 //        listA1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.gray), "Level_A1_Context", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -233,7 +234,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA1.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA1.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("A1",listA1.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("A1",listA1.getSelectedValue().toString(),getid);
                 frame.dispose();
             }
         });
@@ -251,7 +252,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA2.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA2.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("A2",listA2.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("A2",listA2.getSelectedValue().toString(),getid);
                 frame.dispose();
             }
         });
@@ -268,7 +269,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB1.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB1.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("B1",listB1.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("B1",listB1.getSelectedValue().toString(),getid);
                 frame.dispose();
             }
         });
@@ -285,7 +286,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB2.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB2.getSelectedValue().toString());
-                levelSubContext lsc = new levelSubContext("B2",listB2.getSelectedValue().toString(),email);
+                levelSubContext lsc = new levelSubContext("B2",listB2.getSelectedValue().toString(),getid);
                 frame.dispose();
             }
         });
@@ -302,7 +303,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA1sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA1sc.getSelectedValue().toString());
-                Communication com= new Communication("A1",listA1sc.getSelectedValue().toString(),email );
+                Communication com= new Communication("A1",listA1sc.getSelectedValue().toString(),getid );
                 frame.dispose();
             }
         });
@@ -319,7 +320,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listA2sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listA2sc.getSelectedValue().toString());
-                Communication com= new Communication( "A2",listA2sc.getSelectedValue().toString(),email );
+                Communication com= new Communication( "A2",listA2sc.getSelectedValue().toString(),getid );
                 frame.dispose();
             }
         });
@@ -336,7 +337,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB1sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB1sc.getSelectedValue().toString());
-                Communication com= new Communication("B1",listB1sc.getSelectedValue().toString(),email );
+                Communication com= new Communication("B1",listB1sc.getSelectedValue().toString(),getid );
                 frame.dispose();
             }
         });
@@ -353,7 +354,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
         listB2sc.addListSelectionListener((ListSelectionEvent e) -> {
             if(!e.getValueIsAdjusting()){
                 System.out.println(listB2sc.getSelectedValue().toString());
-                Communication com= new Communication("B2",listB2sc.getSelectedValue().toString(),email );
+                Communication com= new Communication("B2",listB2sc.getSelectedValue().toString(),getid );
                 frame.dispose();
             }
         });
@@ -396,24 +397,12 @@ public class SearchPage extends SearchBarData implements ActionListener{
         
         frame.setVisible(true);
     }
-    
-    public static void main(String[] arg){
-        SearchPage sp = new SearchPage("email");
-        
-        System.out.println(sp.list1);
-        System.out.println(sp.list2);
-        System.out.println(sp.list3);
-        System.out.println(sp.list4);
-        System.out.println(sp.list5);
-        System.out.println(sp.list6);
-        System.out.println(sp.list7);
-        System.out.println(sp.list8);
-        
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == SearchButton ){
+           
+           //when the textfield is cleared and searched all information from the database will be retrieved again rather than it being empty
            
            StealValue.clear();
            
@@ -428,7 +417,7 @@ public class SearchPage extends SearchBarData implements ActionListener{
            
            SubpaneCenter.removeAll();
 //           
-           for(String element : list1){
+           for(String element : list1){ 
                
                 if (element.toLowerCase().contains(SearchText.getText().toLowerCase().trim())){
                     System.out.println("LEVEL A1 : "+ element);
@@ -583,19 +572,20 @@ public class SearchPage extends SearchBarData implements ActionListener{
        
         if(e.getSource() == each_sub_Button1_1 )
         {
-            ll = new level_language(getemail);
+            ll = new level_language(getid);
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_2 )
         {
-           SearchPage Searchbar  = new SearchPage(getemail);
+           SearchPage Searchbar  = new SearchPage(getid);
            frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_3 )
         {
-            openning opening= new openning();
+            ProfilePage Pp= new ProfilePage(getid);
+            Pp.setVisible(true);
             frame.dispose();
         }
        

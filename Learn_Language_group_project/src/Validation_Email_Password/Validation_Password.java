@@ -9,12 +9,12 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng /Abdullahi
  */
 
 public class Validation_Password {
     
-    public static boolean validationPassword(String password){
+    public static boolean validationPassword(String password){ //checks for password length, must be equal or more than 8 characters
         if(password.length() > 7){
             
             if(checkPass(password)){
@@ -29,7 +29,7 @@ public class Validation_Password {
         }
     }
     
-    private static boolean checkPass(String password){
+    private static boolean checkPass(String password){ //checks for at least 1 capital letter, 1 lower case letter and 1 number
         
         boolean hasNum = false;
         boolean hasCap = false;
@@ -55,7 +55,7 @@ public class Validation_Password {
     }
     
     public static boolean isSpace(String password)
-    {
+    { // check for no Space
         
         for(char currentChar : password.toCharArray()){
             
@@ -70,7 +70,7 @@ public class Validation_Password {
     }
     
     public static boolean hasSpecialCharactor(String password)
-    {
+    {  //checks for SpecialCharactor
         
         Pattern sPattern = Pattern.compile("[a-zA-Z0-9]*");
         Matcher sMatcher = sPattern.matcher(password);

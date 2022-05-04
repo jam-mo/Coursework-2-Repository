@@ -10,7 +10,7 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author kokmeng / christopher / Jamie
  */
 public class Communication extends readLevel implements ActionListener{
     
@@ -27,7 +27,7 @@ public class Communication extends readLevel implements ActionListener{
     levelSubContext lsc;
     
     String levels;
-    String getemail;
+    int getid;
     
     JPanel[] sub_panel_center_1 = new JPanel[3];
     JPanel[] sub_panel_center_1_1 = new JPanel[3];
@@ -70,10 +70,10 @@ public class Communication extends readLevel implements ActionListener{
     ImageIcon[] icon = new ImageIcon[3];
     
     
-    Communication(String level,String SubContext,String email){
+    Communication(String level,String SubContext,int id){
         
         levels = level;
-        getemail = email;
+        getid = id;
         
         icon[0] = new ImageIcon("go-back.png");
         icon[1] = new ImageIcon("Search.png");
@@ -101,9 +101,9 @@ public class Communication extends readLevel implements ActionListener{
         
         sub_panel_center_Top.add(helpButton);
         
-        levelReadData.ReadContext(levels, SubContext);
-        levelReadData.ReadtextA( level,SubContext);
-        levelReadData.ReadWord( level,SubContext);
+        levelReadData.ReadContext(levels, SubContext); //recalls the subcontent and context data from the database
+        levelReadData.ReadtextA( level,SubContext); //calls for the conversation from the database
+        levelReadData.ReadWord( level,SubContext); //calls for the spanish translation from the database
         
         label5 = new JLabel[levelReadData.getPersonA().size()];
         for (int i = 0 ; i < levelReadData.getPersonA().size() ; i++) {
@@ -229,9 +229,7 @@ public class Communication extends readLevel implements ActionListener{
         
     }
     
-    public static void main(String[] arg){
-        Communication c = new Communication("A1", "Takeaway", "kasd");
-    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -239,23 +237,26 @@ public class Communication extends readLevel implements ActionListener{
         
         if(e.getSource() == each_sub_Button1_1)
         {
-            lsc = new levelSubContext(levels, levelReadData.readContext(),getemail);
+            lsc = new levelSubContext(levels, levelReadData.readContext(),getid);
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_2){
-           Searchbar  = new SearchPage(getemail);
+           Searchbar  = new SearchPage(getid);
            frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_3 )
         {
-            profilePage Pg= new profilePage(getemail);
+            ProfilePage Pp= new ProfilePage(getid);
+            Pp.setVisible(true);
             frame.dispose();
         }
         
         
         if(e.getSource() == helpButton){
+            
+            //popout message indicating the system could be slow
             
             helpLabel.setText("<html><h3>Key Vocabulary</h3> "+levelReadData.readWord().get(0)+"</html>");
             helpLabel.setBounds(0, 0, 360, 430);
@@ -263,7 +264,7 @@ public class Communication extends readLevel implements ActionListener{
             helpLabel.setFont(myFont6);
             sub_panel_center_Top.add(helpLabel);
             
-            JOptionPane.showMessageDialog(null, "Please wait for 2 second to let it run");
+            JOptionPane.showMessageDialog(null, "The system may be quite slow at the moment, please wait...");
             
         }
         

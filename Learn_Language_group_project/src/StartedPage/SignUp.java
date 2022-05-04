@@ -15,7 +15,7 @@ import javax.swing.*;
  * @author kokmeng
  */
 
-public class SignUp extends ReadDatabase implements ActionListener{
+public class SignUp extends ReadDatabase implements ActionListener{ // initiated     String userName; String firstName; String lastName; String password; String email;
     
     String userName;
     String firstName;
@@ -52,9 +52,13 @@ public class SignUp extends ReadDatabase implements ActionListener{
     JComboBox combobox;
     
     String userType;
+    
+    //initiated calling for specific images with variables
 
     ImageIcon icon = new ImageIcon("eye.png");
     ImageIcon icon1 = new ImageIcon("hidden.png");
+    
+    //initiated calling for specific FONT with variables
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -63,6 +67,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
     SignUp(){
+        
         String[] valueType = {"Select","Student","Staff"};
         
         combobox = new JComboBox(valueType);
@@ -72,7 +77,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
         userType = (String) combobox.getSelectedItem();
 
         label = new JLabel();
-        label.setText("SignUp");
+        label.setText("SignUp"); // Sign Up label 
         label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -317,6 +322,9 @@ public class SignUp extends ReadDatabase implements ActionListener{
         
         if(e.getSource()==buttonSubmit){
             
+            // all the values inserted will be added will be added to the database once the next button is pressed
+            //password requirements require 8 characters, 1 capital letter, 1 lower case, 1 number, at least 1 special character and no spaces
+            
             userName = text0.getText();
             firstName = text1.getText();
             lastName = text2.getText();
@@ -353,7 +361,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
             {
                 JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com");
             }
-            else if(Validation_Password.isSpace(password)==false)
+            else if(Validation_Password.isSpace(password)==false)  
             {
                 JOptionPane.showMessageDialog(null, "Please dont use space in password");
             }
@@ -361,7 +369,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
             {
                 JOptionPane.showMessageDialog(null, "Your password require Special Charactor");
             }
-            else if(Validation_Password.validationPassword(password)==false)
+            else if(Validation_Password.validationPassword(password)==false) 
             {
                 JOptionPane.showMessageDialog(null, """
                                                     Your password need to include
@@ -388,12 +396,12 @@ public class SignUp extends ReadDatabase implements ActionListener{
                 System.out.println(ReadEmail(userType,email));
                 
 //                
-                if(ReadUserName(userType,userName)==true){
+                if(ReadUserName(userType,userName)==true){ // checks database if the same user name is already inserted which is not allowed and lets user username already exist
                     JOptionPane.showMessageDialog(null, "Username already exists");
-                }else if(ReadEmail(userType,email)==true){
+                }else if(ReadEmail(userType,email)==true){ // checks database if the same email is already inserted which is not allowed and lets user email already exist
                     JOptionPane.showMessageDialog(null, "Email Already exists");
                 }else{
-                        JOptionPane.showMessageDialog(null, "Amazing");
+                        JOptionPane.showMessageDialog(null, "Information has been inserted, we will now lead you to the security question page!");
                         Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
                         frame1.dispose();
                 }

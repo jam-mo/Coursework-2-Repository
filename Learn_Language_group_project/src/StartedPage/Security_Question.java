@@ -11,7 +11,7 @@ import javadb.*;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / jamie
  */
 public class Security_Question extends ReadDatabase implements ActionListener {
 
@@ -68,7 +68,7 @@ public class Security_Question extends ReadDatabase implements ActionListener {
         label.setFont(myFont1);
 
         label1 = new JLabel();
-        label1.setText("Quetion 1: Are you single?");
+        label1.setText("Quetion : What is your mother's maiden name?");
         label1.setForeground(new java.awt.Color(102, 102, 255));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -79,7 +79,7 @@ public class Security_Question extends ReadDatabase implements ActionListener {
         label4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label4.setBounds(-50, 650, 388, 30);
-        label4.setText("if you want to change something click |");
+        label4.setText("Would you like to change Sign Up ? |");
 
         label5 = new JLabel();
         label5.setText("Go Back");
@@ -159,13 +159,13 @@ public class Security_Question extends ReadDatabase implements ActionListener {
             this.qestionText1 = text1.getText();
 
             if (qestionText1.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please Answer Question 1");
+                JOptionPane.showMessageDialog(null, "Please Answer Question ");
             } else {
 
-                JOptionPane.showMessageDialog(null, "Wow amazing answer You account is create");
+                JOptionPane.showMessageDialog(null, "Your account is created");
 
                 ReadDatabase Input = new ReadDatabase();
-                // userType - checks if == admin or user
+                // userType - checks if == admin or user 
                 if (userType.equals("Staff")) {
                     Input.insertStaff(userName, firstname, lastname, emailAddress, password, qestionText1) ;    
                 } else if (userType.equals("Student")) {

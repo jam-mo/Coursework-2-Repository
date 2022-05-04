@@ -6,23 +6,24 @@ package StartedPage;
 
 import java.sql.*;
 import javadb.ConnectingDB;
-import javax.swing.*;
 
 /**
  *
  * @author kokmeng
  */
-public class userActivity {
+public class userActivity { 
     
     Connection con;
     Statement stmt = null;
     PreparedStatement pstmt = null;
     
-    protected boolean userLogintime(String getEmail){
+    Timestamp time ; // initiated timestamp
+    
+    protected boolean userLogintime(int getEmail){ // set timestamp on database for login
         
         String inputloginTime = """
                                 INSERT INTO USERACTIVITY (
-                                                             userEmail,
+                                                             user_ID,
                                                              loginTime
                                                          )
                                                          VALUES (
@@ -41,7 +42,7 @@ public class userActivity {
             
             pstmt = con.prepareStatement(inputloginTime);
             
-            pstmt.setString(1, getEmail);
+            pstmt.setInt(1, getEmail);
             pstmt.setTimestamp(2, date);
             
             pstmt.executeUpdate();
@@ -74,11 +75,11 @@ public class userActivity {
         return false;
     }
     
-    protected boolean userLogouttime(String getEmail){
+    protected boolean userLogouttime(int getEmail){ // set timestamp on database for logout
         
         String inputlogOutTime = """
                                  INSERT INTO USERACTIVITY (
-                                                              userEmail,
+                                                              user_ID,
                                                               logoutTime
                                                           )
                                                           VALUES (
@@ -98,7 +99,7 @@ public class userActivity {
             
             pstmt = con.prepareStatement(inputlogOutTime);
             
-            pstmt.setString(1, getEmail);
+            pstmt.setInt(1, getEmail);
             pstmt.setTimestamp(2, date);
             
             pstmt.executeUpdate();
@@ -126,6 +127,20 @@ public class userActivity {
                 }
             }
         }
+        
+        return false;
+    }
+    
+    protected boolean getLoginTime(){
+        
+        String getLoginTime = "";
+        
+        return false;
+    }
+    
+    protected boolean getLogOutTime(){
+        
+        
         
         return false;
     }

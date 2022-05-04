@@ -15,8 +15,8 @@ public class Validation_Email {
    
     public static boolean validationEmail(String input){
         
-        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z{2,6}$]";
-        Pattern emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z{2,6}$]"; 
+        Pattern emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);  //no matter which case sensitive for email it will deliver with correct case sensitive
         Matcher matcher = emailPat.matcher(input);
         return matcher.find();
     

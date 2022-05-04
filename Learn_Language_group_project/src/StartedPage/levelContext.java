@@ -11,10 +11,10 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author christopher
  */
 
-public class levelContext extends readLevel implements ActionListener {
+public class levelContext extends readLevel implements ActionListener { // Reading from database ( readLevel )
     
     readLevel levelReadData;
     
@@ -32,7 +32,7 @@ public class levelContext extends readLevel implements ActionListener {
     JPanel sub_panel1;
 
     String levels;
-    String getemail;
+    int getid;
     
     JPanel[] each_sub_panel1;
     
@@ -73,10 +73,10 @@ public class levelContext extends readLevel implements ActionListener {
     
     Font myFont6 = new Font("Lucida Grande",Font.BOLD,16);
     
-    levelContext(String level, String email){
+    levelContext(String level, int id){
         
-        getemail = email;
-        System.out.println(getemail);
+        getid = id;
+        System.out.println(id);
         
         label = new JLabel();
         label.setText("LEVEL_"+level);
@@ -111,10 +111,10 @@ public class levelContext extends readLevel implements ActionListener {
                                           <html>
                                           <style>
                                           .bg-text {
-                                            background-color: rgb(250, 235, 239);
-                                            background-color: rgba(250, 235, 239, 0.7);
+                                            background-color: rgb(0, 0, 0);
+                                            background-color: rgba(0, 0, 0, 0.6);
                                             font-weight: bold;
-                                            color:#D9514EFF;
+                                            color:#ffffff;
                                             border: 3px solid #D9514EFF;
                                             padding: 10px;
                                             text-align: center;
@@ -217,9 +217,9 @@ public class levelContext extends readLevel implements ActionListener {
         
     }
     
-    public static void  main(String[] arg){
-        levelContext le = new levelContext("A1","asdas");
-    }
+//    public static void  main(String[] arg){
+//        levelContext le = new levelContext("A1","asdas");
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -228,26 +228,27 @@ public class levelContext extends readLevel implements ActionListener {
         {
             
             if (e.getSource() == each_sub_button1_1[i]) {
-                lsc = new levelSubContext(levels , (String) levelReadData.getContext().get(i), getemail);
+                lsc = new levelSubContext(levels , (String) levelReadData.getContext().get(i), getid);
                 frame.dispose();
             }
         }
         
         if(e.getSource() == each_sub_Button1_1)
         {
-            ll2 = new level_language(getemail);
+            ll2 = new level_language(getid);
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_2)
         {
-           Searchbar  = new SearchPage(getemail);
+           Searchbar  = new SearchPage(getid);
            frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_3 )
         {
-            profilePage Pg= new profilePage(getemail);
+            ProfilePage Pp= new ProfilePage(getid);
+            Pp.setVisible(true);
             frame.dispose();
         }
         

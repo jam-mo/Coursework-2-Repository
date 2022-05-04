@@ -12,9 +12,9 @@ import Validation_Email_Password.Validation_Password;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / Abdullahi
  */
-public class Reset_password extends ReadDatabase implements ActionListener {
+public class Reset_password extends ReadDatabase implements ActionListener { //Reset_password reads from the database ReadDatabase
     
     JFrame frame;
     JFrame frame1;
@@ -60,7 +60,7 @@ public class Reset_password extends ReadDatabase implements ActionListener {
     ImageIcon icon1 = new ImageIcon("hidden.png");
     ImageIcon icon2 = new ImageIcon("back.png");
     
-    Reset_password(String usertype){
+    Reset_password(String usertype){ 
         
         userType = usertype;
         
@@ -163,8 +163,8 @@ public class Reset_password extends ReadDatabase implements ActionListener {
         
     }
     
-    public static void main(String[] arg){
-        Reset_password pw = new Reset_password("Student");
+    public static void main(String[] arg){  
+        Reset_password pw = new Reset_password("Student"); // create new Object reset_Password
     }
 
     @Override
@@ -178,6 +178,7 @@ public class Reset_password extends ReadDatabase implements ActionListener {
         }
         
         if(e.getSource() == buttonSubmit){
+            //whilst the user enters the email, it checks if the email exist in the email
             String getEmail = text1.getText();
             
                 if(getEmail.equalsIgnoreCase("") || getEmail.equalsIgnoreCase(null))
@@ -188,10 +189,10 @@ public class Reset_password extends ReadDatabase implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Your email need to include "+getEmail+"@Example.com");
                 }else{
                     
-                    if(ReadEmail(userType,getEmail)==true){
-                        JOptionPane.showMessageDialog(null, "Amazing");
+                    if(ReadEmail(userType,getEmail)==true){ 
+                        JOptionPane.showMessageDialog(null, "The email address inserted exists, you will now be directed to submit your Security Question");
                         
-                            label1.setText("Why are you Gay ?");
+                            label1.setText("What is your mother's maiden name?");
                             Mainpanel.remove(text1);
                             Mainpanel.remove(buttonSubmit);
                             
@@ -208,13 +209,16 @@ public class Reset_password extends ReadDatabase implements ActionListener {
                             Mainpanel.add(buttonNext);
                            
                             
-                    }else{
+                    }else{ //the email address inserted does not exist, therefore this error message will show
                         JOptionPane.showMessageDialog(null, "Sorry we cant find email :  "+getEmail+"  on list");
                     }
                 }
         }
         
         if(e.getSource() == buttonNext ){
+            
+            // retrieve inserted text
+            
             String getText = text2.getText();
             String getEmail = text1.getText();
 
@@ -223,17 +227,18 @@ public class Reset_password extends ReadDatabase implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please Answer some question");
             }else{
                 
-                if(ReadSecureQuestion(userType,getText,getEmail)==true){
-                        JOptionPane.showMessageDialog(null, "Amazing");
+                if(ReadSecureQuestion(userType,getText,getEmail)==true){ 
+                    
+                        JOptionPane.showMessageDialog(null, "Your security answer submitted is correct, you will now be directed to change your password");
                             
                             frame.dispose();
                             
                             frame1 = new JFrame();
                         
-                            label.setText("New Password");
+                            label.setText("New Password"); // text new password label
                             
                             label5 = new JLabel();
-                            label5.setText("Password:");
+                            label5.setText("Password:");// text  password label
                             label5.setForeground(new java.awt.Color(102,102,255));
                             label5.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                             label5.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -241,7 +246,7 @@ public class Reset_password extends ReadDatabase implements ActionListener {
                             label5.setFont(myFont2);
                             
                             label6 = new JLabel();
-                            label6.setText("Comfire Password:");
+                            label6.setText("Comfirm Password:"); // text comfirm password label
                             label6.setForeground(new java.awt.Color(102,102,255));
                             label6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                             label6.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -255,7 +260,7 @@ public class Reset_password extends ReadDatabase implements ActionListener {
                             text5.setFont(myFont3);
                             
                             checkbox = new JCheckBox();
-                            checkbox.setIcon(icon1);
+                            checkbox.setIcon(icon1); 
                             checkbox.setForeground(new java.awt.Color(255,51,51));
                             checkbox.setFocusable(false);
                             checkbox.setBounds(350, 200, 50, 50);
@@ -305,7 +310,7 @@ public class Reset_password extends ReadDatabase implements ActionListener {
                             
                             Sub_panel.add(buttonSubmit1);
                             
-                            frame1 = new JFrame();
+                            frame1 = new JFrame(); // NEW Frame  appear
                             frame1.setVisible(true);
                             frame1.setSize(400, 750);
                             frame1.setResizable(false);
@@ -355,6 +360,9 @@ public class Reset_password extends ReadDatabase implements ActionListener {
         }
         
         if(e.getSource() == buttonSubmit1){
+            
+            //password requirements require 8 characters, 1 capital letter, 1 lower case, 1 number, at least 1 special character and no spaces
+            
             String getPassword = String.valueOf(text5.getPassword());
             String re_getPassword = String.valueOf(text6.getPassword());
             String getEmail = text1.getText();
@@ -387,8 +395,10 @@ public class Reset_password extends ReadDatabase implements ActionListener {
             }
             else
             {
+                // insert new password
                 changePwd(userType,getEmail,getPassword);
-                JOptionPane.showMessageDialog(null, "Enjoy your New Password");
+                JOptionPane.showMessageDialog(null, "Your new password is now active ");
+                SignIn signin = new SignIn();
                 frame1.dispose();
             }
             

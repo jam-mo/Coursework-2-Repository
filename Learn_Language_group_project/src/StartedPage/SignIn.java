@@ -13,10 +13,10 @@ import javadb.*;
 
 /**
  *
- * @author kokmeng
+ * @author abdullahi 
  */
 
-public class SignIn extends ReadDatabase implements ActionListener{
+public class SignIn extends ReadDatabase implements ActionListener{ // initiated Jframe, JPanel  JLabel  JButton JTextField , JPasswordField , JCheckbox , JComboBox , ImageIcon , font 
     
     JFrame frame;
     
@@ -42,9 +42,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
     
     JComboBox combobox;
     
+    // Call for specfic images to specfic variable
+    
     ImageIcon icon = new ImageIcon("eye.png");
     ImageIcon icon1 = new ImageIcon("hidden.png");
     ImageIcon icon2 = new ImageIcon("back.png");
+    
+    // Call for specfic font to specfic variable
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -52,9 +56,9 @@ public class SignIn extends ReadDatabase implements ActionListener{
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    SignIn(){
+    SignIn(){ // New Object , referencing  Jframe, JPanel  JLabel  JButton JTextField , JPasswordField , JCheckbox , JComboBox , ImageIcon, Font  for the SignIn page
         
-        goback_button = new JButton();
+        goback_button = new JButton(); // button ( link back to openning page)
         goback_button.setIcon(icon2);
         goback_button.setBounds(5, 15, 35, 35);
         goback_button.setBorder(null);
@@ -62,15 +66,15 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
         String[] valueType = {"Select","Student","Staff"};
         
-        combobox = new JComboBox(valueType);
+        combobox = new JComboBox(valueType); // Drop menu to select ( student or staff)
         combobox.setBounds(300, 0, 100, 50);
         combobox.addActionListener(this);
         
-        userType = (String) combobox.getSelectedItem();
+        userType = (String) combobox.getSelectedItem(); // Call from value type list ( combo box )
         
         
         label = new JLabel();
-        label.setText("SignIn");
+        label.setText("SignIn"); // Sign In label ( title )
         label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -78,7 +82,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label.setFont(myFont1);
         
         label1 = new JLabel();
-        label1.setText("Email:");
+        label1.setText("Email:"); // email label 
         label1.setForeground(new java.awt.Color(102,102,255));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,21 +90,21 @@ public class SignIn extends ReadDatabase implements ActionListener{
         label1.setFont(myFont2);
         
         label2 = new JLabel();
-        label2.setText("Password:");
+        label2.setText("Password:"); // password label 
         label2.setForeground(new java.awt.Color(102,102,255));
         label2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         label2.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label2.setBounds(10, 280, 388, 50);
         label2.setFont(myFont2);
         
-        label3 = new JLabel();
+        label3 = new JLabel(); // displaying the alternative option to logging in, but instead a button beside it will allow the user to sign up
         label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label3.setBounds(-50, 650, 388, 30);
         label3.setText("If you dont have Any Account |");
         
         label4 = new JLabel();
-        label4.setText("Sign Up");
+        label4.setText("Sign Up"); // clickable label ( link to sign up)
         label4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label4.setBounds(80, 650, 388, 30);
@@ -116,20 +120,22 @@ public class SignIn extends ReadDatabase implements ActionListener{
             }  
         });
         
-        label5 = new JLabel();
-        label5.setText("Reset_Password");
+        label5 = new JLabel(); // clickable label ( link to reset password ) 
+        label5.setText("Reset_Password"); 
         label5.setFont(myFont5);
         label5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label5.setBounds(230, 365, 150, 30);
         label5.setForeground(new java.awt.Color(255,51,51));
-        label5.addMouseListener(new MouseAdapter(){
+        label5.addMouseListener(new MouseAdapter(){ // 
             @Override
             public void mouseClicked(MouseEvent e)  
             {  
                // you can open a new frame here as
                // i have assumed you have declared "frame" as instance variable
                 
+                // When specfic value type it selected , it will prompt with a functionality for the outcome of the selected usertype
+                 
                 if(!(userType.equalsIgnoreCase("student" )|| userType.equalsIgnoreCase("staff"))){
                     JOptionPane.showMessageDialog(null, "Please select your student or teacher" ,"SELECT",JOptionPane.INFORMATION_MESSAGE);
                 }else{
@@ -140,8 +146,9 @@ public class SignIn extends ReadDatabase implements ActionListener{
             }  
         });
         
+        // this code below provides an option for the user to have their password hidden or show when the values are typed
         
-        checkbox = new JCheckBox();
+        checkbox = new JCheckBox();  
         checkbox.setIcon(icon1);
         checkbox.setForeground(new java.awt.Color(255,51,51));
         checkbox.setFocusable(false);
@@ -149,17 +156,23 @@ public class SignIn extends ReadDatabase implements ActionListener{
         checkbox.addActionListener(this);
         checkbox.setFont(myFont5);
         
+        //textfield for email
+        
         text1 = new JTextField(); 
         text1.setForeground(new java.awt.Color(255,51,51));
         text1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         text1.setBounds(5, 240, 388, 50);
         text1.setFont(myFont3);
         
+        //textfield for password
+        
         password = new JPasswordField();
         password.setForeground(new java.awt.Color(255,51,51));
         password.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         password.setBounds(5, 320, 388, 50);
         password.setFont(myFont3);
+        
+        //button to authenticate email and password for login
         
         buttonSubmit = new JButton();
         buttonSubmit.setText("Submit");
@@ -171,7 +184,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         buttonSubmit.setFont(myFont4);
         buttonSubmit.addActionListener(this);
         
-        Mainpanel = new JPanel();
+        Mainpanel = new JPanel(); // Mainpanel ( color and size )
         Mainpanel.setBackground(Color.getHSBColor(255, 204, 204));
         Mainpanel.setLayout(null);
         Mainpanel.setSize(400,750);
@@ -252,8 +265,10 @@ public class SignIn extends ReadDatabase implements ActionListener{
             }
         }
         
-        if(e.getSource()==buttonSubmit)
-        {
+        if(e.getSource()==buttonSubmit) 
+        {  //check textfield for empty values and case sensitive values, if textfield is empty it will prompt an error message
+            
+            
             System.out.println("user: "+userType);
             
             String email = text1.getText();
@@ -267,12 +282,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
             {
                 JOptionPane.showMessageDialog(null, "Add a password" ,"PASSWORD", JOptionPane.ERROR_MESSAGE);
             }
-            else if(Validation_Email.validationEmail(email)==false)
+            else if(Validation_Email.validationEmail(email)==false) //if no domain is added with an @ sign, an error message will show up
             {
                 JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com");
             }
             else{
-
+                //checking textfield values for validation from the results in the database
+                
                 if(userType.equalsIgnoreCase("Staff"))
                 { //insertStaff and insertStaffUse
                     ReadDatabase ReadSignIn = new ReadDatabase();
@@ -280,8 +296,11 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             userActivity userAct = new userActivity();
-                            userAct.userLogintime(email);
-                            level_language lvlanguage = new level_language(email);
+//                            userAct.userLogintime(email);
+                            ReadSignIn.get_id(email);
+                            System.out.println(ReadSignIn.getId());
+                            userAct.userLogintime(ReadSignIn.getId());
+                            level_language lvlanguage = new level_language(ReadSignIn.getId());
                             frame.dispose();
                             //level_language lvlanguage = new level_language();
                         }
@@ -297,8 +316,10 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
                             userActivity userAct = new userActivity();
-                            userAct.userLogintime(email);
-                            level_language lvlanguage = new level_language(email);
+                            ReadSignIn.get_id(email);
+                            System.out.println(ReadSignIn.getId());
+                            userAct.userLogintime(ReadSignIn.getId());
+                            level_language lvlanguage = new level_language(ReadSignIn.getId());
                             frame.dispose();
 
                         }

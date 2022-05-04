@@ -6,12 +6,11 @@ package Validation_Email_Password;
 
 /**
  *
- * @author kokmeng / christopher
+ *@author kokmeng / christopher / Jamie
  */
 
 public abstract class getdata_learning {
     
-    abstract protected boolean levels();
     
     abstract protected boolean context( String level);
     

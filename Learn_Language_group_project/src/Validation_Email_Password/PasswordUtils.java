@@ -12,7 +12,7 @@ import javax.crypto.spec.PBEKeySpec;
  
 /**
  *
- * @author kokmeng / christopher
+ * @author kokmeng / christopher /jamie / abdullahi
  */
 
 public class PasswordUtils {
@@ -22,10 +22,10 @@ public class PasswordUtils {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
     
-     public static String getSalt(int length) {
+     public static String getSalt(int length) {  
         StringBuilder returnValue = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));   //random ALPHABET string and length
         }
         return new String(returnValue);
     }
@@ -83,6 +83,22 @@ public class PasswordUtils {
         } else {
             System.out.println("Provided password is incorrect");
         }
+        
+//        
+//        System.out.println("-----++++++--------");
+//        String providedPassword1 = "123456789123489";
+//        
+//        String salt1 = PasswordUtils.getSalt(30);
+//        
+//        String securePassword1 = PasswordUtils.generateSecurePassword(providedPassword1, salt1);
+//        
+//        System.out.println(providedPassword1);
+//        
+//        System.out.println(salt1);
+//        
+//        System.out.println(securePassword1);
+        
+        
         
         
         

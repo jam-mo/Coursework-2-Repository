@@ -10,7 +10,7 @@ import javadb.*;
 
 /**
  *
- * @author kokmeng/christopher
+ * @author kokmeng/christopher / jamie
  */
 public class SearchBarData {
     Connection con;

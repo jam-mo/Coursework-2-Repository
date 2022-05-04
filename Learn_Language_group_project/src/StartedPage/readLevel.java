@@ -17,10 +17,10 @@ import javadb.ConnectingDB;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author christopher / Jamie
  */
 
-public class readLevel extends getdata_learning {
+public class readLevel extends getdata_learning { //extends abstract class getdata_learning
     
     Connection con;
     Statement stmt = null;
@@ -31,7 +31,8 @@ public class readLevel extends getdata_learning {
     String context_id;
     String Subcontext_id;
     
-    ArrayList level = new ArrayList();
+    //Created arrayList and String
+    
     ArrayList context = new ArrayList();
     ArrayList Imglevel = new ArrayList();
     ArrayList Imgcontext = new ArrayList();
@@ -42,69 +43,16 @@ public class readLevel extends getdata_learning {
     String readContext;
     
     
-    @Override
-    protected boolean levels() {
-        
-        String readlevel = "SELECT  l.Language_level FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  WHERE languages =?;";
-        
-        con = ConnectingDB.connect();
-        
-        try {
-            pstmt = con.prepareStatement(readlevel);
-            
-//            pstmt.setString(1, languageSelect);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            int n = 0;
-            
-            while(rs.next()){
-                int numColumns = rs.getMetaData().getColumnCount();
-                n++;
-
-                for (int i = 1; i <= numColumns; i++) {
-                    System.out.print(" something :"+rs.getObject(i));
-                    this.level.add(rs.getObject(i));
-                }
-                System.out.println("");
-            }
-            System.out.println("");
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
-            }
-        }
-        
-        return false;
-    }
-    
-    ArrayList getLevelText(){
-        return level;
-    }
 
     @Override
-    protected boolean context(String level) {
+    protected boolean context(String level) { // read Context by level 
        boolean getvalue = false; 
         String readContext = """
                         SELECT CONTEXT_TITLE
                               FROM CONTEXT
                               WHERE CONTEXT_LEVEL = ?
                             ;
-                             """;
+                             """;  //if levels selected equals to the context levels it will be shown
         
         
         con = ConnectingDB.connect();
@@ -112,7 +60,7 @@ public class readLevel extends getdata_learning {
             try {
                 pstmt = con.prepareStatement(readContext);
 
-                pstmt.setString(1,level);
+                pstmt.setString(1,level); // insert value to database  where (Context_Level)
                 
                 ResultSet rs = pstmt.executeQuery();
 
@@ -124,16 +72,16 @@ public class readLevel extends getdata_learning {
 
                     for (int i = 1; i <= numColumns; i++) {
                         System.out.print(" something : "+rs.getObject(i));
-                        this.context.add(rs.getObject(i));
+                        this.context.add(rs.getObject(i)); //Adding to arraylist
                     }
                     System.out.println("");
                 }
                 System.out.println("");
                 rs.close();
-            } catch (SQLException ex) {
+            } catch (SQLException ex) { // try exception 
                 Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
             }finally {
-                if (stmt != null) {
+                if (stmt != null) { 
                     try {
                         stmt.close();
                     } catch (SQLException e) {
@@ -153,18 +101,18 @@ public class readLevel extends getdata_learning {
 
     }
     
-    ArrayList getContext(){
+    ArrayList getContext(){  //returns the title name value for each context
         return context;
     }
     
     @Override
-    protected boolean subcontext( String level,String context) {
+    protected boolean subcontext( String level,String context) { // read Sub Context by context and level
         
         String readSubContext = """
                         SELECT SUB_CONTEXT
                                 FROM CONTEXT
                                 WHERE CONTEXT_LEVEL = ? And CONTEXT_TITLE = ?
-                                """;
+                                """; //if context selected equals to the context and level, the sub context will appear
         
         con = ConnectingDB.connect();
             try {
@@ -224,7 +172,7 @@ public class readLevel extends getdata_learning {
                         SELECT CONVERSATION_PROMPT
                             FROM CONTEXT
                             WHERE CONTEXT_LEVEL = ? And SUB_CONTEXT=?
-                             """;
+                             """; //if Sub context selected equals to the Sub_context and level, the conversation will appear
         con = ConnectingDB.connect();
             try {
                 
@@ -275,12 +223,12 @@ public class readLevel extends getdata_learning {
         return personA;
     }  
     
-    protected boolean readImgContext(String level){
+    protected boolean readImgContext(String level){ // 
         String readContext = """
                         SELECT CONTEXT_TITLE_img
                             FROM CONTEXT
                             WHERE CONTEXT_LEVEL = ?
-                             """;
+                             """; //if levels selected equals to the context_img, image will be shown
         
         
         con = ConnectingDB.connect();
@@ -336,7 +284,7 @@ public class readLevel extends getdata_learning {
                         SELECT SUB_CONTEXT_img
                             FROM CONTEXT
                             WHERE CONTEXT_LEVEL = ? And CONTEXT_TITLE = ?
-                             """;
+                             """; //if context selected equals to the context and level, the sub context_img will appear
         
         
         con = ConnectingDB.connect();
@@ -388,61 +336,6 @@ public class readLevel extends getdata_learning {
         return ImgSubcontext;
     }
     
-    
-    protected boolean readImgLevel(){
-        
-        String getLevel = "SELECT  l.level_img FROM LANGUAGES sp JOIN LEVELS l ON sp.languages_ID = l.languages_ID  WHERE languages =?;";
-        
-        con = ConnectingDB.connect();
-        
-        try {
-            
-            pstmt = con.prepareStatement(getLevel);
-            
-//            pstmt.setString(1, languageSelect);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            int n = 0;
-            
-            while(rs.next()){
-                int numColumns = rs.getMetaData().getColumnCount();
-                n++;
-
-                for (int i = 1; i <= numColumns; i++) {
-                    System.out.print(" something :"+rs.getObject(i));
-                    this.Imglevel.add(rs.getObject(i));
-                }
-                System.out.println("");
-            }
-            System.out.println("");
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(readLevel.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
-            }
-        }
-        
-        return false;
-    }
-    
-    ArrayList getImgLevel(){
-        return Imglevel;
-    }
-    
     @Override
     protected boolean ReadContext( String level, String Context) {
         
@@ -450,7 +343,7 @@ public class readLevel extends getdata_learning {
                             SELECT CONTEXT_TITLE
                                FROM CONTEXT
                                WHERE CONTEXT_LEVEL=? AND SUB_CONTEXT =? ;
-                             """;
+                             """; 
         
         con = ConnectingDB.connect();
             try {
@@ -508,7 +401,7 @@ public class readLevel extends getdata_learning {
                         SELECT SPANISH_WORDS
                             FROM CONTEXT
                             WHERE CONTEXT_LEVEL = ? And SUB_CONTEXT=?
-                             """;
+                             """; 
         con = ConnectingDB.connect();
             try {
                 

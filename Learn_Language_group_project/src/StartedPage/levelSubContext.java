@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author christopher 
  */
 public class levelSubContext extends readLevel implements ActionListener{
     readLevel levelReadData;
@@ -33,7 +33,7 @@ public class levelSubContext extends readLevel implements ActionListener{
 
     String levels;
     String contexts;
-    String getemail;
+    int getid;
     
     JPanel[] each_sub_panel1;
     
@@ -67,11 +67,11 @@ public class levelSubContext extends readLevel implements ActionListener{
     Font myFont4 = new Font("Lucida Grande",Font.PLAIN,16);
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
-    levelSubContext (String level, String context,String email){
+    levelSubContext (String level, String context,int id){
         
         levels = level;
         contexts = context;
-        getemail = email;
+        getid = id;
         
         label = new JLabel();
         label.setText(context);
@@ -106,10 +106,10 @@ public class levelSubContext extends readLevel implements ActionListener{
                                           <style>
                                           .bg-text {
                                             background-color: rgb(0,0,0);
-                                            background-color: rgba(225, 149, 235, 0.2);
+                                            background-color: rgba(0, 0, 0, 0.7);
                                             font-weight: bold;
                                             font-size: 10px;
-                                            border: 3px solid #9E86EB;
+                                            border: 3px solid #6E92F7;
                                             padding: 10px;
                                             text-align: center;
                                           }
@@ -117,7 +117,7 @@ public class levelSubContext extends readLevel implements ActionListener{
                                           <div class="bg-text">
                                           """+levelReadData.getSubcontext().get(i)+"</div></html>");
             
-            each_sub_button1_1[i].setForeground(new java.awt.Color(153,102,255));
+            each_sub_button1_1[i].setForeground(new java.awt.Color(255,255,255));
             each_sub_button1_1[i].setPreferredSize(new Dimension(50,50));
             each_sub_button1_1[i].addActionListener(this);
 //            each_sub_button1_1[i].setBorder(null);
@@ -243,7 +243,7 @@ public class levelSubContext extends readLevel implements ActionListener{
 //                if(answer == 0){
 //                    
                     
-                    Comm = new Communication(levels,(String) levelReadData.getSubcontext().get(i),getemail);
+                    Comm = new Communication(levels,(String) levelReadData.getSubcontext().get(i),getid);
                     frame.dispose();
 //                    
 //                }else if(answer == 1){
@@ -260,19 +260,20 @@ public class levelSubContext extends readLevel implements ActionListener{
         
         if(e.getSource() == each_sub_Button1_1 )
         {
-            lc = new levelContext( levels,getemail);
+            lc = new levelContext( levels,getid);
             frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_2 )
         {
-           Searchbar  = new SearchPage(getemail);
+           Searchbar  = new SearchPage(getid);
            frame.dispose();
         }
         
         if(e.getSource() == each_sub_Button1_3 )
         {
-            profilePage Pg= new profilePage(getemail);
+            ProfilePage Pp= new ProfilePage(getid);
+            Pp.setVisible(true);
             frame.dispose();
         }
         

@@ -19,9 +19,9 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author kokmeng / christopher
+ * @author kokmeng / abdullahi
  */
-public class openning implements ActionListener {
+public class openning implements ActionListener { // initiated Jframe, JPanel  JLabel x3  and JButton
     
     JFrame frame;
     
@@ -39,9 +39,9 @@ public class openning implements ActionListener {
     Font myFont1 = new Font("Herculanum",Font.BOLD,60);
     Font myFont2 = new Font("Luminari",Font.PLAIN,20);
     
-    openning(){
+    openning(){ // New Object , referencing Jframe, JLabel and JPanels for the opening page
         
-        label1 = new JLabel();
+        label1 = new JLabel(); // Display welcome title
         label1.setText("WELCOME");
         label1.setForeground(new java.awt.Color(255, 51, 102));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -49,7 +49,7 @@ public class openning implements ActionListener {
         label1.setBounds(0, 250, 388, 50);
         label1.setFont(myFont1);
         
-        label2 = new JLabel();
+        label2 = new JLabel(); // Display To Understading Moth Team's
         label2.setText("To Understading Moth Team's");
         label2.setForeground(new java.awt.Color(153, 0, 51));
         label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -57,7 +57,7 @@ public class openning implements ActionListener {
         label2.setBounds(0, 350, 388, 30);
         label2.setFont(myFont2);
         
-        label3 = new JLabel();
+        label3 = new JLabel(); // Display Speaking Assitance Application
         label3.setText("Speaking Assitance Application");
         label3.setForeground(new java.awt.Color(153, 0, 51));
         label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,19 +65,20 @@ public class openning implements ActionListener {
         label3.setBounds(0, 400, 388, 30);
         label3.setFont(myFont2);
         
-        label4 = new JLabel();
+        label4 = new JLabel(); // displaying the alternative option to logging in, but instead a button beside it will allow the user to sign up
         label4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label4.setBounds(-50, 650, 388, 30);
         label4.setText("If you do not have an Account |");
         
         label5 = new JLabel();
-        label5.setText("Sign Up");
+        label5.setText("Sign Up"); // clickable label ( link to sign up) 
         label5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label5.setBounds(80, 650, 388, 30);
         label5.setForeground(new java.awt.Color(51, 51, 255));
         label5.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e)  
             {  
                // you can open a new frame here as
@@ -90,7 +91,7 @@ public class openning implements ActionListener {
         });
         
 
-        label6 = new JLabel();
+        label6 = new JLabel(); // label type with button to sign In 
         label6.setFont(new java.awt.Font("Phosphate", 0, 15)); 
         label6.setForeground(new java.awt.Color(102, 51, 255));
         label6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,12 +99,12 @@ public class openning implements ActionListener {
         label6.setText("GET STARTED");
         
         
-        Mpanel = new JPanel();
+        Mpanel = new JPanel(); // Mainpanel ( color and size )
         Mpanel.setBackground(Color.getHSBColor(255, 204, 204));
         Mpanel.setLayout(null);
         Mpanel.setSize(400,750);
         
-        button = new JButton();
+        button = new JButton(); // button to link to next page ( sign In )
         button.setBackground(Color.WHITE);
         button.setPreferredSize(new Dimension(388,50));
         button.setBounds(10, 500, 380, 50);
@@ -134,7 +135,7 @@ public class openning implements ActionListener {
         Mpanel.add(label5);
         
         
-        frame = new JFrame("LearnSpainishLanguage");
+        frame = new JFrame("LearnSpainishLanguage"); // frame ( display window )
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
@@ -147,13 +148,13 @@ public class openning implements ActionListener {
     }
     
     
-    public static void main(String[] arg){
-       openning opening= new openning();
+    public static void main(String[] arg){ 
+       openning opening= new openning(); // call new object  ( openning )
        
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { 
         
         if(e.getSource()==button){  // when user click button , it will link to sign in page
             System.out.println("let Started");
