@@ -26,23 +26,30 @@ public class AdminPage extends javax.swing.JFrame {
      */
     public AdminPage() {
         initComponents();
+        //displays the code
         show_user();
     }
     
     public ArrayList<User> userList() {
+        //Creates usersList object
         ArrayList<User> usersList = new ArrayList<>();
         try {
+            //Connection to database
             Class.forName("org.sqlite.JDBC");
-            
-            Connection con = DriverManager.getConnection("jdbc:sqlite:appDB.db"); // connection to our database
+            Connection con = DriverManager.getConnection("jdbc:sqlite:appDB.db"); 
             System.out.println("Database Connected.");
             
+            //String variable query1 selects all the users from the USERS table
             String query1="SELECT * FROM USERS";
+            //createStatement creates an object for sending SQL statements to the database
             Statement st= con.createStatement();
+            //ResultSet contains the results of executing an SQL query
             ResultSet rs= st.executeQuery(query1);
             User user;
             while(rs.next()) {
+                //Adds the data in the user object
                 user=new User(rs.getInt("user_ID"), rs.getString("firstName"), rs.getString("lastName"));
+                //Adds the user in the array list
                 usersList.add(user);
             }
             } 
@@ -54,11 +61,14 @@ public class AdminPage extends javax.swing.JFrame {
     public void show_user(){
         ArrayList<User> list = userList();
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        //creates array that stores the row data
         Object[] row = new Object[3];
+        //for loop that adds the data to the column 
         for(int i=0;i<list.size();i++) {
             row[0]=list.get(i).getuserID();
             row[1]=list.get(i).getfirstName();
             row[2]=list.get(i).getlastName();
+            //adds a row in the table
             model.addRow(row);
         }
     }
@@ -258,15 +268,23 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        //gets the row which is selected
        int row = jTable1.getSelectedRow();
+       //String variable tc gets the values in each row
        String tc= jTable1.getModel().getValueAt(row, 0).toString();
        try {
+           //Connection to the database
            Class.forName("org.sqlite.JDBC");
-           Connection con = DriverManager.getConnection("jdbc:sqlite:appDB.db"); // connection to our database
+           Connection con = DriverManager.getConnection("jdbc:sqlite:appDB.db"); 
            System.out.println("");
-           String query2="select * from USERS where user_ID="+tc+"";
+           
+           //String variable query2 selects all the users from the USERS table where the user ID matches the row selected by the admin
+           String query2="select * from USERS where user_ID="+tc+""; 
+           //createStatement creates an object for sending SQL statements to the database
            Statement st= con.createStatement();
+           //ResultSet contains the results of executing an SQL query
            ResultSet rs= st.executeQuery(query2);
+           //if rs.next moves the cursor to the next row if it contains any data
            if(rs.next()){
                String firstName = rs.getString("firstName");
                int level_A1_Progress=rs.getInt("level_A1_Progress");
@@ -275,7 +293,7 @@ public class AdminPage extends javax.swing.JFrame {
                int level_B2_Progress=rs.getInt("level_B2_Progress"); 
                
                
-               
+               //Displays the relevent data to the lable and textfields
                jLabel6.setText(""+firstName+"'s "+"progress: ");
                jTextField2.setText(""+level_A1_Progress+"/22 Completed");
                jTextField3.setText(""+level_A2_Progress+"/25 Completed"); 
