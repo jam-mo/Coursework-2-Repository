@@ -76,6 +76,7 @@ public class levelContext extends readLevel implements ActionListener {
     levelContext(String level, String email){
         
         getemail = email;
+        System.out.println(getemail);
         
         label = new JLabel();
         label.setText("LEVEL_"+level);
@@ -244,10 +245,9 @@ public class levelContext extends readLevel implements ActionListener {
            frame.dispose();
         }
         
-        
         if(e.getSource() == each_sub_Button1_3 )
         {
-            openning opening= new openning();
+            profilePage Pg= new profilePage(getemail);
             frame.dispose();
         }
         

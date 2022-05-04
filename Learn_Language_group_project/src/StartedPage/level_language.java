@@ -263,7 +263,7 @@ public class level_language extends readLevel implements ActionListener {
         
         if(e.getSource() == each_sub_Button1_3 )
         {
-            openning opening= new openning();
+            profilePage Pg= new profilePage(getemail);
             frame.dispose();
         }
         

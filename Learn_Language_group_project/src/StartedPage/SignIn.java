@@ -220,7 +220,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
             
         }
         
-        if(e.getSource()==combobox){
+        if(e.getSource()==combobox){  // combo box using to help with userType ( Student or teacher) 
             if(combobox.getSelectedItem().equals("Admin")){
                 userType = (String) combobox.getSelectedItem();
                 System.out.println(userType);
@@ -236,7 +236,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
             }
         }
         
-        if(e.getSource()==checkbox)
+        if(e.getSource()==checkbox) // this check box it using to display password and make hidden 
         {
             if(checkbox.isSelected())
             {

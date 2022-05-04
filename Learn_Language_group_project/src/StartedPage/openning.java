@@ -155,7 +155,7 @@ public class openning implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        if(e.getSource()==button){
+        if(e.getSource()==button){  // when user click button , it will link to sign in page
             System.out.println("let Started");
                 SignIn signIn = new SignIn();
                 frame.dispose();

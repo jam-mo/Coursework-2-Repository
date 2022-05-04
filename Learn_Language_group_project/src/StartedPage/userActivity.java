@@ -90,6 +90,7 @@ public class userActivity {
         
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         
+        
         System.out.println("query : " + inputlogOutTime);
         System.out.println("Date : " + date);
         

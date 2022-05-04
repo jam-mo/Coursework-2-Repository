@@ -42,8 +42,6 @@ public class Communication extends readLevel implements ActionListener{
     
     JPanel sub_panel1;
     
-    JPanel[] sub_panel_1 = new JPanel[23];
-    
     JButton each_sub_Button1_1;
     JButton each_sub_Button1_2;
     JButton each_sub_Button1_3;
@@ -250,9 +248,10 @@ public class Communication extends readLevel implements ActionListener{
            frame.dispose();
         }
         
-        if(e.getSource() == each_sub_Button1_1 )
+        if(e.getSource() == each_sub_Button1_3 )
         {
-            System.out.println("poo3");
+            profilePage Pg= new profilePage(getemail);
+            frame.dispose();
         }
         
         
