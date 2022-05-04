@@ -23,10 +23,10 @@ public class ProfilePage extends javax.swing.JFrame {
     int Cuser_ID = 0; //should be input retrieved when account is logged into
     int languages_ID = 41470; // also needs to be retrieved elsewhere
     int Userinput;                                                  //User input from submit button
-    
+       
 
     public ProfilePage(int id) { // Profile page method which is used to run all other methods essentially creating the popup and changing the information
-       
+        
         Cuser_ID = id;
         
         
@@ -47,14 +47,14 @@ public class ProfilePage extends javax.swing.JFrame {
             this.dispose();
         } //home button
         );         
-         
+            
         jButton2.addActionListener((ActionEvent e) -> {// Change ActionListener to ActionEvent e ( make function working properly )
             level_language  ll2= new level_language(Cuser_ID);
             this.dispose();
         } // level button
         );
-        
-              
+         
+            
         jButton3.addActionListener((ActionEvent e) -> { // Change ActionListener to ActionEvent e ( make function working properly )
             userActivity userAct = new userActivity();
             userAct.userLogouttime(Cuser_ID);
@@ -63,20 +63,20 @@ public class ProfilePage extends javax.swing.JFrame {
         } // Logout button
         );
         
-                 
+              
         jButton4.addActionListener((ActionEvent e) -> { // Change ActionListener to ActionEvent e ( make function working properly )
             level_language  ll2= new level_language(Cuser_ID);
              this.dispose();
         } // back button
         );
         jButton5.addActionListener((ActionEvent e) -> { // Change ActionListener to ActionEvent e ( make function working properly )
-            System.out.println("PLACEHOLDER"); 
+             System.out.println("PLACEHOLDER");
             
             String temp =  jTextField1.getText();
             Userinput = Integer.valueOf(temp);
             System.out.println(temp);
-            SetTeacherCode();
-            System.out.println(TeacherCodeTest());
+           SetTeacherCode();
+           System.out.println(TeacherCodeTest());
         } //submit button which adds the textfield integers to the program database
         );
         
@@ -220,7 +220,7 @@ public class ProfilePage extends javax.swing.JFrame {
         String teacher = rs.getString(1);
       //  System.out.println(teacher);
          rs = ps.executeQuery();
-         
+  
          con.close();
          return teacher;
 
@@ -245,7 +245,7 @@ public class ProfilePage extends javax.swing.JFrame {
         String level_A1 = rs.getString(1);
         System.out.println(level_A1);
          rs = ps.executeQuery();
-         
+       
          con.close();
          return level_A1;
 
@@ -270,7 +270,7 @@ public class ProfilePage extends javax.swing.JFrame {
         String level_A2 = rs.getString(1);
         System.out.println(level_A2);
          rs = ps.executeQuery();
-         
+      
          con.close();
          return level_A2;
 
@@ -295,7 +295,7 @@ public class ProfilePage extends javax.swing.JFrame {
         String level_B1 = rs.getString(1);
         System.out.println(level_B1);
          rs = ps.executeQuery();
-         
+     
          con.close();
          return level_B1;
 
@@ -320,7 +320,7 @@ public class ProfilePage extends javax.swing.JFrame {
         String level_B2 = rs.getString(1);
         System.out.println(level_B2);
          rs = ps.executeQuery();
-         
+       
          con.close();
          return level_B2;
 
@@ -419,6 +419,11 @@ public class ProfilePage extends javax.swing.JFrame {
         jLabel11.setText("Profile picture");
 
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Username:");
 
@@ -514,7 +519,7 @@ public class ProfilePage extends javax.swing.JFrame {
                                                         .addComponent(jLabel19)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(jLabel20)
-                                                        .addGap(65, 65, 65)))))
+                                                        .addGap(70, 70, 70)))))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jButton5)
@@ -525,7 +530,7 @@ public class ProfilePage extends javax.swing.JFrame {
                                                         .addGap(9, 9, 9)
                                                         .addComponent(jLabel10))
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(11, 11, 11)
+                                                        .addGap(5, 5, 5)
                                                         .addComponent(jLabel21)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,6 +630,10 @@ public class ProfilePage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     public static void main(String args[]) {
      
         
@@ -633,6 +642,7 @@ public class ProfilePage extends javax.swing.JFrame {
             public void run() {
                 
                 new ProfilePage(75835).setVisible(true);
+                
                 
                 
             }
