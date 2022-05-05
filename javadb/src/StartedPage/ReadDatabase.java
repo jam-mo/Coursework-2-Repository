@@ -20,22 +20,32 @@ import static javadb.Javadb.generateId;
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng & Jamie
  */
 
 public class ReadDatabase extends PasswordUtils {
-    
+    // kokmeng code
     Connection con;
     Statement stmt = null;
     PreparedStatement pstmt = null;
     PreparedStatement pstmt1 = null;
     String userEmail;
     
-    
-    protected boolean ReadEmail(String user_email){
+    protected boolean ReadEmail(String userType,String user_email){ // kokmeng code
         // checks if email doesnt exist,
+        String changeEmail = null;
+        String user = null;
         boolean getvalue = false;
-        String get_Email = "SELECT emailAddress FROM USERS WHERE emailAddress = ? ;";
+        
+        if(userType.equalsIgnoreCase("Student")){
+            user = "USERS";
+            changeEmail = "emailAddress";
+        }else if(userType.equalsIgnoreCase("Staff")){
+            user = "STAFF";
+            changeEmail = "staffEmailAddress";
+        }
+        
+        String get_Email = "SELECT "+changeEmail+" FROM "+user+" WHERE "+changeEmail+" = ? ;";
         con = ConnectingDB.connect();
         try
         {
@@ -46,11 +56,19 @@ public class ReadDatabase extends PasswordUtils {
             ResultSet results_email = pstmt.executeQuery();
             int n =0;
             
-                if(results_email.next()){
+            while(results_email.next()){
+                int numColumns = results_email.getMetaData().getColumnCount();
+                n++;
+                
+                for(int i = 1; i <= numColumns; i++){
+                    System.out.println(results_email.getObject(i));
+                    if(results_email.getObject(i).equals(user_email)){
                         getvalue = true;
-                }else{
+                    }else{
                         getvalue = false;
+                    }
                 }
+            }
             
             results_email.close();
             
@@ -76,10 +94,23 @@ public class ReadDatabase extends PasswordUtils {
         }
         return getvalue;
     }
-    protected boolean ReadUserName(String user_name){
-        // checks if email doesnt exist,
+    protected boolean ReadUserName(String userType,String user_name){
+        // checks if email doesnt exist, - //kokmeng
         boolean unValue = false;
-        String get_userName = "SELECT username FROM USERS WHERE username = ? ;"; // figure out what this is
+        
+        String changeUserName = null;
+        String user = null;
+        
+        if(userType.equalsIgnoreCase("Student")){
+            user = "USERS";
+            changeUserName = "username";
+        }else if(userType.equalsIgnoreCase("Staff")){
+            user = "STAFF";
+            changeUserName = "staffUsername";
+        }
+        System.out.println("Print Type :" +" user " + user + " userName "+ changeUserName);
+        
+        String get_userName = "SELECT "+changeUserName+" FROM "+user+" WHERE "+changeUserName+" = ? ;"; // figure out what this is
         con = ConnectingDB.connect();
         try
         {
@@ -89,12 +120,20 @@ public class ReadDatabase extends PasswordUtils {
             
             ResultSet results_uName = pstmt.executeQuery();
             int n =0;
-            
-                if(results_uName.next()){
+
+            while(results_uName.next()){
+                int numColumns = results_uName.getMetaData().getColumnCount();
+                n++;
+                
+                for(int i = 1; i <= numColumns; i++){
+                    System.out.println(results_uName.getObject(i));
+                    if(results_uName.getObject(i).equals(user_name)){
                         unValue = true;
-                }else{
+                    }else{
                         unValue = false;
+                    }
                 }
+            }
             
             results_uName.close();
             
@@ -126,12 +165,12 @@ public class ReadDatabase extends PasswordUtils {
     
     protected boolean ReadSignIn(String userType,  String userEmail, String userPassword) throws SQLException{
         
-        // should also pass in userType here, 
+        // should also pass in userType here, // kokmeng
         // USERNAME NEEDS ADDING
         String TypeOfUser = userType;
         String changeEmail = null;
         String encryptedpassword = null;
-        String encryted = null;
+        String encrypted = null;
         
         String providedPassword = userPassword;
         
@@ -141,13 +180,15 @@ public class ReadDatabase extends PasswordUtils {
         if(TypeOfUser.equalsIgnoreCase("staff")){
             // checks if student says user or staff
             TypeOfUser = "STAFF";
-            changeEmail = "staffemailAddress";
-            encryptedpassword = "staffPassword";
+            changeEmail = "staffEmailAddress";
+            encryptedpassword = "staffEncryptedPassword";
+            encrypted = "staffEncrypted";
             
         }else if(TypeOfUser.equalsIgnoreCase("student")){
-            TypeOfUser = "STUDENT_USER";
+            TypeOfUser = "USERS";
             changeEmail = "emailAddress";
-            encryptedpassword = "encryptedpassword";
+            encryptedpassword = "encryptedPassword";
+            encrypted = "encrypted";
         }
         System.out.println(TypeOfUser+changeEmail+encryptedpassword);
         
@@ -171,8 +212,8 @@ public class ReadDatabase extends PasswordUtils {
             }
             else
             {
-                String sql = "SELECT `encryptedpassword` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
-                String sql1 = "SELECT `encryted` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
+                String sql = "SELECT `"+encryptedpassword+"` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
+                String sql1 = "SELECT `"+encrypted+"` FROM `"+TypeOfUser+"` WHERE `"+changeEmail+"` = ?;";
                 
                 pstmt = con.prepareStatement(sql);
                 pstmt1 = con.prepareStatement(sql1);
@@ -237,10 +278,25 @@ public class ReadDatabase extends PasswordUtils {
         return re_Value;
     }
     
-    protected boolean ReadSecureQuestion(String value,String text1,String user_email){
-        
+    protected boolean ReadSecureQuestion(String userType,String text1,String user_email){
+         // kokmeng 
         boolean getvalue = false;
-        String get_Text1 = "SELECT "+value+" from Security_Question where "+value+" = ?  AND user_email = ?;";
+        
+        String changeEmail = null;
+        String user = null;
+        String changeQuestion = null;
+        
+        if(userType.equalsIgnoreCase("Student")){
+            user = "USERS";
+            changeEmail = "emailAddress";
+            changeQuestion = "securityQuestion";
+        }else if(userType.equalsIgnoreCase("Staff")){
+            user = "STAFF";
+            changeEmail = "staffEmailAddress";
+            changeQuestion = "staffSecurityQuestion";
+        }
+        
+        String get_Text1 = "SELECT "+changeQuestion+" from "+user+" where "+changeQuestion+" = ?  AND "+changeEmail+" = ?;";
         con = ConnectingDB.connect();
         try
         {
@@ -250,12 +306,20 @@ public class ReadDatabase extends PasswordUtils {
             pstmt.setString(2, user_email);
             
             ResultSet results_email = pstmt.executeQuery();
-            
-                if(results_email.next()){
+            int n =0;
+            while(results_email.next()){
+                int numColumns = results_email.getMetaData().getColumnCount();
+                n++;
+                
+                for(int i = 1; i <= numColumns; i++){
+                    System.out.println(results_email.getObject(i));
+                    if(results_email.getObject(i).equals(text1)){
                         getvalue = true;
-                }else{
+                    }else{
                         getvalue = false;
+                    }
                 }
+            }
             
             results_email.close();
             
@@ -283,68 +347,43 @@ public class ReadDatabase extends PasswordUtils {
         
     }
     
-    protected boolean ReadSecureEmail(String user_email){
-        
-        boolean getvalue = false;
-        String get_Text1 = "SELECT user_email FROM Security_Question WHERE user_email = ? ;";
-        con = ConnectingDB.connect();
-        try
-        {
-            pstmt = con.prepareStatement(get_Text1);
-            
-            pstmt.setString(1, user_email);
-            
-            ResultSet results_email = pstmt.executeQuery();
-            
-                if(results_email.next()){
-                        getvalue = true;
-                }else{
-                        getvalue = false;
-                }
-            
-            results_email.close();
-            
-        }
-        catch (SQLException ex) {
-            System.out.println("erorr");
-            
-        }finally{
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException ex) {
-                    System.err.println("SQLException: " + ex.getMessage());
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println("SQLException: " + ex.getMessage());
-                }
-            }
-        }
-        return getvalue;
-        
-        
-    }
-    
-    protected boolean changePwd(String user_email, String user_password){
-        
+    protected boolean changePwd(String usertype, String user_email, String user_password){
+        // kokmeng
         boolean takeValue = false;
+        
+        String user = null;
+        String encrypted = null;
+        String encryptedPassword = null;
+        String changeEmail = null;
+        String changePassword = null;
+        
+        if(usertype.equalsIgnoreCase("student")){
+            user = "USERS";
+            encrypted = "encrypted";
+            encryptedPassword = "encryptedPassword";
+            changeEmail = "emailAddress";
+            changePassword = "Password";
+        }else if(usertype.equalsIgnoreCase("staff")){
+            user = "STAFF";
+            encrypted = "staffEncrypted";
+            encryptedPassword = "staffEncryptedPassword";
+            changeEmail = "staffEmailAddress";
+            changePassword = "staffPassword";
+        }
         
         String salt1 = PasswordUtils.getSalt(99);
         String mySecurePassword = PasswordUtils.generateSecurePassword(user_password, salt1);
         
-        String get_Text1 = "UPDATE STUDENT_USER SET encryted= ?, encryptedpassword=?  WHERE emailAddress =?;";
+        String get_Text1 = "UPDATE "+user+" SET "+changePassword+"=?, "+encrypted+"= ?, "+encryptedPassword+"=?  WHERE "+changeEmail+" =?;";
         con = ConnectingDB.connect(); 
         
         try{
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(get_Text1);
-            pstmt.setString(1, salt1);
-            pstmt.setString(2, mySecurePassword);
-            pstmt.setString(3, user_email);
+            pstmt.setString(1, user_password);
+            pstmt.setString(2, salt1);
+            pstmt.setString(3, mySecurePassword);
+            pstmt.setString(4, user_email);
 
             pstmt.executeUpdate();
 
@@ -374,9 +413,12 @@ public class ReadDatabase extends PasswordUtils {
     }
     
     public static void insertStaff(String UserName, String firstName, String lastName, String email, String password, String securityQuestion) {
-        Connection con = ConnectingDB.connect();
+        Connection con = ConnectingDB.connect(); // jamie
         PreparedStatement ps = null; 
         int staff_ID = generateId();
+        int teacherCode = generateTeacherCode();
+        String salt1 = PasswordUtils.getSalt(50);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(password, salt1);
         
         // also, call other method
         
@@ -384,7 +426,23 @@ public class ReadDatabase extends PasswordUtils {
         
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
-            String staffSql = "INSERT INTO STAFF(staff_ID, staffUsername, staffFirstName, staffLastName, staffEmailAddress, staffPassword,staffSecurityQuestion) VALUES(?,?,?,?,?,?,?)";
+            String staffSql = """
+                                        INSERT INTO STAFF (
+                                                    staff_ID,
+                                                    staffUsername,
+                                                    staffFirstName,
+                                                    staffLastName,
+                                                    staffEmailAddress,
+                                                    staffPassword,
+                                                    staffEncrypted,
+                                                    staffEncryptedPassword,
+                                                    staffSecurityQuestion,
+                                                    teacherCode
+                                                )
+                                                VALUES (
+                                                            ?,?,?,?,?,?,?,?,?,?
+                                                );
+                              """;
             ps = con.prepareStatement(staffSql);
             // do a random check - ex have a method thaint staff_ID = generateId();t checks if number is in db
             ps.setInt(1, staff_ID);
@@ -393,10 +451,13 @@ public class ReadDatabase extends PasswordUtils {
             ps.setString(4, lastName);
             ps.setString(5, email);
             ps.setString(6, password);
-            ps.setString(7, securityQuestion);
+            ps.setString(7, salt1);
+            ps.setString(8, mySecurePassword);
+            ps.setString(9, securityQuestion);
+            ps.setInt(10, teacherCode);
             ps.execute();
             System.out.println("Data has been added");
-            insertStaffUser(UserName, firstName, lastName, email, password,securityQuestion, staff_ID);
+            insertStaffUser(UserName, firstName, lastName, email, password,securityQuestion, staff_ID, teacherCode);
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
@@ -405,15 +466,19 @@ public class ReadDatabase extends PasswordUtils {
     }
 
     public static void insertUser(String userName, String firstName, String lastName, String emailAddress, String Password,String securityQuestion) {
-        Connection con = ConnectingDB.connect();
+        Connection con = ConnectingDB.connect(); // jamie
         PreparedStatement psUser = null;
         int languages = generateId();
         insertLanguages(languages);
         int user_ID = generateId();
         insertUserActivity(user_ID);
+        
+        String salt1 = PasswordUtils.getSalt(50);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(Password, salt1);
+        
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
-            String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion, languages_ID) VALUES(?,?,?,?,?,?,?,?)";
+            String userSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password , encrypted, encryptedPassword,securityQuestion, languages_ID) VALUES(?,?,?,?,?,?,?,?,?,?)";
             psUser = con.prepareStatement(userSql);
             // do a random check - ex have a method that checks if number is in db
             psUser.setInt(1, user_ID);
@@ -421,9 +486,11 @@ public class ReadDatabase extends PasswordUtils {
             psUser.setString(3, firstName);
             psUser.setString(4, lastName);
             psUser.setString(5, emailAddress);
-            psUser.setString(6, Password);      
-            psUser.setString(7, securityQuestion);
-            psUser.setInt(8, languages);
+            psUser.setString(6, Password);
+            psUser.setString(7, salt1);
+            psUser.setString(8, mySecurePassword);
+            psUser.setString(9, securityQuestion);
+            psUser.setInt(10, languages);
             psUser.execute();
             System.out.println("Data has been added to User Table");
         } catch (SQLException e) {
@@ -431,14 +498,14 @@ public class ReadDatabase extends PasswordUtils {
         }
 
     }
-
-    public static void insertStaffUser(String userName, String firstName, String lastName, String emailAddress, String Password,String securityQuestion, int staff_ID) {
+///////////////////////////////////////////////////////////////////////////////////////////
+    public static void insertStaffUser(String userName, String firstName, String lastName, String emailAddress, String Password,String securityQuestion, int staff_ID, int teacherCode) {
         Connection con = ConnectingDB.connect();
-        PreparedStatement psStaff = null;
+        PreparedStatement psStaff = null; // jamie
         ; // should I have a seperate userID for staff, or the userID and staffID be the same
         // SET _ID IN HERE OR SOMETHING, DONT HAVE IT IN THE PPARAMETER
         try {
-            String staffSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion, staff_ID) VALUES(?,?,?,?,?,?,?,?)";
+            String staffSql = "INSERT INTO USERS(user_ID, username, firstName, lastName, emailAddress, Password,securityQuestion, staff_ID, teacherCode) VALUES(?,?,?,?,?,?,?,?,?)";
             psStaff = con.prepareStatement(staffSql);
             // do a random check - ex have a method that checks if number is in db
             psStaff.setInt(1, staff_ID);
@@ -449,6 +516,7 @@ public class ReadDatabase extends PasswordUtils {
             psStaff.setString(6, Password);
             psStaff.setString(7, securityQuestion);
             psStaff.setInt(8, staff_ID);
+            psStaff.setInt(9, teacherCode);
             psStaff.execute();
             System.out.println("Data has been added to users");
         } catch (SQLException e) {
@@ -457,7 +525,7 @@ public class ReadDatabase extends PasswordUtils {
         // check nums in 
     }
 
-    public static void insertLevels(int languages_ID) {
+    public static void insertLevels(int languages_ID) { // jamie
         // what am i going to do for this one? // get lanugages_ID 
         Connection con = ConnectingDB.connect();
         PreparedStatement psLevel = null;
@@ -487,7 +555,7 @@ public class ReadDatabase extends PasswordUtils {
         }
     }
 
-        public static void insertLanguages(int languages_ID) {
+        public static void insertLanguages(int languages_ID) { // jamie
 
 	// fetch userID, or when creating user, call this function, and pass a parameted for languages_id
          Connection con = ConnectingDB.connect();
@@ -511,7 +579,7 @@ public class ReadDatabase extends PasswordUtils {
          }
     }
 
-    public static void insertContext() {
+    public static void insertContext() { // jamie
         Connection con = ConnectingDB.connect();
         Statement stmt = null;
         PreparedStatement ps = null;
@@ -556,26 +624,47 @@ public class ReadDatabase extends PasswordUtils {
                     ps.setString(6, Spanish);
                     ps.execute();
                     }
-                    
+                    // if equals b, do t // person B <b style="color:#B72E52;">'’</b> // Person B
+                        //// person a <b style="color:#2E52B7;">’’</b> //Person A
                     contextID = generateId();
                     level = splitSt[0];
                     Context = splitSt[1];
                     Subcontext = splitSt[2];
-                    Conversation = splitSt[3] + ": " + splitSt[4];
+                    if (splitSt[3].contains("A"))  {
+                        Conversation = "<p style=\"color:#660033;\">" + splitSt[3] + ": " + splitSt[4] + "</p><br>";
+                    } else if (splitSt[3].contains("B")) {
+                        Conversation = "<p style=\"color:#003366;\">" + splitSt[3] + ": " + splitSt[4] + "</p><br>";
+                    }
+                    //Conversation = splitSt[3] + ": " + splitSt[4];
                     Spanish = splitSt[5];
 //                     
                 }
                 else {
-                    Conversation += "\n" +  splitSt[3] + ": " + splitSt[4];
+                    if (splitSt[3].contains("A"))  {
+                        Conversation += "\n" + "<p style=\"color:#660033;\">" + splitSt[3] + ": " + splitSt[4] + "</p><br>";
+                    } else if (splitSt[3].contains("B")) {
+                        Conversation += "\n" + "<p style=\"color:#003366;\">" + splitSt[3] + ": " + splitSt[4] + "</p><br>";
+                    }
+                    //Conversation += "\n" +  splitSt[3] + ": " + splitSt[4];
                     if (splitSt[5] == null || splitSt[5].isEmpty()) {
-                        Spanish += "," + splitSt[5];
+                        Spanish += splitSt[5];
                     }
                     //Spanish += "," + splitSt[5];
 
                 }
                    
                 //System.out.println(Arrays.toString(splitSt));
-            }
+            } // 
+            String contextSql = "INSERT INTO CONTEXT(CONTEXT_ID,CONTEXT_TITLE, CONTEXT_LEVEL, SUB_CONTEXT, CONVERSATION_PROMPT, SPANISH_WORDS) VALUES(?,?,?,?,?,?)";
+                    ps = con.prepareStatement(contextSql); // jamie
+                    
+                    ps.setInt(1, contextID);
+                    ps.setString(2, Context);
+                    ps.setString(3, level);
+                    ps.setString(4, Subcontext);
+                    ps.setString(5, Conversation);
+                    ps.setString(6, Spanish);
+                    ps.execute();
 
 //
         } catch (Exception e) {
@@ -584,7 +673,7 @@ public class ReadDatabase extends PasswordUtils {
        
     }
 
-      public static void insertUserActivity(int user_ID){
+      public static void insertUserActivity(int user_ID){ // jamie & kokmeng
           Connection con = ConnectingDB.connect();
          PreparedStatement psUserActivity = null;
          // add user_ID in here, call from user_ID
@@ -605,13 +694,20 @@ public class ReadDatabase extends PasswordUtils {
      }
       
       
-      public static Integer generateId() { // https://tutorial.eyehunts.com/java/random-number-generator-java-range-5-digit/ source
+      public static Integer generateId() { // jamie// https://tutorial.eyehunts.com/java/random-number-generator-java-range-5-digit/ source
           Random rand = new Random();
           int number = rand.nextInt(100000);
           String formatNum =  String.format("%05d",number);
           int returnNum = Integer.parseInt(formatNum);
           return returnNum;
       }
+      public static Integer generateTeacherCode() { //jamie
+          Random rand = new Random();
+          int number = rand.nextInt(100000);
+          String formatNum =  String.format("%03d",number);
+          int returnNum = Integer.parseInt(formatNum);
+          return returnNum;
+      }  // call in when teacher is created
       
 
     
@@ -620,8 +716,6 @@ public class ReadDatabase extends PasswordUtils {
         ReadDatabase rd = new ReadDatabase();
         insertContext(); // fills db up
        // insertLanguages(generateId()); // generates languageID & username
-        // need to call insertLevels and insertLanguages here also
-        // send languages_id to user
         
         
         

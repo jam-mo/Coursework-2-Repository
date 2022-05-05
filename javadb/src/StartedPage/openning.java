@@ -16,12 +16,10 @@ import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import javadb.*;
-
 
 /**
  *
- * @author kokmeng
+ * @author kokmeng / christopher
  */
 public class openning implements ActionListener {
     
@@ -52,7 +50,7 @@ public class openning implements ActionListener {
         label1.setFont(myFont1);
         
         label2 = new JLabel();
-        label2.setText("To Understading Moth Team");
+        label2.setText("To Understading Moth Team's");
         label2.setForeground(new java.awt.Color(153, 0, 51));
         label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label2.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,7 +69,7 @@ public class openning implements ActionListener {
         label4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         label4.setBounds(-50, 650, 388, 30);
-        label4.setText("If you dont have any Account |");
+        label4.setText("If you do not have an Account |");
         
         label5 = new JLabel();
         label5.setText("Sign Up");
@@ -97,7 +95,7 @@ public class openning implements ActionListener {
         label6.setForeground(new java.awt.Color(102, 51, 255));
         label6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label6.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-        label6.setText("GET START");
+        label6.setText("GET STARTED");
         
         
         Mpanel = new JPanel();
@@ -136,7 +134,7 @@ public class openning implements ActionListener {
         Mpanel.add(label5);
         
         
-        frame = new JFrame("LearnSpainLanguage");
+        frame = new JFrame("LearnSpainishLanguage");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 750);
         frame.setLayout(null);
@@ -158,7 +156,7 @@ public class openning implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource()==button){
-            System.out.println("lets get started");
+            System.out.println("let Started");
                 SignIn signIn = new SignIn();
                 frame.dispose();
         }

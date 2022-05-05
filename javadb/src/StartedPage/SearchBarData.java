@@ -6,8 +6,7 @@ package StartedPage;
 
 import java.sql.*;
 import java.util.*;
-import javadb.ConnectingDB;
-
+import javadb.*;
 
 /**
  *
@@ -32,11 +31,9 @@ public class SearchBarData {
     protected boolean ReadContextA1(){
         con = ConnectingDB.connect();
         String contextA1 = """
-                SELECT  c.CONTEXT       
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           WHERE Language_level ='LEVEL_A1';
+                        SELECT CONTEXT_TITLE
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'A1';
                            
                            """;
         
@@ -82,11 +79,9 @@ public class SearchBarData {
     protected boolean ReadContextA2(){
         con = ConnectingDB.connect();
         String contextA2 = """
-                SELECT  c.CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           WHERE Language_level ='LEVEL_A2';
+                        SELECT CONTEXT_TITLE
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'A2';
                            """;
         
         try {
@@ -130,12 +125,9 @@ public class SearchBarData {
     protected boolean ReadContextB1(){
         con = ConnectingDB.connect();
         String contextB1 = """
-                SELECT  c.CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-
-                           
-                           WHERE Language_level ='LEVEL_B1';
+                        SELECT CONTEXT_TITLE
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'B1';
                            """;
         try {
             pstmt = con.prepareStatement(contextB1);
@@ -178,12 +170,9 @@ public class SearchBarData {
     protected boolean ReadContextB2(){
         con = ConnectingDB.connect();
         String contextB2 = """
-                SELECT  c.CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           
-                           WHERE Language_level ='LEVEL_B2';
+                        SELECT CONTEXT_TITLE
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'B2';
                            """;
         
         try {
@@ -228,14 +217,9 @@ public class SearchBarData {
     protected boolean ReadSubContextA1(){
         con = ConnectingDB.connect();
         String SubcontextA1 = """
-                SELECT  sc.SUB_CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           Join SUB_CONTEXT sc  
-                           on c.Context_ID = sc.Context_ID
-                           
-                           WHERE Language_level ='LEVEL_A1';
+                        SELECT SUB_CONTEXT
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'A1';
                            """;
         
         try {
@@ -279,14 +263,9 @@ public class SearchBarData {
     protected boolean ReadSubContextA2(){
         con = ConnectingDB.connect();
         String SubcontextA2 = """
-                SELECT  sc.SUB_CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           Join SUB_CONTEXT sc  
-                           on c.Context_ID = sc.Context_ID
-                           
-                           WHERE Language_level ='LEVEL_A2';
+                        SELECT SUB_CONTEXT
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'A2';
                            """;
         
         try {
@@ -330,14 +309,9 @@ public class SearchBarData {
     protected boolean ReadSubContextB1(){
         con = ConnectingDB.connect();
         String SubcontextB1 = """
-                SELECT  sc.SUB_CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           Join SUB_CONTEXT sc  
-                           on c.Context_ID = sc.Context_ID
-                           
-                           WHERE Language_level ='LEVEL_B1';
+                        SELECT SUB_CONTEXT
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'B1';
                            """;
         
         try {
@@ -381,14 +355,9 @@ public class SearchBarData {
     protected boolean ReadSubContextB2(){
         con = ConnectingDB.connect();
         String SubcontextB2 = """
-                SELECT  sc.SUB_CONTEXT
-                           FROM LEVELS l JOIN CONTEXT c 
-                           ON l.difficulty_ID = c.difficulty_ID 
-                           
-                           Join SUB_CONTEXT sc  
-                           on c.Context_ID = sc.Context_ID
-                           
-                           WHERE Language_level ='LEVEL_B2';
+                        SELECT SUB_CONTEXT
+                                              FROM CONTEXT
+                                              WHERE CONTEXT_LEVEL = 'B2';
                            """;
         
         try {

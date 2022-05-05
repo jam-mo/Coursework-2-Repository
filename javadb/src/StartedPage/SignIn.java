@@ -34,14 +34,17 @@ public class SignIn extends ReadDatabase implements ActionListener{
     
     JButton buttonSubmit;
     
+    JButton goback_button;
+    
     JCheckBox checkbox;
     
     String userType;
     
     JComboBox combobox;
     
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language/src/image/hidden.png");
+    ImageIcon icon = new ImageIcon("/images/eye.png");
+    ImageIcon icon1 = new ImageIcon("/images/hidden.png");
+    ImageIcon icon2 = new ImageIcon("/images/back.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -50,10 +53,17 @@ public class SignIn extends ReadDatabase implements ActionListener{
     Font myFont5 = new Font("Lucida Grande",Font.PLAIN,14);
     
     SignIn(){
+        
+        goback_button = new JButton();
+        goback_button.setIcon(icon2);
+        goback_button.setBounds(5, 15, 35, 35);
+        goback_button.setBorder(null);
+        goback_button.addActionListener(this);
+        
         String[] valueType = {"Select","Student","Staff"};
         
         combobox = new JComboBox(valueType);
-        combobox.setBounds(100, 0, 100, 50);
+        combobox.setBounds(300, 0, 100, 50);
         combobox.addActionListener(this);
         
         userType = (String) combobox.getSelectedItem();
@@ -61,7 +71,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
         label = new JLabel();
         label.setText("SignIn");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -119,7 +129,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
             {  
                // you can open a new frame here as
                // i have assumed you have declared "frame" as instance variable
-                Reset_password Rpwd = new Reset_password();
+                
+                if(!(userType.equalsIgnoreCase("student" )|| userType.equalsIgnoreCase("staff"))){
+                    JOptionPane.showMessageDialog(null, "Please select your student or teacher" ,"SELECT",JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    Reset_password rspw=new Reset_password(userType);
+                    frame.dispose();
+                }
 
             }  
         });
@@ -172,6 +188,7 @@ public class SignIn extends ReadDatabase implements ActionListener{
         Mainpanel.add(text1);
         
         Mainpanel.add(password);
+        Mainpanel.add(goback_button);
         
         Mainpanel.add(buttonSubmit);
         
@@ -195,6 +212,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == goback_button){
+            
+            openning op = new openning();
+            frame.dispose();
+            
+        }
         
         if(e.getSource()==combobox){
             if(combobox.getSelectedItem().equals("Admin")){
@@ -237,27 +261,27 @@ public class SignIn extends ReadDatabase implements ActionListener{
         
             if(email.equalsIgnoreCase("") || email.equalsIgnoreCase(null))
             {
-                JOptionPane.showMessageDialog(null, "Add a Email");
+                JOptionPane.showMessageDialog(null, "Add a Email","EMAIL", JOptionPane.ERROR_MESSAGE);
             }
             else if(password01.equals("") || password01.equals(null))
             {
-                JOptionPane.showMessageDialog(null, "Add a password");
+                JOptionPane.showMessageDialog(null, "Add a password" ,"PASSWORD", JOptionPane.ERROR_MESSAGE);
             }
             else if(Validation_Email.validationEmail(email)==false)
             {
                 JOptionPane.showMessageDialog(null, "Your email need to include "+email+"@Example.com");
             }
             else{
-                
-                Connection con = ConnectingDB.connect();
-                Statement stmt = null;
-                
+
                 if(userType.equalsIgnoreCase("Staff"))
                 { //insertStaff and insertStaffUse
                     ReadDatabase ReadSignIn = new ReadDatabase();
                     // 
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
+                            userActivity userAct = new userActivity();
+                            userAct.userLogintime(email);
+                            level_language lvlanguage = new level_language(email);
                             frame.dispose();
                             //level_language lvlanguage = new level_language();
                         }
@@ -272,8 +296,11 @@ public class SignIn extends ReadDatabase implements ActionListener{
                     
                     try {
                         if(ReadSignIn.ReadSignIn(userType, email, password01) == true){
+                            userActivity userAct = new userActivity();
+                            userAct.userLogintime(email);
+                            level_language lvlanguage = new level_language(email);
                             frame.dispose();
-                            //level_language lvlanguage = new level_language();
+
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -282,13 +309,13 @@ public class SignIn extends ReadDatabase implements ActionListener{
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please select your student or teacher");
+                    JOptionPane.showMessageDialog(null, "Please select your student or teacher" ,"SELECT",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
             
         }
     }
-    
+   
     
     
 }

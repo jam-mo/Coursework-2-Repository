@@ -104,17 +104,17 @@ public class Security_Question extends ReadDatabase implements ActionListener {
         text1.setBounds(5, 220, 388, 50);
         text1.setFont(myFont3);
 
-        text2 = new JTextField();
-        text2.setForeground(new java.awt.Color(255, 51, 51));
-        text2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        text2.setBounds(5, 300, 388, 50);
-        text2.setFont(myFont3);
-
-        text3 = new JTextField();
-        text3.setForeground(new java.awt.Color(255, 51, 51));
-        text3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        text3.setBounds(5, 380, 388, 50);
-        text3.setFont(myFont3);
+//        text2 = new JTextField();
+//        text2.setForeground(new java.awt.Color(255, 51, 51));
+//        text2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+//        text2.setBounds(5, 300, 388, 50);
+//        text2.setFont(myFont3);
+//
+//        text3 = new JTextField();
+//        text3.setForeground(new java.awt.Color(255, 51, 51));
+//        text3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+//        text3.setBounds(5, 380, 388, 50);
+//        text3.setFont(myFont3);
 
         buttonSubmit = new JButton();
         buttonSubmit.setText("Submit");
@@ -134,14 +134,10 @@ public class Security_Question extends ReadDatabase implements ActionListener {
 
         Mpanel.add(label);
         Mpanel.add(label1);
-        Mpanel.add(label2);
-        Mpanel.add(label3);
         Mpanel.add(label4);
         Mpanel.add(label5);
 
         Mpanel.add(text1);
-        Mpanel.add(text2);
-        Mpanel.add(text3);
 
         Mpanel.add(buttonSubmit);
 

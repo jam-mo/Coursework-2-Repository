@@ -8,7 +8,6 @@ import java.sql.*;
 import javadb.ConnectingDB;
 import javax.swing.*;
 
-
 /**
  *
  * @author kokmeng

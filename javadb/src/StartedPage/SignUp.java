@@ -7,14 +7,8 @@ package StartedPage;
 import Validation_Email_Password.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
 import javax.swing.*;
-import javadb.*;
-import java.util.regex.*;
+
 
 /**
  *
@@ -29,9 +23,6 @@ public class SignUp extends ReadDatabase implements ActionListener{
     String password;
     String email;
 
-    
-    
-    
     JFrame frame1;
     
     JPanel Mainpanel;
@@ -62,8 +53,8 @@ public class SignUp extends ReadDatabase implements ActionListener{
     
     String userType;
 
-    ImageIcon icon = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/eye.png");
-    ImageIcon icon1 = new ImageIcon("/Users/kokmeng/Desktop/Coursework-2-Repository/Learn_Language_group_project_MOTH/src/image/hidden.png");
+    ImageIcon icon = new ImageIcon("/images/eye.png");
+    ImageIcon icon1 = new ImageIcon("hidden.png");
     
     Font myFont1 = new Font("Arial Rounded MT Bold",Font.BOLD,30);
     Font myFont2 = new Font("Herculanum",Font.BOLD,16);
@@ -82,7 +73,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
 
         label = new JLabel();
         label.setText("SignUp");
-        label.setForeground(new java.awt.Color(255,51,51));
+        label.setForeground(new java.awt.Color(198,102,104));
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         label.setBounds(0, 50, 388, 50);
@@ -141,14 +132,14 @@ public class SignUp extends ReadDatabase implements ActionListener{
         label6 = new JLabel();
         label6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        label6.setBounds(-50, 730, 388, 30); // from 650-730
+        label6.setBounds(-50, 660, 388, 30); // from 650-730
         label6.setText("If you already have Account |");
         
         label7 = new JLabel();
         label7.setText("Sign In");
         label7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        label7.setBounds(80, 730, 388, 30); // from 650-730
+        label7.setBounds(80, 660, 388, 30); // from 650-730
         label7.setForeground(new java.awt.Color(51, 51, 255));
         label7.addMouseListener(new MouseAdapter(){
             @Override
@@ -195,7 +186,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
         checkbox.setIcon(icon1);
         checkbox.setForeground(new java.awt.Color(255,51,51));
         checkbox.setFocusable(false);
-        checkbox.setBounds(420, 340, 50, 50); //340-420
+        checkbox.setBounds(350, 420, 50, 50); //340-420
         checkbox.addActionListener(this);
         checkbox.setFont(myFont5);
         
@@ -225,7 +216,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
         buttonSubmit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         buttonSubmit.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         buttonSubmit.setAlignmentY((float) 0.5);
-        buttonSubmit.setBounds(5, 660, 388, 50); // 660
+        buttonSubmit.setBounds(5, 620, 388, 50); // 660
         buttonSubmit.setFont(myFont4);
         
         buttonSubmit.addActionListener(this);
@@ -261,7 +252,7 @@ public class SignUp extends ReadDatabase implements ActionListener{
         
         frame1 = new JFrame("SignUP");
         frame1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame1.setSize(400, 850);
+        frame1.setSize(400, 750);
         frame1.setLayout(null);
         frame1.setResizable(false);
         
@@ -380,27 +371,38 @@ public class SignUp extends ReadDatabase implements ActionListener{
                                                     At least 1 number
                                                     """);
             }
+            else if(!(userType.equalsIgnoreCase("staff") || userType.equalsIgnoreCase("Student")))
+            {
+                
+                JOptionPane.showMessageDialog(null, "Please select if you are a student or teacher");
+                
+
+            }
             else
             {
-                if(ReadUserName(userName)==false){
-                    JOptionPane.showMessageDialog(null, "Amazing");
-                    frame1.dispose();
-                    Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
-                    // pass usertype here
-
-                }else{
-                    JOptionPane.showMessageDialog(null, "Username already exists");
-                }
-                if(ReadEmail(email)==false){
-                    JOptionPane.showMessageDialog(null, "Amazing");
-                    frame1.dispose();
-                    Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
-
-                }else{
-                    JOptionPane.showMessageDialog(null, "Email Already exists");
-                }
                 
+                ReadDatabase ReadSignIn = new ReadDatabase();
+               
+                
+                System.out.println(ReadUserName(userType,userName));
+                System.out.println(ReadEmail(userType,email));
+                
+//                
+                if(ReadUserName(userType,userName)==true){
+                    JOptionPane.showMessageDialog(null, "Username already exists");
+                }else if(ReadEmail(userType,email)==true){
+                    JOptionPane.showMessageDialog(null, "Email Already exists");
+                }else{
+                        JOptionPane.showMessageDialog(null, "Amazing");
+                        Security_Question s_q = new Security_Question(userType,userName, firstName, lastName, email, password);
+                        frame1.dispose();
+                }
+                    
+               
+
             }
+                
+            
             
         }
     
