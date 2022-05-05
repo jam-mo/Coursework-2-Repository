@@ -34,6 +34,7 @@ public class AdminPage extends javax.swing.JFrame {
      */
     public AdminPage() {
         initComponents();
+        //displays the code
         show_user();
     }
     
@@ -69,19 +70,25 @@ public class AdminPage extends javax.swing.JFrame {
     }
 
     public ArrayList<User> userList() {
+        //Creates usersList object
         ArrayList<User> usersList = new ArrayList<>();
+        
         try {
+            //Connection to database
             Class.forName("org.sqlite.JDBC");
-
             Connection con = DriverManager.getConnection("jdbc:sqlite:appDB.db"); // connection to our database
             System.out.println("Database Connected.");
-
-            String query1 = "SELECT * FROM USERS";
+            //String variable query1 selects all the users from the USERS table
+            String query1 = "SELECT * FROM USERS WHERE  staff_ID IS NULL";
+            //createStatement creates an object for sending SQL statements to the database
             Statement st = con.createStatement();
+            //ResultSet contains the results of executing an SQL query
             ResultSet rs = st.executeQuery(query1);
             User user;
             while (rs.next()) {
+                 //Adds the data in the user object
                 user = new User(rs.getInt("user_ID"), rs.getString("firstName"), rs.getString("lastName"));
+                //Adds the user in the array list
                 usersList.add(user);
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -93,7 +100,9 @@ public class AdminPage extends javax.swing.JFrame {
     public void show_user() {
         ArrayList<User> list = userList();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //creates array that stores the row data
         Object[] row = new Object[3];
+        //for loop that adds the data to the column 
         for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getuserID();
             row[1] = list.get(i).getfirstName();
@@ -276,16 +285,12 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jToggleButton1)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -293,13 +298,13 @@ public class AdminPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jToggleButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -329,21 +334,28 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        //gets the row which is selected
         int row = jTable1.getSelectedRow();
+         //String variable tc gets the values in each row
         String tc = jTable1.getModel().getValueAt(row, 0).toString();
         con = ConnectingDB.connect();// connection to our database
         try {
-            String query = "SELECT  firstName, level_A1, level_A2, level_B1, level_B2 FROM USERS JOIN LEVELS  ON  USERS.languages_ID = LEVELS.languages_ID WHERE user_ID = '"+tc+"' "; // 
-            
+            //String variable query is a join query which joins the USERS and LEVELS table
+            String query = "SELECT  firstName, level_A1, level_A2, level_B1, level_B2 FROM USERS JOIN LEVELS  ON  USERS.languages_ID = LEVELS.languages_ID WHERE  \n" +
+"staff_ID IS NULL And  user_ID = '"+tc+"';"; // 
+            //createStatement creates an object for sending SQL statements to the database
             Statement st = con.createStatement();
+            //ResultSet contains the results of executing an SQL query
             ResultSet rs = st.executeQuery(query);
+            //if rs.next moves the cursor to the next row if it contains any data
             if (rs.next()) {
                 String firstName = rs.getString("firstName");
                 int level_A1_Progress = rs.getInt("level_A1");
                 int level_A2_Progress = rs.getInt("level_A2");
                 int level_B1_Progress = rs.getInt("level_B1");
                 int level_B2_Progress = rs.getInt("level_B2");
-
+                
+                //Displays the relevent data to the lable and textfields
                 jLabel6.setText("" + firstName + "'s " + "progress: ");
                 jTextField2.setText("" + level_A1_Progress + "/22 Completed");
                 jTextField3.setText("" + level_A2_Progress + "/25 Completed");
