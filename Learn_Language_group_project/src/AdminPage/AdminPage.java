@@ -2,14 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package StartedPage;
+package AdminPage;
 
+import StartedPage.SignIn;
+import StartedPage.userActivity;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.*;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.io.File;
-import javadb.*;
+import javadb.ConnectingDB;
 
 /**
  *
@@ -19,6 +25,7 @@ public class AdminPage extends javax.swing.JFrame {
     
     Connection con;
     Statement stmt = null;
+    PreparedStatement pstmt = null;
     PreparedStatement ps = null;
     int teachersCode = 0;
    // jTextField1.setText(Integer.toString(teachersCode));
@@ -120,8 +127,6 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -172,6 +177,11 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField2.setEditable(false);
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setEditable(false);
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -254,14 +264,6 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel5.setText("ADMINS");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Teachers code");
-
         jToggleButton1.setText("Log out");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,12 +282,7 @@ public class AdminPage extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(186, 186, 186)
                         .addComponent(jToggleButton1)))
@@ -296,11 +293,7 @@ public class AdminPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(65, 65, 65)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,19 +331,18 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
         String tc = jTable1.getModel().getValueAt(row, 0).toString();
+        con = ConnectingDB.connect();// connection to our database
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection con = DriverManager.getConnection("jdbc:sqlite:appDB.db"); // connection to our database
-            System.out.println("");
-            String query2 = "select * from USERS where user_ID=" + tc + "";  // 
+            String query = "SELECT  firstName, level_A1, level_A2, level_B1, level_B2 FROM USERS JOIN LEVELS  ON  USERS.languages_ID = LEVELS.languages_ID WHERE user_ID = '"+tc+"' "; // 
+            
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(query2);
+            ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
                 String firstName = rs.getString("firstName");
-                int level_A1_Progress = rs.getInt("level_A1_Progress");
-                int level_A2_Progress = rs.getInt("level_A2_Progress");
-                int level_B1_Progress = rs.getInt("level_B1_Progress");
-                int level_B2_Progress = rs.getInt("level_B2_Progress");
+                int level_A1_Progress = rs.getInt("level_A1");
+                int level_A2_Progress = rs.getInt("level_A2");
+                int level_B1_Progress = rs.getInt("level_B1");
+                int level_B2_Progress = rs.getInt("level_B2");
 
                 jLabel6.setText("" + firstName + "'s " + "progress: ");
                 jTextField2.setText("" + level_A1_Progress + "/22 Completed");
@@ -372,25 +364,22 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
-
-        
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // logout button // jamie
         userActivity userAct = new userActivity();
-        
             //-- ask men for 
             //userAct.userLogouttime(getemail);
-            SignIn si = new SignIn();
+//            SignIn si = new SignIn();
             //frame.dispose();
         
 
 
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,14 +428,12 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

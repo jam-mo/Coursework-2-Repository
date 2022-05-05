@@ -65,38 +65,38 @@ public class PasswordUtils {
     public static void main(String[] args)
     {
 
-        // User provided password to validate
-        String providedPassword = "123456789";
-                
-        // Encrypted and Base64 encoded password read from database
-        String salt = "3oMDBTwGEpSGtrzFbPqAMySq8nayhZ";
+//        // User provided password to validate
+//        String providedPassword = "123456789";
+//                
+//        // Encrypted and Base64 encoded password read from database
+//        String salt = "3oMDBTwGEpSGtrzFbPqAMySq8nayhZ";
+//        
+//        // Salt value stored in database 
+////        String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
+//        String securePassword = "/3CDGV2drpnbatCSHMCiHncwpaG+XodO6qJ+JFRqj4c=";
+//        
+//        boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
+//        
+//        if(passwordMatch) 
+//        {
+//            System.out.println("Provided user password " + providedPassword + " is correct.");
+//        } else {
+//            System.out.println("Provided password is incorrect");
+//        }
+//        
+//        
+        System.out.println("-----++++++--------");
+        String providedPassword1 = "123456789123489";
         
-        // Salt value stored in database 
-//        String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
-        String securePassword = "/3CDGV2drpnbatCSHMCiHncwpaG+XodO6qJ+JFRqj4c=";
+        String salt1 = PasswordUtils.getSalt(3);
         
-        boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
+        String securePassword1 = PasswordUtils.generateSecurePassword(providedPassword1, salt1);
         
-        if(passwordMatch) 
-        {
-            System.out.println("Provided user password " + providedPassword + " is correct.");
-        } else {
-            System.out.println("Provided password is incorrect");
-        }
+        System.out.println(providedPassword1);
         
-//        
-//        System.out.println("-----++++++--------");
-//        String providedPassword1 = "123456789123489";
-//        
-//        String salt1 = PasswordUtils.getSalt(30);
-//        
-//        String securePassword1 = PasswordUtils.generateSecurePassword(providedPassword1, salt1);
-//        
-//        System.out.println(providedPassword1);
-//        
-//        System.out.println(salt1);
-//        
-//        System.out.println(securePassword1);
+        System.out.println(salt1);
+        
+        System.out.println(securePassword1);
         
         
         
